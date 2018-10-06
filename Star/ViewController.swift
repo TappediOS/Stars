@@ -129,7 +129,10 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       MoveSpotLightNode.eulerAngles.x = -90
       MoveSpotLightNode.light?.spotOuterAngle = 65
       MoveSpotLightNode.light?.spotInnerAngle = 48
+      MoveSpotLightNode.light?.shadowMapSize.width = 6000
+      MoveSpotLightNode.light?.shadowMapSize.height = 6000
       
+      MoveSpotLightNode.light?.zNear = 50
 //      MoveSpotLightNode.light?.orthographicScale = 35
 //      MoveSpotLightNode.light?.zFar = 10
 //      MoveSpotLightNode.light?.zNear = 2
@@ -138,7 +141,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
 //      MoveSpotLightNode.light?.shadowMode = .forward
 //      MoveSpotLightNode.light?.intensity = 1000
       let action33 = SCNAction.moveBy(x: 0, y: y_speed, z: 0, duration: 1)
-      MoveSpotLightNode.runAction(SCNAction.repeatForever(action33))
+//      MoveSpotLightNode.runAction(SCNAction.repeatForever(action33))
       scene.rootNode.addChildNode(MoveSpotLightNode)
       SpotLightNode = MoveSpotLightNode
       
@@ -465,7 +468,12 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
 //
 //         }
          self.sun.position.z = self.sun.position.z + Float(y)
+         self.SpotLightNode.position.z = self.sun.position.z
+         
          self.sun.position.x = self.sun.position.x + Float(x)
+         self.SpotLightNode.position.x = self.sun.position.x
+        
+         
          
       }
       queue.addOperation(operation)
