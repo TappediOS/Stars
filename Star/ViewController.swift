@@ -110,16 +110,6 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       SceneView.allowsCameraControl = false
       view.accessibilityIgnoresInvertColors = true
       
-      // シーンに光を与える為のノードを作成
-      let lightNode = SCNNode()
-      // ライトノードに光を表すライトオブジェクトを追加
-      lightNode.light = SCNLight()
-      // ライトオブジェクトの光属性を全方位への光を表す属性とする
-      lightNode.light?.type = SCNLight.LightType.omni
-      // ライトオブジェクトの位置を設定する
-      lightNode.position = SCNVector3(x: 0, y: 1000000, z: 0)
-      // シーンのルートノードにライトノードを追加
-      //scene.rootNode.addChildNode(lightNode)
       
       let MoveSpotLightNode = SCNNode()
       MoveSpotLightNode.light = SCNLight()
@@ -129,19 +119,10 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       MoveSpotLightNode.eulerAngles.x = -90
       MoveSpotLightNode.light?.spotOuterAngle = 65
       MoveSpotLightNode.light?.spotInnerAngle = 48
-      MoveSpotLightNode.light?.shadowMapSize.width = 6000
-      MoveSpotLightNode.light?.shadowMapSize.height = 6000
-      
-      MoveSpotLightNode.light?.zNear = 50
-//      MoveSpotLightNode.light?.orthographicScale = 35
-//      MoveSpotLightNode.light?.zFar = 10
-//      MoveSpotLightNode.light?.zNear = 2
-      
-//      MoveSpotLightNode.light?.shadowBias = 1
-//      MoveSpotLightNode.light?.shadowMode = .forward
-//      MoveSpotLightNode.light?.intensity = 1000
+      MoveSpotLightNode.light?.shadowMapSize.width = 2500
+      MoveSpotLightNode.light?.shadowMapSize.height = 2500
+      MoveSpotLightNode.light?.zNear = 48
       let action33 = SCNAction.moveBy(x: 0, y: y_speed, z: 0, duration: 1)
-//      MoveSpotLightNode.runAction(SCNAction.repeatForever(action33))
       scene.rootNode.addChildNode(MoveSpotLightNode)
       SpotLightNode = MoveSpotLightNode
       
@@ -334,19 +315,24 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       View2.alpha = 0.21
       
       
-      if TARGET_OS_SIMULATOR == 1 {
-         print("テスト広告")
-         AdUnitID = TEST_ID
-      }else{
-         print("本番広告")
-         AdUnitID = AdMobID
-      }
-//
-//      rewardBasedVideo = GADRewardBasedVideoAd.sharedInstance()
-//      rewardBasedVideo?.delegate = self
-//
-//      setupRewardBasedVideoAd()
-//
+      #if DEBUG
+         print("This is debug, so NOT AD")
+      #else
+      
+         if TARGET_OS_SIMULATOR == 1 {
+            print("テスト広告")
+            AdUnitID = TEST_ID
+         }else{
+            print("本番広告")
+            AdUnitID = AdMobID
+         }
+
+         rewardBasedVideo = GADRewardBasedVideoAd.sharedInstance()
+         rewardBasedVideo?.delegate = self
+
+         setupRewardBasedVideoAd()
+      #endif
+
    }
    
    
@@ -440,59 +426,59 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
    @objc func panView(sender: UIPanGestureRecognizer) {
       //移動後の相対位置を取得
       let location: CGPoint = sender.translation(in: self.view)  //Swift3
-      let x = CGFloat(location.x / 65)
-      let y = CGFloat(location.y / 65)
+      let x = CGFloat(location.x / 65) // 65
+      let z = CGFloat(location.y / 65)
       
-     
+      let MoveX = self.sun.position.x + Float(x)
+      let MoveZ = self.sun.position.z + Float(z)
+      
+      print("X: \(MoveX)")
+      print("Z: \(MoveZ)")
+      
+      if MoveX < -1.5 || MoveX > 1.5 {
+         sender.setTranslation(CGPoint(x: 0, y: 0), in: view)
+         return
+      }
+      if MoveZ < -1.5 || MoveZ > 1.5 {
+         sender.setTranslation(CGPoint(x: 0, y: 0), in: view)
+         return
+      }
 
-      self.sun.position.y = self.Camera_Node.position.y - 7.5
-      
-      
-
-      
-      
+      //self.sun.position.y = self.Camera_Node.position.y - 7.5
 
       let queue = OperationQueue()
       let operation = BlockOperation {
          
-//         if self.sun.position.z >= -1.5 && self.sun.position.z <= 1.5 {
+
+//         self.sun.position.z = self.sun.position.z + Float(y)
+//         self.SpotLightNode.position.z = self.sun.position.z
 //
-//            self.sun.position.z = self.sun.position.z + Float(y)
-//
-//         }
-//         if self.sun.position.x >= -1.5 && self.sun.position.x <= 1.5{
-//
-//            self.sun.position.x = self.sun.position.x + Float(x)
-//            //self.Camera_Node.position.x = self.Camera_Node.position.x + Float(x)
-//            //self.sun.position.y = self.Camera_Node.position.y - 7.5
-//
-//         }
-         self.sun.position.z = self.sun.position.z + Float(y)
-         self.SpotLightNode.position.z = self.sun.position.z
-         
-         self.sun.position.x = self.sun.position.x + Float(x)
-         self.SpotLightNode.position.x = self.sun.position.x
+//         self.sun.position.x = self.sun.position.x + Float(x)
+//         self.SpotLightNode.position.x = self.sun.position.x
         
+         self.sun.position = SCNVector3(x: MoveX, y: self.Camera_Node.position.y - 7.5, z:  MoveZ)
+         self.SpotLightNode.position = SCNVector3(x: MoveX, y: self.SpotLightNode.position.y, z: MoveZ)
          
          
       }
       queue.addOperation(operation)
       
-      
-      if sun.position.z > 1.5 {
-         sun.position.z = 1.5
-      }
-      if sun.position.z < -1.5 {
-         sun.position.z = -1.5
-      }
-      
-      if sun.position.x > 1.5 {
-         sun.position.x = 1.5
-      }
-      if sun.position.x < -1.5 {
-         sun.position.x = -1.5
-      }
-      
+//
+//
+//      if sun.position.z > 1.5 {
+//         sun.position.z = 1.5
+//      }
+//      if sun.position.z < -1.5 {
+//         sun.position.z = -1.5
+//      }
+//
+//      if sun.position.x > 1.5 {
+//         sun.position.x = 1.5
+//      }
+//      if sun.position.x < -1.5 {
+//         sun.position.x = -1.5
+//      }
+//
       sender.setTranslation(CGPoint(x: 0, y: 0), in: view)
    }
    

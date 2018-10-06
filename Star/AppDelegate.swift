@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       print("テスト環境")
       #else
       let fileName = "GoogleService-Info"
-      print("本番")
+      print("本番のfirebaseにアクセス")
       #endif
       
       let filePath = Bundle.main.path(forResource: fileName, ofType: "plist")
