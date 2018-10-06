@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  Star
+
+  Created by jun on 2018/08/15.
+  Copyright © 2018年 jun. All rights reserved.
+*/
+
+
+"Restore" = "복원";
+"Purchase" = "매수:$1.09";
+
+"ReTry" = "계속하기 (광고보기)";
+"Return" = "끝";
+"ReStart" = "스타트";

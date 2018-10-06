@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  Star
+
+  Created by jun on 2018/08/15.
+  Copyright © 2018年 jun. All rights reserved.
+*/
+
+
+"Restore" = "恢复";
+"Purchase" = "采购:¥8.00";
+
+"ReTry" = "继续（观看广告。）";
+"Return" = "完";
+"ReStart" = "开始";
