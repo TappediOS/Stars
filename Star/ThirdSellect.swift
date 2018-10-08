@@ -80,11 +80,16 @@ class ThirdSellectViewController: UIViewController, GKGameCenterControllerDelega
       
       print("Target ->", TARGET_OS_SIMULATOR)
       
+      #if DEBUG
+      print("this is test ad")
+      request.testDevices = ["32469097af622f72ff0f6d1ded471f0c"]
+      #else
       if TARGET_OS_SIMULATOR == 1{
          request.testDevices = [kGADSimulatorID]
       }else{
-         request.testDevices = ["c50facd3fc62377f872eacd38f43b291"]
+         request.testDevices = ["32469097af622f72ff0f6d1ded471f0c"]
       }
+      #endif
       
       bannreView.load(request)
       

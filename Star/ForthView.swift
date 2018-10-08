@@ -24,6 +24,8 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    
    var score:Int = 0
    var y_speed:CGFloat = -22
+   var Speed: Double = 450
+   var AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: 419)
    let BoxCategory: UInt32 = 0b0001
    let SunCategory: UInt32 = 0b0100
    let FloorCategoyr: UInt32 = 0b010

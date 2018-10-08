@@ -23,8 +23,9 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
    var wall:[[[Int]]] = [[[]]]
    
    var score:Int = 0
-   var y_speed:CGFloat = -24
    var Action = SCNAction.repeatForever(SCNAction.moveBy(x: 0, y: -24, z: 0, duration: 1))
+   var Speed: Double = 419
+   var AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: 419)
    let BoxCategory: UInt32 = 0b0001
    let SunCategory: UInt32 = 0b0100
    let FloorCategoyr: UInt32 = 0b010
@@ -107,7 +108,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       self.view = SceneView
       SceneView.backgroundColor = UIColor.black
       SceneView.scene = scene
-      SceneView.showsStatistics = true
+      SceneView.showsStatistics = false
       SceneView.allowsCameraControl = false
       view.accessibilityIgnoresInvertColors = true
       
@@ -120,8 +121,8 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       MoveSpotLightNode.eulerAngles.x = -90
       MoveSpotLightNode.light?.spotOuterAngle = 65
       MoveSpotLightNode.light?.spotInnerAngle = 48
-      MoveSpotLightNode.light?.shadowMapSize.width = 1000
-      MoveSpotLightNode.light?.shadowMapSize.height = 1000
+      MoveSpotLightNode.light?.shadowMapSize.width = 2000
+      MoveSpotLightNode.light?.shadowMapSize.height = 2000
       MoveSpotLightNode.light?.zNear = 48
       scene.rootNode.addChildNode(MoveSpotLightNode)
       SpotLightNode = MoveSpotLightNode
@@ -146,7 +147,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       CameraNode.position = SCNVector3(x: 0, y: 10035 , z: -3.5)
       CameraNode.eulerAngles.x = -90
       CameraNode.castsShadow = false
-      CameraNode.runAction(Action)
+      CameraNode.runAction(AfterAction)
       scene.rootNode.addChildNode(CameraNode)
       Camera_Node = CameraNode
       
@@ -239,7 +240,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       GorldNode.physicsBody?.contactTestBitMask = Int(Wall1Category) + Int(Wall0Category)
       GorldNode.physicsBody?.collisionBitMask = Int(BoxCategory) + Int(FloorCategoyr) + Int(SunCategory)
       GorldNode.physicsBody?.mass = 0
-      GorldNode.runAction(Action)
+      GorldNode.runAction(AfterAction)
       GorldNode.castsShadow = true
 //      GorldNode.light?.castsShadow = true
 
@@ -387,41 +388,45 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
 
       
   
-         let queue0 = OperationQueue()
-         let operation0 = BlockOperation {
+      let queue0 = OperationQueue()
+      let operation0 = BlockOperation {
 
             
-            self.sun.addParticleSystem(self.key3!)
-            self.sun.addParticleSystem(self.key1!)
-            self.sun.addParticleSystem(self.key2!)
+         self.sun.addParticleSystem(self.key3!)
+         self.sun.addParticleSystem(self.key1!)
+         self.sun.addParticleSystem(self.key2!)
             
-            self.audioPlayerInstance.volume = 0.05
-            self.audioPlayerInstance.currentTime = 0
-            self.audioPlayerInstance.play()
+         self.audioPlayerInstance.volume = 0.05
+         self.audioPlayerInstance.currentTime = 0
+         self.audioPlayerInstance.play()
             
-         }
-         queue0.addOperation(operation0)
+      }
+      queue0.addOperation(operation0)
 
  
          
       
 
-         let queue = OperationQueue()
+      let queue = OperationQueue()
+      let operation = BlockOperation {
 
-         let operation = BlockOperation {
-
-            self.SpotLightNode.removeAllActions()
-            self.sun.removeAllActions()
-            self.Camera_Node.removeAllActions()
-            self.y_speed -= 0.5
-            self.Action = SCNAction.repeatForever(SCNAction.moveBy(x: 0, y: self.y_speed, z: 0, duration: 1))
-            self.sun.runAction(SCNAction.repeatForever(self.Action))
-            self.Camera_Node.runAction(SCNAction.repeatForever(self.Action))
-            self.SpotLightNode.runAction(SCNAction.repeatForever(self.Action))
-         }
+         self.sun.runAction(self.AfterAction)
+         self.Camera_Node.runAction(self.AfterAction)
+         self.SpotLightNode.runAction(self.AfterAction)
+      }
       
-         queue.addOperation(operation)
+      let Endqueue = OperationQueue()
+      let Ope = BlockOperation {
+         self.SpotLightNode.removeAllActions()
+         self.sun.removeAllActions()
+         self.Camera_Node.removeAllActions()
+      }
       
+      self.Speed -= 4
+      self.AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: self.Speed)
+      
+      Endqueue.addOperation(Ope)
+      queue.addOperation(operation)
    }
    
    
@@ -432,51 +437,29 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       let x = CGFloat(location.x / 55) // 65
       let z = CGFloat(location.y / 55)
       
-      ///let MoveX = self.sun.position.x + Float(x)
-      //let MoveZ = self.sun.position.z + Float(z)
-
-      
       self.sun.position.y = self.Camera_Node.position.y - 7.5
 
       let queue = OperationQueue()
       let operation = BlockOperation {
-
-
          self.sun.position.z = self.sun.position.z + Float(z)
-         self.SpotLightNode.position.z = self.sun.position.z
-
          self.sun.position.x = self.sun.position.x + Float(x)
          self.SpotLightNode.position.x = self.sun.position.x
-
-         //self.sun.position = SCNVector3(x: MoveX, y: self.Camera_Node.position.y - 7.5, z:  MoveZ)
-         //self.SpotLightNode.position = SCNVector3(x: MoveX, y: self.SpotLightNode.position.y, z: MoveZ)
-
-
+         self.SpotLightNode.position.z = self.sun.position.z
       }
       queue.addOperation(operation)
-      
-
 
       if sun.position.z > 1.5 {
          self.sun.position.z = 1.5
-         //self.Camera_Node.position.z = 1.5 - 3.5
-         //sun.position = SCNVector3(x: self.sun.position.x, y: self.Camera_Node.position.y - 7.5, z:  1.5)
       }
       if sun.position.z < -1.5 {
          self.sun.position.z = -1.5
-         //self.Camera_Node.position.z = -1.5 - 3.5
-         //sun.position = SCNVector3(x: self.sun.position.x, y: self.Camera_Node.position.y - 7.5, z:  -1.5)
       }
 
       if sun.position.x > 1.5 {
          self.sun.position.x = 1.5
-         //self.Camera_Node.position.x = 1.5
-         //sun.position = SCNVector3(x: 1.5, y: self.Camera_Node.position.y - 7.5, z:  self.sun.position.z)
       }
       if sun.position.x < -1.5 {
          self.sun.position.x = -1.5
-         //self.Camera_Node.position.x = -1.5
-         //sun.position = SCNVector3(x: -1.5, y: self.Camera_Node.position.y - 7.5, z:  self.sun.position.z)
       }
 
       sender.setTranslation(CGPoint(x: 0, y: 0), in: view)
@@ -571,11 +554,12 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) {
          let queue = OperationQueue()
          let operation = BlockOperation {
-            self.y_speed += 0.5
-            let action = SCNAction.moveBy(x: 0, y: self.y_speed, z: 0, duration: 1)
-            self.sun.runAction(SCNAction.repeatForever(action))
-            self.Camera_Node.runAction(SCNAction.repeatForever(action))
+            self.sun.runAction(self.AfterAction)
+            self.Camera_Node.runAction(self.AfterAction)
+            self.SpotLightNode.runAction(self.AfterAction)
          }
+         self.Speed -= 4
+         self.AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: self.Speed)
          queue.addOperation(operation)
       }
       

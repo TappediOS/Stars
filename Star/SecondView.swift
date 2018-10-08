@@ -23,7 +23,8 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    
    
    var score:Int = 0
-   var y_speed:CGFloat = -22
+   var Speed: Double = 480
+   var AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: 480)
    let BoxCategory: UInt32 = 0b0001
    let SunCategory: UInt32 = 0b0100
    let FloorCategoyr: UInt32 = 0b010
@@ -35,6 +36,7 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    let SceneView = SCNView()
    var Node = SCNNode()
    var Camera_Node = SCNNode()
+   var SpotLightNode = SCNNode()
    var count: Int = 100
    var up: Int = 0
    var right: Int = 1
@@ -110,16 +112,19 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       view.accessibilityIgnoresInvertColors = true
       
       
-      // シーンに光を与える為のノードを作成
-      let lightNode = SCNNode()
-      // ライトノードに光を表すライトオブジェクトを追加
-      lightNode.light = SCNLight()
-      // ライトオブジェクトの光属性を全方位への光を表す属性とする
-      lightNode.light?.type = SCNLight.LightType.omni
-      // ライトオブジェクトの位置を設定する
-      lightNode.position = SCNVector3(x: 0, y: 1000000, z: 0)
-      // シーンのルートノードにライトノードを追加
-      scene.rootNode.addChildNode(lightNode)
+      let MoveSpotLightNode = SCNNode()
+      MoveSpotLightNode.light = SCNLight()
+      MoveSpotLightNode.light?.type = SCNLight.LightType.spot
+      MoveSpotLightNode.light?.castsShadow = true
+      MoveSpotLightNode.position = SCNVector3(x: 0, y: 10035, z: 0)
+      MoveSpotLightNode.eulerAngles.x = -90
+      MoveSpotLightNode.light?.spotOuterAngle = 65
+      MoveSpotLightNode.light?.spotInnerAngle = 48
+      MoveSpotLightNode.light?.shadowMapSize.width = 2000
+      MoveSpotLightNode.light?.shadowMapSize.height = 2000
+      MoveSpotLightNode.light?.zNear = 48
+      scene.rootNode.addChildNode(MoveSpotLightNode)
+      SpotLightNode = MoveSpotLightNode
       
       let floor = SCNFloor()
       floor.reflectivity = 0.5
@@ -140,8 +145,8 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       CameraNode.camera = SCNCamera()
       CameraNode.position = SCNVector3(x: 0, y: 10035 , z: -3.5)
       CameraNode.eulerAngles.x = -90
-      let action33 = SCNAction.moveBy(x: 0, y: y_speed, z: 0, duration: 1)
-      CameraNode.runAction(SCNAction.repeatForever(action33))
+      CameraNode.castsShadow = false
+      CameraNode.runAction(AfterAction)
       scene.rootNode.addChildNode(CameraNode)
       Camera_Node = CameraNode
       
@@ -205,8 +210,8 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
                   WallNode0.physicsBody?.categoryBitMask = Int(Wall0Category)
                   WallNode0.physicsBody?.collisionBitMask = 0
                   WallNode0.physicsBody?.contactTestBitMask = Int(SunCategory)
+                  WallNode0.castsShadow = false
                   SceneView.scene?.rootNode.addChildNode(WallNode0)
-                  wall0 = WallNode0
                   
                }else if wall[tmp][x][y] == 1 {
                   
@@ -222,9 +227,9 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
                   WallNode1.physicsBody?.categoryBitMask = Int(Wall1Category)
                   WallNode1.physicsBody?.collisionBitMask = 0
                   WallNode1.physicsBody?.contactTestBitMask = Int(SunCategory)
+                  WallNode1.castsShadow = false
                   SceneView.scene?.rootNode.addChildNode(WallNode1)
-                  wall1 = WallNode1
-                  
+
                }else if wall[tmp][x][y] == 2 {
                   
                   let Wall1 = SCNPlane(width: 1.19, height: 1.19)
@@ -239,8 +244,8 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
                   WallNode1.physicsBody?.categoryBitMask = Int(Wall1Category)
                   WallNode1.physicsBody?.collisionBitMask = 0
                   WallNode1.physicsBody?.contactTestBitMask = Int(SunCategory)
+                  WallNode1.castsShadow = false
                   SceneView.scene?.rootNode.addChildNode(WallNode1)
-                  wall1 = WallNode1
                   
                }
             }
@@ -259,7 +264,8 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       GorldNode.physicsBody?.contactTestBitMask = Int(Wall1Category) + Int(Wall0Category)
       GorldNode.physicsBody?.collisionBitMask = Int(BoxCategory) + Int(FloorCategoyr) + Int(SunCategory)
       GorldNode.physicsBody?.mass = 0
-      GorldNode.runAction(SCNAction.repeatForever(action33))
+      GorldNode.runAction(AfterAction)
+      GorldNode.castsShadow = true
       
       //位置を決める
       //z is Position
@@ -267,6 +273,7 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       //やっとシーンに追加できる
       SceneView.scene?.rootNode.addChildNode(GorldNode)
       sun = GorldNode
+      sun.castsShadow = true
       
       //パーティクルシステムのオブジェクト生成、およびノードへの追加
       GorldNode.addParticleSystem(self.bokeh!)
@@ -329,20 +336,23 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       
       
       
-      if TARGET_OS_SIMULATOR == 1 {
-         print("テスト広告")
-         AdUnitID = TEST_ID
-      }else{
-         print("本番広告")
-         AdUnitID = AdMobID
-      }
+      #if DEBUG
+         print("debug")
+      #else
+         if TARGET_OS_SIMULATOR == 1 {
+            print("テスト広告")
+            AdUnitID = TEST_ID
+         }else{
+            print("本番広告")
+            AdUnitID = AdMobID
+         }
       
-      rewardBasedVideo = GADRewardBasedVideoAd.sharedInstance()
-      rewardBasedVideo?.delegate = self
+         rewardBasedVideo = GADRewardBasedVideoAd.sharedInstance()
+         rewardBasedVideo?.delegate = self
       
-      setupRewardBasedVideoAd()
+         setupRewardBasedVideoAd()
+      #endif
    }
-   
    //8
    func setupRewardBasedVideoAd(){
       
@@ -457,63 +467,60 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
          
          
          if score % 3 == 0 {
-         
-            sun.removeAllActions()
-            Camera_Node.removeAllActions()
-            // オペレーションキューを生成。
+
             let queue = OperationQueue()
-            // オペレーションオブジェクトを生成。
-            // Swiftの場合、クロージャを使うといい。
             let operation = BlockOperation {
-               // 並列で行いたい処理
-               self.y_speed -= 0.5
-               let action = SCNAction.moveBy(x: 0, y: self.y_speed, z: 0, duration: 1)
-               self.sun.runAction(SCNAction.repeatForever(action))
-               self.Camera_Node.runAction(SCNAction.repeatForever(action))
+               
+               self.sun.runAction(self.AfterAction)
+               self.Camera_Node.runAction(self.AfterAction)
+               self.SpotLightNode.runAction(self.AfterAction)
             }
             
+            self.Speed += 5
+            self.AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: self.Speed)
+            
+            self.SpotLightNode.removeAllActions()
+            self.sun.removeAllActions()
+            self.Camera_Node.removeAllActions()
             queue.addOperation(operation)
          }
       }
    }
    
+   
    @objc func panView(sender: UIPanGestureRecognizer) {
       //移動後の相対位置を取得
       let location: CGPoint = sender.translation(in: self.view)  //Swift3
-      let x = CGFloat(location.x / 65)
-      let y = CGFloat(location.y / 65)
+      let x = CGFloat(location.x / 55)
+      let z = CGFloat(location.y / 55)
       
-      self.sun.position.y = self.Camera_Node.position.y - 7.5
+      self.Camera_Node.position.y = self.sun.position.y + 7.5
+      //self.sun.position.y = self.Camera_Node.position.y - 7.5
+//      self.sun.position = SCNVector3(x: self.sun.position.x + Float(x), y: self.sun.position.y, z: self.sun.position.z + Float(z))
+//      self.Camera_Node.position = SCNVector3(x: 0, y: self.sun.position.y + 7.5, z: -3.5)
       
-      // オペレーションキューを生成。
       let queue = OperationQueue()
-      // オペレーションオブジェクトを生成。
-      // Swiftの場合、クロージャを使うといい。
       let operation = BlockOperation {
-//         if self.sun.position.z >= -1.5 && self.sun.position.z <= 1.5 {
-//            self.sun.position.z = self.sun.position.z + Float(y)
-//         }
-//         if self.sun.position.x >= -1.5 && self.sun.position.x <= 1.5 {
-//            self.sun.position.x = self.sun.position.x + Float(x)
-//         }
-         self.sun.position.z = self.sun.position.z + Float(y)
+         self.sun.position.z = self.sun.position.z + Float(z)
          self.sun.position.x = self.sun.position.x + Float(x)
-         
+
+         self.SpotLightNode.position.x = self.sun.position.x
+         self.SpotLightNode.position.z = self.sun.position.z
       }
       queue.addOperation(operation)
       
       if sun.position.z > 1.5 {
-         sun.position.z = 1.5
+         self.sun.position.z = 1.5
       }
       if sun.position.z < -1.5 {
-         sun.position.z = -1.5
+         self.sun.position.z = -1.5
       }
       
       if sun.position.x > 1.5 {
-         sun.position.x = 1.5
+         self.sun.position.x = 1.5
       }
       if sun.position.x < -1.5 {
-         sun.position.x = -1.5
+         self.sun.position.x = -1.5
       }
       
       sender.setTranslation(CGPoint(x: 0, y: 0), in: view)
@@ -608,11 +615,12 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) {
          let queue = OperationQueue()
          let operation = BlockOperation {
-            self.y_speed += 0.5
-            let action = SCNAction.moveBy(x: 0, y: self.y_speed, z: 0, duration: 1)
-            self.sun.runAction(SCNAction.repeatForever(action))
-            self.Camera_Node.runAction(SCNAction.repeatForever(action))
+            self.sun.runAction(self.AfterAction)
+            self.Camera_Node.runAction(self.AfterAction)
+            self.SpotLightNode.runAction(self.AfterAction)
          }
+         self.Speed -= 4
+         self.AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: self.Speed)
          queue.addOperation(operation)
       }
       
