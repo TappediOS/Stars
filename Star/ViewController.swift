@@ -18,12 +18,13 @@ import FirebaseAnalytics
 import GoogleMobileAds
 
 //2
-class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterControllerDelegate, GADRewardBasedVideoAdDelegate {
+class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterControllerDelegate, SCNSceneRendererDelegate, GADRewardBasedVideoAdDelegate {
    
    var wall:[[[Int]]] = [[[]]]
    
    var score:Int = 0
    var y_speed:CGFloat = -24
+   var Action = SCNAction.repeatForever(SCNAction.moveBy(x: 0, y: -24, z: 0, duration: 1))
    let BoxCategory: UInt32 = 0b0001
    let SunCategory: UInt32 = 0b0100
    let FloorCategoyr: UInt32 = 0b010
@@ -119,10 +120,9 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       MoveSpotLightNode.eulerAngles.x = -90
       MoveSpotLightNode.light?.spotOuterAngle = 65
       MoveSpotLightNode.light?.spotInnerAngle = 48
-      MoveSpotLightNode.light?.shadowMapSize.width = 2500
-      MoveSpotLightNode.light?.shadowMapSize.height = 2500
+      MoveSpotLightNode.light?.shadowMapSize.width = 1000
+      MoveSpotLightNode.light?.shadowMapSize.height = 1000
       MoveSpotLightNode.light?.zNear = 48
-      let action33 = SCNAction.moveBy(x: 0, y: y_speed, z: 0, duration: 1)
       scene.rootNode.addChildNode(MoveSpotLightNode)
       SpotLightNode = MoveSpotLightNode
       
@@ -146,7 +146,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       CameraNode.position = SCNVector3(x: 0, y: 10035 , z: -3.5)
       CameraNode.eulerAngles.x = -90
       CameraNode.castsShadow = false
-      CameraNode.runAction(SCNAction.repeatForever(action33))
+      CameraNode.runAction(Action)
       scene.rootNode.addChildNode(CameraNode)
       Camera_Node = CameraNode
       
@@ -239,7 +239,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       GorldNode.physicsBody?.contactTestBitMask = Int(Wall1Category) + Int(Wall0Category)
       GorldNode.physicsBody?.collisionBitMask = Int(BoxCategory) + Int(FloorCategoyr) + Int(SunCategory)
       GorldNode.physicsBody?.mass = 0
-      GorldNode.runAction(SCNAction.repeatForever(action33))
+      GorldNode.runAction(Action)
       GorldNode.castsShadow = true
 //      GorldNode.light?.castsShadow = true
 
@@ -348,6 +348,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
          print("Error: setup RewardBasedVideoAd")
       }
    }
+   
 
    
    
@@ -413,72 +414,71 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
             self.sun.removeAllActions()
             self.Camera_Node.removeAllActions()
             self.y_speed -= 0.5
-            let action = SCNAction.moveBy(x: 0, y: self.y_speed, z: 0, duration: 1)
-            self.sun.runAction(SCNAction.repeatForever(action))
-            self.Camera_Node.runAction(SCNAction.repeatForever(action))
-            self.SpotLightNode.runAction(SCNAction.repeatForever(action))
+            self.Action = SCNAction.repeatForever(SCNAction.moveBy(x: 0, y: self.y_speed, z: 0, duration: 1))
+            self.sun.runAction(SCNAction.repeatForever(self.Action))
+            self.Camera_Node.runAction(SCNAction.repeatForever(self.Action))
+            self.SpotLightNode.runAction(SCNAction.repeatForever(self.Action))
          }
       
          queue.addOperation(operation)
       
    }
    
+   
+   
    @objc func panView(sender: UIPanGestureRecognizer) {
       //移動後の相対位置を取得
       let location: CGPoint = sender.translation(in: self.view)  //Swift3
-      let x = CGFloat(location.x / 65) // 65
-      let z = CGFloat(location.y / 65)
+      let x = CGFloat(location.x / 55) // 65
+      let z = CGFloat(location.y / 55)
       
-      let MoveX = self.sun.position.x + Float(x)
-      let MoveZ = self.sun.position.z + Float(z)
-      
-      print("X: \(MoveX)")
-      print("Z: \(MoveZ)")
-      
-      if MoveX < -1.5 || MoveX > 1.5 {
-         sender.setTranslation(CGPoint(x: 0, y: 0), in: view)
-         return
-      }
-      if MoveZ < -1.5 || MoveZ > 1.5 {
-         sender.setTranslation(CGPoint(x: 0, y: 0), in: view)
-         return
-      }
+      ///let MoveX = self.sun.position.x + Float(x)
+      //let MoveZ = self.sun.position.z + Float(z)
 
-      //self.sun.position.y = self.Camera_Node.position.y - 7.5
+      
+      self.sun.position.y = self.Camera_Node.position.y - 7.5
 
       let queue = OperationQueue()
       let operation = BlockOperation {
-         
 
-//         self.sun.position.z = self.sun.position.z + Float(y)
-//         self.SpotLightNode.position.z = self.sun.position.z
-//
-//         self.sun.position.x = self.sun.position.x + Float(x)
-//         self.SpotLightNode.position.x = self.sun.position.x
-        
-         self.sun.position = SCNVector3(x: MoveX, y: self.Camera_Node.position.y - 7.5, z:  MoveZ)
-         self.SpotLightNode.position = SCNVector3(x: MoveX, y: self.SpotLightNode.position.y, z: MoveZ)
-         
-         
+
+         self.sun.position.z = self.sun.position.z + Float(z)
+         self.SpotLightNode.position.z = self.sun.position.z
+
+         self.sun.position.x = self.sun.position.x + Float(x)
+         self.SpotLightNode.position.x = self.sun.position.x
+
+         //self.sun.position = SCNVector3(x: MoveX, y: self.Camera_Node.position.y - 7.5, z:  MoveZ)
+         //self.SpotLightNode.position = SCNVector3(x: MoveX, y: self.SpotLightNode.position.y, z: MoveZ)
+
+
       }
       queue.addOperation(operation)
       
-//
-//
-//      if sun.position.z > 1.5 {
-//         sun.position.z = 1.5
-//      }
-//      if sun.position.z < -1.5 {
-//         sun.position.z = -1.5
-//      }
-//
-//      if sun.position.x > 1.5 {
-//         sun.position.x = 1.5
-//      }
-//      if sun.position.x < -1.5 {
-//         sun.position.x = -1.5
-//      }
-//
+
+
+      if sun.position.z > 1.5 {
+         self.sun.position.z = 1.5
+         //self.Camera_Node.position.z = 1.5 - 3.5
+         //sun.position = SCNVector3(x: self.sun.position.x, y: self.Camera_Node.position.y - 7.5, z:  1.5)
+      }
+      if sun.position.z < -1.5 {
+         self.sun.position.z = -1.5
+         //self.Camera_Node.position.z = -1.5 - 3.5
+         //sun.position = SCNVector3(x: self.sun.position.x, y: self.Camera_Node.position.y - 7.5, z:  -1.5)
+      }
+
+      if sun.position.x > 1.5 {
+         self.sun.position.x = 1.5
+         //self.Camera_Node.position.x = 1.5
+         //sun.position = SCNVector3(x: 1.5, y: self.Camera_Node.position.y - 7.5, z:  self.sun.position.z)
+      }
+      if sun.position.x < -1.5 {
+         self.sun.position.x = -1.5
+         //self.Camera_Node.position.x = -1.5
+         //sun.position = SCNVector3(x: -1.5, y: self.Camera_Node.position.y - 7.5, z:  self.sun.position.z)
+      }
+
       sender.setTranslation(CGPoint(x: 0, y: 0), in: view)
    }
    
