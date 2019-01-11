@@ -25,6 +25,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
    var score:Int = 0
    var Action = SCNAction.repeatForever(SCNAction.moveBy(x: 0, y: -24, z: 0, duration: 1))
    var Speed: Double = 419
+   var BeforAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: 419)
    var AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: 419)
    let BoxCategory: UInt32 = 0b0001
    let SunCategory: UInt32 = 0b0100
@@ -92,6 +93,9 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
    
    let bokeh = SCNParticleSystem(named: "Myparticle.scnp", inDirectory: "")
    let Stars = SCNParticleSystem(named: "Stars.scnp", inDirectory: "")
+   
+   
+   var MyTimer = Timer()
 
    
    override func viewDidLoad() {
@@ -121,8 +125,8 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       MoveSpotLightNode.eulerAngles.x = -90
       MoveSpotLightNode.light?.spotOuterAngle = 65
       MoveSpotLightNode.light?.spotInnerAngle = 48
-      MoveSpotLightNode.light?.shadowMapSize.width = 2000
-      MoveSpotLightNode.light?.shadowMapSize.height = 2000
+      MoveSpotLightNode.light?.shadowMapSize.width = 3000
+      MoveSpotLightNode.light?.shadowMapSize.height = 3000
       MoveSpotLightNode.light?.zNear = 48
       scene.rootNode.addChildNode(MoveSpotLightNode)
       SpotLightNode = MoveSpotLightNode
@@ -147,7 +151,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       CameraNode.position = SCNVector3(x: 0, y: 10035 , z: -3.5)
       CameraNode.eulerAngles.x = -90
       CameraNode.castsShadow = false
-      CameraNode.runAction(AfterAction)
+      //CameraNode.runAction(AfterAction)
       scene.rootNode.addChildNode(CameraNode)
       Camera_Node = CameraNode
       
@@ -316,8 +320,13 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       View2.alpha = 0.21
       
       
+      
+      self.MyTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(ViewController.TimerUpdate(timer:)), userInfo: nil, repeats: true)
+      
+      
       #if DEBUG
          print("This is debug, so NOT AD")
+         //SceneView.showsStatistics = true
       #else
       
          if TARGET_OS_SIMULATOR == 1 {
@@ -334,6 +343,12 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
          setupRewardBasedVideoAd()
       #endif
 
+   }
+   
+   @objc func TimerUpdate(timer : Timer){
+     
+      self.Camera_Node.position.y = self.sun.position.y + 7.5
+      
    }
    
    
@@ -404,29 +419,18 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       queue0.addOperation(operation0)
 
  
-         
-      
+      self.SpotLightNode.removeAllActions()
+      self.sun.removeAllActions()
 
-      let queue = OperationQueue()
-      let operation = BlockOperation {
-
-         self.sun.runAction(self.AfterAction)
-         self.Camera_Node.runAction(self.AfterAction)
-         self.SpotLightNode.runAction(self.AfterAction)
-      }
+      self.sun.runAction(self.AfterAction)
+      self.SpotLightNode.runAction(self.AfterAction)
+  
       
-      let Endqueue = OperationQueue()
-      let Ope = BlockOperation {
-         self.SpotLightNode.removeAllActions()
-         self.sun.removeAllActions()
-         self.Camera_Node.removeAllActions()
-      }
+ 
       
       self.Speed -= 4
       self.AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: self.Speed)
-      
-      Endqueue.addOperation(Ope)
-      queue.addOperation(operation)
+
    }
    
    
@@ -437,16 +441,23 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       let x = CGFloat(location.x / 55) // 65
       let z = CGFloat(location.y / 55)
       
-      self.sun.position.y = self.Camera_Node.position.y - 7.5
 
+      
       let queue = OperationQueue()
       let operation = BlockOperation {
          self.sun.position.z = self.sun.position.z + Float(z)
          self.sun.position.x = self.sun.position.x + Float(x)
+         self.Camera_Node.position.y = self.sun.position.y + 7.5
          self.SpotLightNode.position.x = self.sun.position.x
          self.SpotLightNode.position.z = self.sun.position.z
       }
       queue.addOperation(operation)
+      
+   
+     
+
+      
+      
 
       if sun.position.z > 1.5 {
          self.sun.position.z = 1.5
@@ -461,6 +472,8 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       if sun.position.x < -1.5 {
          self.sun.position.x = -1.5
       }
+      
+   
 
       sender.setTranslation(CGPoint(x: 0, y: 0), in: view)
    }
@@ -604,6 +617,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
    func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd, didFailToLoadWithError error: Error) {
       adRequestInProgress = false
       print("reword:失敗したよ（準備できてない？）: \(error.localizedDescription)")
+      
    }
    
    func rewardBasedVideoAdDidReceive(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {

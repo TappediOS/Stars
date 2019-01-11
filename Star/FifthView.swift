@@ -20,7 +20,7 @@ import GoogleMobileAds
 class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterControllerDelegate, GADRewardBasedVideoAdDelegate {
    
    var wall:[[[Int]]] = [[[]]]
-   
+   var AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: 480)
    var score:Int = 0
    var y_speed:CGFloat = -22
    let BoxCategory: UInt32 = 0b0001
@@ -35,6 +35,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
    var Node = SCNNode()
    var Camera_Node = SCNNode()
    var count: Int = 100
+   var Speed: Double = 419
    var up: Int = 0
    var right: Int = 1
    var left: Int = 0
@@ -59,6 +60,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
    var audio1 : AVAudioPlayer! = nil  // 再生するサウンドのインスタンス
    var Score = SKLabelNode()
    var UserScore4: UserDefaults = UserDefaults.standard
+   var SpotLightNode = SCNNode()
    let LEADERBOARD_ID = "Stage4"
    
    //3
@@ -91,6 +93,8 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
    
    let bokeh = SCNParticleSystem(named: "Myparticle.scnp", inDirectory: "")
    let Stars = SCNParticleSystem(named: "Stars.scnp", inDirectory: "")
+   
+   var MyTimer = Timer()
 
    
    override func viewDidLoad() {
@@ -121,6 +125,20 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
       // シーンのルートノードにライトノードを追加
       scene.rootNode.addChildNode(lightNode)
       
+      let MoveSpotLightNode = SCNNode()
+      MoveSpotLightNode.light = SCNLight()
+      MoveSpotLightNode.light?.type = SCNLight.LightType.spot
+      MoveSpotLightNode.light?.castsShadow = true
+      MoveSpotLightNode.position = SCNVector3(x: 0, y: 10035, z: 0)
+      MoveSpotLightNode.eulerAngles.x = -90
+      MoveSpotLightNode.light?.spotOuterAngle = 65
+      MoveSpotLightNode.light?.spotInnerAngle = 48
+      MoveSpotLightNode.light?.shadowMapSize.width = 3000
+      MoveSpotLightNode.light?.shadowMapSize.height = 3000
+      MoveSpotLightNode.light?.zNear = 48
+      scene.rootNode.addChildNode(MoveSpotLightNode)
+      SpotLightNode = MoveSpotLightNode
+      
       let floor = SCNFloor()
       floor.reflectivity = 0.5
       floor.firstMaterial?.diffuse.contents = UIImage(named: "Snow1")
@@ -141,7 +159,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
       CameraNode.position = SCNVector3(x: 0, y: 10035 , z: -3.5)
       CameraNode.eulerAngles.x = -90
       let action33 = SCNAction.moveBy(x: 0, y: y_speed, z: 0, duration: 1)
-      CameraNode.runAction(SCNAction.repeatForever(action33))
+      //CameraNode.runAction(SCNAction.repeatForever(action33))
       scene.rootNode.addChildNode(CameraNode)
       Camera_Node = CameraNode
       
@@ -382,6 +400,8 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
       View2.backgroundColor = UIColor.white
       View2.alpha = 0.21
       
+      self.MyTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(FifthViewController.TimerUpdate(timer:)), userInfo: nil, repeats: true)
+      
       
       if TARGET_OS_SIMULATOR == 1 {
          print("テスト広告")
@@ -408,6 +428,14 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
       }else{
          print("Error: setup RewardBasedVideoAd")
       }
+      
+      
+   }
+   
+   @objc func TimerUpdate(timer : Timer){
+      
+      self.Camera_Node.position.y = self.sun.position.y + 7.5
+      
    }
    
    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
@@ -571,24 +599,19 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
          }
          queue0.addOperation(operation0)
          
-         if score % 3 == 0 {
+         
+            self.SpotLightNode.removeAllActions()
+            self.sun.removeAllActions()
             
-            sun.removeAllActions()
-            Camera_Node.removeAllActions()
-            // オペレーションキューを生成。
-            let queue = OperationQueue()
-            // オペレーションオブジェクトを生成。
-            // Swiftの場合、クロージャを使うといい。
-            let operation = BlockOperation {
-               // 並列で行いたい処理
-               self.y_speed -= 0.5
-               let action = SCNAction.moveBy(x: 0, y: self.y_speed, z: 0, duration: 1)
-               self.sun.runAction(SCNAction.repeatForever(action))
-               self.Camera_Node.runAction(SCNAction.repeatForever(action))
-            }
+            self.sun.runAction(self.AfterAction)
+            self.SpotLightNode.runAction(self.AfterAction)
             
-            queue.addOperation(operation)
-         }
+            
+            
+            
+            self.Speed -= 2
+            self.AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: self.Speed)
+
       }
    }
    
@@ -596,23 +619,19 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
       //移動後の相対位置を取得
       let location: CGPoint = sender.translation(in: self.view)  //Swift3
       let x = CGFloat(location.x / 65)
-      let y = CGFloat(location.y / 65)
+      let z = CGFloat(location.y / 65)
       
-      self.sun.position.y = self.Camera_Node.position.y - 7.5
       
       // オペレーションキューを生成。
       let queue = OperationQueue()
       // オペレーションオブジェクトを生成。
       // Swiftの場合、クロージャを使うといい。
       let operation = BlockOperation {
-//         if self.sun.position.z >= -1.5 && self.sun.position.z <= 1.5 {
-//            self.sun.position.z = self.sun.position.z + Float(y)
-//         }
-//         if self.sun.position.x >= -1.5 && self.sun.position.x <= 1.5 {
-//            self.sun.position.x = self.sun.position.x + Float(x)
-//         }
-         self.sun.position.z = self.sun.position.z + Float(y)
+         self.sun.position.z = self.sun.position.z + Float(z)
          self.sun.position.x = self.sun.position.x + Float(x)
+         self.Camera_Node.position.y = self.sun.position.y + 7.5
+         self.SpotLightNode.position.x = self.sun.position.x
+         self.SpotLightNode.position.z = self.sun.position.z
       }
       queue.addOperation(operation)
       
@@ -638,6 +657,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
       
       sun.removeAllActions()
       Camera_Node.removeAllActions()
+      SpotLightNode.removeAllActions()
       
       if RewardAD == true {
          
@@ -720,6 +740,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
             let action = SCNAction.moveBy(x: 0, y: self.y_speed, z: 0, duration: 1)
             self.sun.runAction(SCNAction.repeatForever(action))
             self.Camera_Node.runAction(SCNAction.repeatForever(action))
+            self.SpotLightNode.runAction(self.AfterAction)
          }
          queue.addOperation(operation)
       }

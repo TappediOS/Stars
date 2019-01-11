@@ -94,6 +94,8 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    
    let bokeh = SCNParticleSystem(named: "Myparticle.scnp", inDirectory: "")
    let Stars = SCNParticleSystem(named: "Stars.scnp", inDirectory: "")
+   
+   var MyTimer = Timer()
 
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -120,8 +122,8 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       MoveSpotLightNode.eulerAngles.x = -90
       MoveSpotLightNode.light?.spotOuterAngle = 65
       MoveSpotLightNode.light?.spotInnerAngle = 48
-      MoveSpotLightNode.light?.shadowMapSize.width = 2000
-      MoveSpotLightNode.light?.shadowMapSize.height = 2000
+      MoveSpotLightNode.light?.shadowMapSize.width = 3000
+      MoveSpotLightNode.light?.shadowMapSize.height = 3000
       MoveSpotLightNode.light?.zNear = 48
       scene.rootNode.addChildNode(MoveSpotLightNode)
       SpotLightNode = MoveSpotLightNode
@@ -146,7 +148,7 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       CameraNode.position = SCNVector3(x: 0, y: 10035 , z: -3.5)
       CameraNode.eulerAngles.x = -90
       CameraNode.castsShadow = false
-      CameraNode.runAction(AfterAction)
+      //CameraNode.runAction(AfterAction)
       scene.rootNode.addChildNode(CameraNode)
       Camera_Node = CameraNode
       
@@ -334,6 +336,7 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       View2.backgroundColor = UIColor.white
       View2.alpha = 0.21
       
+      self.MyTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(SecondViewController.TimerUpdate(timer:)), userInfo: nil, repeats: true)
       
       
       #if DEBUG
@@ -364,8 +367,13 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       }else{
          print("Error: setup RewardBasedVideoAd")
       }
-   }
+         }
 
+   @objc func TimerUpdate(timer : Timer){
+      
+      self.Camera_Node.position.y = self.sun.position.y + 7.5
+      
+   }
    
    
    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
@@ -466,24 +474,21 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
          queue0.addOperation(operation0)
          
          
-         if score % 3 == 0 {
 
-            let queue = OperationQueue()
-            let operation = BlockOperation {
-               
-               self.sun.runAction(self.AfterAction)
-               self.Camera_Node.runAction(self.AfterAction)
-               self.SpotLightNode.runAction(self.AfterAction)
-            }
-            
-            self.Speed += 5
-            self.AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: self.Speed)
-            
+
             self.SpotLightNode.removeAllActions()
             self.sun.removeAllActions()
-            self.Camera_Node.removeAllActions()
-            queue.addOperation(operation)
-         }
+            
+            self.sun.runAction(self.AfterAction)
+            self.SpotLightNode.runAction(self.AfterAction)
+            
+            
+            
+            
+            self.Speed -= 2
+            self.AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: self.Speed)
+
+         
       }
    }
    
@@ -493,8 +498,10 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       let location: CGPoint = sender.translation(in: self.view)  //Swift3
       let x = CGFloat(location.x / 55)
       let z = CGFloat(location.y / 55)
+
+  
       
-      self.Camera_Node.position.y = self.sun.position.y + 7.5
+      //self.Camera_Node.position.y = self.sun.position.y + 7.5
       //self.sun.position.y = self.Camera_Node.position.y - 7.5
 //      self.sun.position = SCNVector3(x: self.sun.position.x + Float(x), y: self.sun.position.y, z: self.sun.position.z + Float(z))
 //      self.Camera_Node.position = SCNVector3(x: 0, y: self.sun.position.y + 7.5, z: -3.5)
@@ -503,7 +510,7 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       let operation = BlockOperation {
          self.sun.position.z = self.sun.position.z + Float(z)
          self.sun.position.x = self.sun.position.x + Float(x)
-
+         self.Camera_Node.position.y = self.sun.position.y + 7.5
          self.SpotLightNode.position.x = self.sun.position.x
          self.SpotLightNode.position.z = self.sun.position.z
       }
@@ -531,6 +538,7 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       
       sun.removeAllActions()
       Camera_Node.removeAllActions()
+      SpotLightNode.removeAllActions()
       
       
       if RewardAD == true {
