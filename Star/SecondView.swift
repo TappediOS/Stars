@@ -34,8 +34,8 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    var set:Bool = true
    let SceneView = SCNView()
    var Node = SCNNode()
-   var Camera_Node = SCNNode()
-   var SpotLightNode = SCNNode()
+   var Camera_Node = StageCamera()
+   var SpotLightNode = StageSpotLight()
    var count: Int = 100
    var up: Int = 0
    var right: Int = 1
@@ -103,19 +103,9 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       view.accessibilityIgnoresInvertColors = true
       
       
-      let MoveSpotLightNode = SCNNode()
-      MoveSpotLightNode.light = SCNLight()
-      MoveSpotLightNode.light?.type = SCNLight.LightType.spot
-      MoveSpotLightNode.light?.castsShadow = true
-      MoveSpotLightNode.position = SCNVector3(x: 0, y: 10035, z: 0)
-      MoveSpotLightNode.eulerAngles.x = -90
-      MoveSpotLightNode.light?.spotOuterAngle = 65
-      MoveSpotLightNode.light?.spotInnerAngle = 48
-      MoveSpotLightNode.light?.shadowMapSize.width = 4500
-      MoveSpotLightNode.light?.shadowMapSize.height = 4500
-      MoveSpotLightNode.light?.zNear = 48
-      scene.rootNode.addChildNode(MoveSpotLightNode)
-      SpotLightNode = MoveSpotLightNode
+ 
+      scene.rootNode.addChildNode(SpotLightNode)
+
       
       let floor = SCNFloor()
       floor.reflectivity = 0.5
@@ -132,14 +122,9 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       floorNode.physicsBody?.categoryBitMask = Int(FloorCategoyr)
       scene.rootNode.addChildNode(floorNode)
       
-      let CameraNode = SCNNode()
-      CameraNode.camera = SCNCamera()
-      CameraNode.position = SCNVector3(x: 0, y: 10035 , z: -3.5)
-      CameraNode.eulerAngles.x = -90
-      CameraNode.castsShadow = false
-      //CameraNode.runAction(AfterAction)
-      scene.rootNode.addChildNode(CameraNode)
-      Camera_Node = CameraNode
+    
+      scene.rootNode.addChildNode(Camera_Node)
+ 
       
       wall.removeAll()
       

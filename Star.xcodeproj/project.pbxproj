@@ -32,6 +32,9 @@
 		BF65632320F064E700294710 /* Myparticle.scnp in Resources */ = {isa = PBXBuildFile; fileRef = BF65632120F064E700294710 /* Myparticle.scnp */; };
 		BF65632720F0677A00294710 /* Conffi.scnp in Resources */ = {isa = PBXBuildFile; fileRef = BF65632520F0677A00294710 /* Conffi.scnp */; };
 		BFB91212215F496C008CECDC /* pan.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFB91211215F496C008CECDC /* pan.mp3 */; };
+		BFDAC0B222ABA6FC002A8C37 /* Floor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDAC0B122ABA6FC002A8C37 /* Floor.swift */; };
+		BFDAC0B422ABA855002A8C37 /* StageSpotLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDAC0B322ABA855002A8C37 /* StageSpotLight.swift */; };
+		BFDAC0B622ABA943002A8C37 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDAC0B522ABA943002A8C37 /* Camera.swift */; };
 		BFDE32DC20F09A1C00D0DE06 /* Stars.scnp in Resources */ = {isa = PBXBuildFile; fileRef = BFDE32DA20F09A1C00D0DE06 /* Stars.scnp */; };
 		BFE8F6CB210C365100830A07 /* Myparticle3.scnp in Resources */ = {isa = PBXBuildFile; fileRef = BFE8F6CA210C365100830A07 /* Myparticle3.scnp */; };
 		BFE8F6CD210C365B00830A07 /* Myparticle2.scnp in Resources */ = {isa = PBXBuildFile; fileRef = BFE8F6CC210C365B00830A07 /* Myparticle2.scnp */; };
@@ -78,6 +81,9 @@
 		BF65632120F064E700294710 /* Myparticle.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Myparticle.scnp; sourceTree = "<group>"; };
 		BF65632520F0677A00294710 /* Conffi.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Conffi.scnp; sourceTree = "<group>"; };
 		BFB91211215F496C008CECDC /* pan.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = pan.mp3; path = ../../../.Trash/pan.mp3; sourceTree = "<group>"; };
+		BFDAC0B122ABA6FC002A8C37 /* Floor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Floor.swift; sourceTree = "<group>"; };
+		BFDAC0B322ABA855002A8C37 /* StageSpotLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageSpotLight.swift; sourceTree = "<group>"; };
+		BFDAC0B522ABA943002A8C37 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		BFDE32DA20F09A1C00D0DE06 /* Stars.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Stars.scnp; sourceTree = "<group>"; };
 		BFE8F6CA210C365100830A07 /* Myparticle3.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Myparticle3.scnp; sourceTree = "<group>"; };
 		BFE8F6CC210C365B00830A07 /* Myparticle2.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Myparticle2.scnp; sourceTree = "<group>"; };
@@ -178,7 +184,7 @@
 				BF2EBFC42121CBA000FE7449 /* IAPManager.swift */,
 				BF65630420EC8BF000294710 /* ViewController.swift */,
 				BF03548620FD8232004BF8A2 /* SecondView.swift */,
-				BFDDC6C322ABA69400A09A4B /* New Group */,
+				BFDDC6C322ABA69400A09A4B /* Stage Objects */,
 				BF2EBFC021201FD200FE7449 /* ForthView.swift */,
 				BF2EBFC22120279400FE7449 /* FifthView.swift */,
 				BF2EBFD02122B62D00FE7449 /* TabBar.swift */,
@@ -211,11 +217,14 @@
 			path = Star;
 			sourceTree = "<group>";
 		};
-		BFDDC6C322ABA69400A09A4B /* New Group */ = {
+		BFDDC6C322ABA69400A09A4B /* Stage Objects */ = {
 			isa = PBXGroup;
 			children = (
+				BFDAC0B122ABA6FC002A8C37 /* Floor.swift */,
+				BFDAC0B322ABA855002A8C37 /* StageSpotLight.swift */,
+				BFDAC0B522ABA943002A8C37 /* Camera.swift */,
 			);
-			path = "New Group";
+			path = "Stage Objects";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,6 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF2EBFC52121CBA000FE7449 /* IAPManager.swift in Sources */,
+				BFDAC0B422ABA855002A8C37 /* StageSpotLight.swift in Sources */,
 				BF2EBFBD211EB21000FE7449 /* FourthSellect.swift in Sources */,
 				BF2EBFB7211EB17800FE7449 /* FirstSellect.swift in Sources */,
 				BF2EBFBF211EB23000FE7449 /* FifthSllect.swift in Sources */,
@@ -388,6 +398,8 @@
 				BF2EBFD12122B62D00FE7449 /* TabBar.swift in Sources */,
 				BF2EBFC121201FD200FE7449 /* ForthView.swift in Sources */,
 				BF2EBFB9211EB1B600FE7449 /* SecondSellect.swift in Sources */,
+				BFDAC0B622ABA943002A8C37 /* Camera.swift in Sources */,
+				BFDAC0B222ABA6FC002A8C37 /* Floor.swift in Sources */,
 				BF2EBFC32120279400FE7449 /* FifthView.swift in Sources */,
 				BF2EBFBB211EB1EA00FE7449 /* ThirdSellect.swift in Sources */,
 			);
