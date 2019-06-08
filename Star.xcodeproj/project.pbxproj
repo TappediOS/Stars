@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BF03548720FD8232004BF8A2 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF03548620FD8232004BF8A2 /* SecondView.swift */; };
+		BF24DFED22A794CC00862C21 /* SStar.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = BF24DFEC22A794CC00862C21 /* SStar.jpeg */; };
 		BF250636215F4BE300B1BFA7 /* Circle.png in Resources */ = {isa = PBXBuildFile; fileRef = BF250635215F4BE300B1BFA7 /* Circle.png */; };
 		BF2EBFB7211EB17800FE7449 /* FirstSellect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2EBFB6211EB17800FE7449 /* FirstSellect.swift */; };
 		BF2EBFB9211EB1B600FE7449 /* SecondSellect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2EBFB8211EB1B600FE7449 /* SecondSellect.swift */; };
@@ -46,6 +47,7 @@
 		40FA7893066C30D182181F05 /* Pods-Star.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Star.release.xcconfig"; path = "Pods/Target Support Files/Pods-Star/Pods-Star.release.xcconfig"; sourceTree = "<group>"; };
 		BAB277BF978B8240C12A89C5 /* Pods_Star.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Star.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF03548620FD8232004BF8A2 /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
+		BF24DFEC22A794CC00862C21 /* SStar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SStar.jpeg; sourceTree = "<group>"; };
 		BF250635215F4BE300B1BFA7 /* Circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Circle.png; path = ../../../.Trash/Circle.png; sourceTree = "<group>"; };
 		BF2EBFB6211EB17800FE7449 /* FirstSellect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstSellect.swift; sourceTree = "<group>"; };
 		BF2EBFB8211EB1B600FE7449 /* SecondSellect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSellect.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				BF2EBFC42121CBA000FE7449 /* IAPManager.swift */,
 				BF65630420EC8BF000294710 /* ViewController.swift */,
 				BF03548620FD8232004BF8A2 /* SecondView.swift */,
+				BFDDC6C322ABA69400A09A4B /* New Group */,
 				BF2EBFC021201FD200FE7449 /* ForthView.swift */,
 				BF2EBFC22120279400FE7449 /* FifthView.swift */,
 				BF2EBFD02122B62D00FE7449 /* TabBar.swift */,
@@ -194,6 +197,7 @@
 				BF65632120F064E700294710 /* Myparticle.scnp */,
 				BFE8F6CA210C365100830A07 /* Myparticle3.scnp */,
 				BFE8F6CC210C365B00830A07 /* Myparticle2.scnp */,
+				BF24DFEC22A794CC00862C21 /* SStar.jpeg */,
 				BF2EBFDA2123DBB600FE7449 /* Localizable.strings */,
 				BF2EBFE22123DEA500FE7449 /* InfoPlist.strings */,
 				BF65630620EC8BF000294710 /* Main.storyboard */,
@@ -205,6 +209,13 @@
 				BF65630E20EC8BF100294710 /* Info.plist */,
 			);
 			path = Star;
+			sourceTree = "<group>";
+		};
+		BFDDC6C322ABA69400A09A4B /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,7 +230,6 @@
 				BF6562FC20EC8BF000294710 /* Frameworks */,
 				BF6562FD20EC8BF000294710 /* Resources */,
 				94F3D5BB395BC3C59572552D /* [CP] Embed Pods Frameworks */,
-				54498678144334AE9D7E7D8D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -293,6 +303,7 @@
 				BF2EBFCD212296A800FE7449 /* flear2.png in Resources */,
 				BFF4AC2020F60A4D0048853C /* key3.scnp in Resources */,
 				BF65632720F0677A00294710 /* Conffi.scnp in Resources */,
+				BF24DFED22A794CC00862C21 /* SStar.jpeg in Resources */,
 				BF2EBFE02123DEA500FE7449 /* InfoPlist.strings in Resources */,
 				BFE8F6CD210C365B00830A07 /* Myparticle2.scnp in Resources */,
 				BF65630D20EC8BF100294710 /* LaunchScreen.storyboard in Resources */,
@@ -308,39 +319,38 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		54498678144334AE9D7E7D8D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Star/Pods-Star-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		94F3D5BB395BC3C59572552D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Star/Pods-Star-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Star/Pods-Star-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
+				"${BUILT_PRODUCTS_DIR}/SpriteKitEasingSwift/SpriteKitEasingSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/TapticEngine/TapticEngine.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SpriteKitEasingSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TapticEngine.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Star/Pods-Star-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Star/Pods-Star-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B176AA9F057AFC3073C1201F /* [CP] Check Pods Manifest.lock */ = {

@@ -57,7 +57,7 @@ class SecondSellectViewController: UIViewController {
    let bannreView = GADBannerView()
    let request:GADRequest = GADRequest()
    
-   let bokeh = SCNParticleSystem(named: "Myparticle.scnp", inDirectory: "")
+   let bokeh = SCNParticleSystem(named: "Myparticle2.scnp", inDirectory: "")
    let Stars = SCNParticleSystem(named: "Stars.scnp", inDirectory: "")
 
 
@@ -228,7 +228,7 @@ class SecondSellectViewController: UIViewController {
      
       
       bannreView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0)
-      bannreView.frame = CGRect(x: 0, y: Size.height - (tabBarController?.tabBar.frame.size.height)! - 50, width: Size.width, height: 50)
+      bannreView.frame = CGRect(x: 0, y: Size.height - (tabBarController?.tabBar.frame.size.height)! - 82, width: Size.width, height: 50)
       
       view.addSubview(bannreView)
       view.bringSubviewToFront(bannreView)
@@ -250,9 +250,11 @@ class SecondSellectViewController: UIViewController {
          }else{
             request.testDevices = ["32469097af622f72ff0f6d1ded471f0c"]
          }
+      
+         bannreView.load(request)
       #endif
       
-      bannreView.load(request)
+      
      
       
       

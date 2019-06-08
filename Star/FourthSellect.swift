@@ -57,7 +57,7 @@ class FourthSellectViewController: UIViewController {
    let bannreView = GADBannerView()
    let request:GADRequest = GADRequest()
    
-   let bokeh = SCNParticleSystem(named: "Myparticle.scnp", inDirectory: "")
+   let bokeh = SCNParticleSystem(named: "Myparticle3.scnp", inDirectory: "")
    let Stars = SCNParticleSystem(named: "Stars.scnp", inDirectory: "")
    
    
@@ -275,9 +275,11 @@ class FourthSellectViewController: UIViewController {
       }else{
          request.testDevices = ["32469097af622f72ff0f6d1ded471f0c"]
       }
-      #endif
       
       bannreView.load(request)
+      #endif
+      
+      
       
       
       

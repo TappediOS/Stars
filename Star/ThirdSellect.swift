@@ -89,9 +89,11 @@ class ThirdSellectViewController: UIViewController, GKGameCenterControllerDelega
       }else{
          request.testDevices = ["32469097af622f72ff0f6d1ded471f0c"]
       }
+      
+       bannreView.load(request)
       #endif
       
-      bannreView.load(request)
+     
       
       
    }

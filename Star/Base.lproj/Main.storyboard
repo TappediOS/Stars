@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="26W-7b-SeE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="26W-7b-SeE">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,7 +27,7 @@
         <!--Stage2-->
         <scene sceneID="jG8-W3-Wrm">
             <objects>
-                <viewController id="dME-nd-2pP" customClass="SecondSellectViewController" customModule="Star" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dME-nd-2pP" customClass="FirstSellectViewController" customModule="Star" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9wV-Mb-hO2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -147,7 +146,7 @@
         <!--Stage1-->
         <scene sceneID="xZT-RQ-aey">
             <objects>
-                <viewController id="1A8-MT-p8p" customClass="FirstSellectViewController" customModule="Star" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1A8-MT-p8p" customClass="SecondSellectViewController" customModule="Star" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YzM-Cd-Qj4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -169,7 +168,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1CZ-MF-MvQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2959" y="1608"/>
+            <point key="canvasLocation" x="-2970" y="1657"/>
         </scene>
         <!--My Tab Bar View Controller-->
         <scene sceneID="kKn-oi-GJR">
@@ -209,7 +208,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="stage1" width="60" height="60"/>
-        <image name="toprate" width="60" height="60"/>
+        <image name="stage1" width="12.342857360839844" height="12.342857360839844"/>
+        <image name="toprate" width="12.342857360839844" height="12.342857360839844"/>
     </resources>
 </document>

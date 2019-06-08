@@ -15,13 +15,12 @@ import Foundation
 import GameKit
 import FirebaseAnalytics
 import GoogleMobileAds
+import TapticEngine
 
 
-class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterControllerDelegate, GADRewardBasedVideoAdDelegate {
+class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterControllerDelegate, GADRewardBasedVideoAdDelegate, SCNSceneRendererDelegate {
    
    var wall:[[[Int]]] = [[[]]]
-   
-   
    var score:Int = 0
    var Speed: Double = 480
    var AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: 480)
@@ -61,16 +60,11 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    var Score = SKLabelNode()
    var UserScore2: UserDefaults = UserDefaults.standard
    let LEADERBOARD_ID = "Stage2"
-   
-   
-   //3
    let Size: CGSize = UIScreen.main.bounds.size
    
-   //4
    let View = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height))
    let View2 = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height))
    
-   //5
    let AdMobID = "ca-app-pub-1460017825820383/4745063368"
    //この394で始まってるやつはgoogleが用意しているテストID
    let TEST_ID = "ca-app-pub-3940256099942544/1712485313"
@@ -78,23 +72,16 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    /// Is an ad being loaded.
    var adRequestInProgress = false
    var adRedy = false
-   
    let request:GADRequest = GADRequest()
-   
-   
-   //6
    /// The reward-based video ad.
    var rewardBasedVideo: GADRewardBasedVideoAd?
    var RewardAD: Bool = true
-
-   
    let key1 = SCNParticleSystem(named: "key1.scnp", inDirectory: "")
    let key2 = SCNParticleSystem(named: "key2.scnp", inDirectory: "")
    let key3 = SCNParticleSystem(named: "key3.scnp", inDirectory: "")
    
-   let bokeh = SCNParticleSystem(named: "Myparticle.scnp", inDirectory: "")
+   let bokeh = SCNParticleSystem(named: "Myparticle2.scnp", inDirectory: "")
    let Stars = SCNParticleSystem(named: "Stars.scnp", inDirectory: "")
-   
    var MyTimer = Timer()
 
    override func viewDidLoad() {
@@ -111,6 +98,8 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       SceneView.backgroundColor = UIColor.black
       SceneView.scene = scene
       SceneView.showsStatistics = false
+      SceneView.delegate = self
+      SceneView.isPlaying = true
       view.accessibilityIgnoresInvertColors = true
       
       
@@ -122,8 +111,8 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       MoveSpotLightNode.eulerAngles.x = -90
       MoveSpotLightNode.light?.spotOuterAngle = 65
       MoveSpotLightNode.light?.spotInnerAngle = 48
-      MoveSpotLightNode.light?.shadowMapSize.width = 3000
-      MoveSpotLightNode.light?.shadowMapSize.height = 3000
+      MoveSpotLightNode.light?.shadowMapSize.width = 4500
+      MoveSpotLightNode.light?.shadowMapSize.height = 4500
       MoveSpotLightNode.light?.zNear = 48
       scene.rootNode.addChildNode(MoveSpotLightNode)
       SpotLightNode = MoveSpotLightNode
@@ -336,8 +325,10 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       View2.backgroundColor = UIColor.white
       View2.alpha = 0.21
       
-      self.MyTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(SecondViewController.TimerUpdate(timer:)), userInfo: nil, repeats: true)
+      self.MyTimer = Timer.scheduledTimer(timeInterval: 0.0001, target: self, selector: #selector(SecondViewController.TimerUpdate(timer:)), userInfo: nil, repeats: true)
       
+      
+      print(MyTimer.timeInterval)
       
       #if DEBUG
          print("debug")
@@ -367,12 +358,10 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       }else{
          print("Error: setup RewardBasedVideoAd")
       }
-         }
+   }
 
    @objc func TimerUpdate(timer : Timer){
-      
-      self.Camera_Node.position.y = self.sun.position.y + 7.5
-      
+
    }
    
    
@@ -409,7 +398,7 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
             sun.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "kiiro")
             watch = 2
          }
-         AudioServicesPlaySystemSound(1519);
+         Play3DtouchHeavy()
          
 
       }else if wall[WallPosiY][WallPosiX][WallPosiZ] == 1  && watch == 1{
@@ -424,7 +413,7 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
             sun.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "kiiro")
             watch = 2
          }
-         AudioServicesPlaySystemSound(1519);
+         Play3DtouchHeavy()
          
       }else if wall[WallPosiY][WallPosiX][WallPosiZ] == 2  && watch == 2{
          
@@ -441,7 +430,7 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
             watch = 2
             
          }
-         AudioServicesPlaySystemSound(1519);
+         Play3DtouchHeavy()
          
       }else{
          //失敗
@@ -476,21 +465,50 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
          
 
 
-            self.SpotLightNode.removeAllActions()
+         
             self.sun.removeAllActions()
-            
             self.sun.runAction(self.AfterAction)
-            self.SpotLightNode.runAction(self.AfterAction)
             
             
             
             
-            self.Speed -= 2
+            self.Speed -= 3
             self.AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: self.Speed)
 
          
       }
    }
+   
+   func renderer(_ aRenderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+      
+      // per-frame code here
+      if sun.position.z > 1.5 {
+         Play3DtouchLight()
+         self.sun.position.z = 1.5
+      }
+      if sun.position.z < -1.5 {
+         Play3DtouchLight()
+         self.sun.position.z = -1.5
+      }
+      
+      if sun.position.x > 1.5 {
+         Play3DtouchLight()
+         self.sun.position.x = 1.5
+      }
+      if sun.position.x < -1.5 {
+         Play3DtouchLight()
+         self.sun.position.x = -1.5
+      }
+
+      
+      self.Camera_Node.position.y = self.sun.position.y + 7.5
+      self.SpotLightNode.position.y  =  self.sun.position.y + 54.78125
+   }
+   
+//   func renderer(_ aRenderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+//      // per-frame code here
+//      print("出てる？")
+//   }
    
    
    @objc func panView(sender: UIPanGestureRecognizer) {
@@ -499,36 +517,34 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       let x = CGFloat(location.x / 55)
       let z = CGFloat(location.y / 55)
 
-  
-      
-      //self.Camera_Node.position.y = self.sun.position.y + 7.5
-      //self.sun.position.y = self.Camera_Node.position.y - 7.5
-//      self.sun.position = SCNVector3(x: self.sun.position.x + Float(x), y: self.sun.position.y, z: self.sun.position.z + Float(z))
-//      self.Camera_Node.position = SCNVector3(x: 0, y: self.sun.position.y + 7.5, z: -3.5)
-      
+
       let queue = OperationQueue()
       let operation = BlockOperation {
          self.sun.position.z = self.sun.position.z + Float(z)
          self.sun.position.x = self.sun.position.x + Float(x)
-         self.Camera_Node.position.y = self.sun.position.y + 7.5
+//         self.Camera_Node.position.y = self.sun.position.y + 7.5
          self.SpotLightNode.position.x = self.sun.position.x
          self.SpotLightNode.position.z = self.sun.position.z
       }
       queue.addOperation(operation)
       
-      if sun.position.z > 1.5 {
-         self.sun.position.z = 1.5
-      }
-      if sun.position.z < -1.5 {
-         self.sun.position.z = -1.5
-      }
-      
-      if sun.position.x > 1.5 {
-         self.sun.position.x = 1.5
-      }
-      if sun.position.x < -1.5 {
-         self.sun.position.x = -1.5
-      }
+//      if sun.position.z > 1.5 {
+//         Play3DtouchLight()
+//         self.sun.position.z = 1.5
+//      }
+//      if sun.position.z < -1.5 {
+//         Play3DtouchLight()
+//         self.sun.position.z = -1.5
+//      }
+//
+//      if sun.position.x > 1.5 {
+//         Play3DtouchLight()
+//         self.sun.position.x = 1.5
+//      }
+//      if sun.position.x < -1.5 {
+//         Play3DtouchLight()
+//         self.sun.position.x = -1.5
+//      }
       
       sender.setTranslation(CGPoint(x: 0, y: 0), in: view)
    }
@@ -537,8 +553,6 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    func GameOver(){
       
       sun.removeAllActions()
-      Camera_Node.removeAllActions()
-      SpotLightNode.removeAllActions()
       
       
       if RewardAD == true {
@@ -577,13 +591,7 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       }
    }
    
-   
-   
-   
-   
-   
-   
-   
+
    //10
    @objc func TryAgain() {
       
@@ -624,8 +632,6 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
          let queue = OperationQueue()
          let operation = BlockOperation {
             self.sun.runAction(self.AfterAction)
-            self.Camera_Node.runAction(self.AfterAction)
-            self.SpotLightNode.runAction(self.AfterAction)
          }
          self.Speed -= 4
          self.AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: self.Speed)
@@ -638,7 +644,40 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       
       let HightScore2: Int = UserScore2.object(forKey: "Stage2") as! Int
       
-      Analytics.logEvent("Stage2Score", parameters: ["Score": score - 1 as Int])
+      
+      Analytics.logEvent("GamePlayCount", parameters: ["GamePlaylayCount": 1 as Int])
+      Analytics.logEvent("Stage2PlayCount", parameters: ["GamePlaylayCount": 1 as Int])
+      
+      let UserScore = score - 1
+      
+      switch UserScore {
+      case 0:
+         Analytics.logEvent("Stage2Score0", parameters: ["Score": UserScore as Int])
+      case 1 ... 9:
+         Analytics.logEvent("Stage2Score1to9", parameters: ["Score": UserScore as Int])
+      case 10 ... 19:
+         Analytics.logEvent("Stage2Score10to19", parameters: ["Score": UserScore as Int])
+      case 20 ... 29:
+         Analytics.logEvent("Stage2Score20to29", parameters: ["Score": UserScore as Int])
+      case 30 ... 39:
+         Analytics.logEvent("Stage2Score30to39", parameters: ["Score": UserScore as Int])
+      case 40 ... 49:
+         Analytics.logEvent("Stage2Score40to49", parameters: ["Score": UserScore as Int])
+      case 50 ... 59:
+         Analytics.logEvent("Stage2Score50to59", parameters: ["Score": UserScore as Int])
+      case 60 ... 69:
+         Analytics.logEvent("Stage2Score60to69", parameters: ["Score": UserScore as Int])
+      case 70 ... 79:
+         Analytics.logEvent("Stage2Score70to79", parameters: ["Score": UserScore as Int])
+      case 80 ... 89:
+         Analytics.logEvent("Stage2Score80to89", parameters: ["Score": UserScore as Int])
+      case 90 ... 99:
+         Analytics.logEvent("Stage2Score90to99", parameters: ["Score": UserScore as Int])
+      case 100 ... 10000:
+         Analytics.logEvent("Stage2ScoreOver100", parameters: ["Score": UserScore as Int])
+      default:
+         Analytics.logEvent("ErroScore2", parameters: ["Score": UserScore as Int])
+      }
       
       
       if HightScore2 < score {
@@ -660,6 +699,9 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
             } as? (Error?) -> Void)
          //send score finished
       }
+      
+      self.MyTimer.invalidate()
+
      
       self.dismiss(animated: true)
 
@@ -716,6 +758,26 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    override func didReceiveMemoryWarning() {
       super.didReceiveMemoryWarning()
       // Dispose of any resources that can be recreated.
+   }
+   
+   
+   private func Play3DtouchLight()  {
+      DispatchQueue.main.async {
+         TapticEngine.impact.feedback(.light)
+      }
+   }
+   
+   private func Play3DtouchMedium() {
+      DispatchQueue.main.async {
+        TapticEngine.impact.feedback(.medium)
+      }
+   }
+   
+   private func Play3DtouchHeavy()  {
+      DispatchQueue.main.async {
+         TapticEngine.impact.feedback(.heavy)
+      }
+      
    }
    
 }

@@ -125,8 +125,8 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       MoveSpotLightNode.eulerAngles.x = -90
       MoveSpotLightNode.light?.spotOuterAngle = 65
       MoveSpotLightNode.light?.spotInnerAngle = 48
-      MoveSpotLightNode.light?.shadowMapSize.width = 3000
-      MoveSpotLightNode.light?.shadowMapSize.height = 3000
+      MoveSpotLightNode.light?.shadowMapSize.width = 4500
+      MoveSpotLightNode.light?.shadowMapSize.height = 4500
       MoveSpotLightNode.light?.zNear = 48
       scene.rootNode.addChildNode(MoveSpotLightNode)
       SpotLightNode = MoveSpotLightNode
@@ -266,6 +266,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       
       //use Size.width or Size.height
       
+      //FIXME:- me
       let panGesture = UIPanGestureRecognizer(target: self, action: #selector(ViewController.panView(sender:)))  //Swift3
       self.view.addGestureRecognizer(panGesture)
       
@@ -321,7 +322,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       
       
       
-      self.MyTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(ViewController.TimerUpdate(timer:)), userInfo: nil, repeats: true)
+      self.MyTimer = Timer.scheduledTimer(timeInterval: 0.0001, target: self, selector: #selector(ViewController.TimerUpdate(timer:)), userInfo: nil, repeats: true)
       
       
       #if DEBUG
@@ -348,6 +349,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
    @objc func TimerUpdate(timer : Timer){
      
       self.Camera_Node.position.y = self.sun.position.y + 7.5
+      self.SpotLightNode.position.y  =  self.sun.position.y + 54.78125
       
    }
    
@@ -419,11 +421,9 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       queue0.addOperation(operation0)
 
  
-      self.SpotLightNode.removeAllActions()
       self.sun.removeAllActions()
 
       self.sun.runAction(self.AfterAction)
-      self.SpotLightNode.runAction(self.AfterAction)
   
       
  
@@ -433,6 +433,17 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
 
    }
    
+   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+   }
+   
+   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+  
+   }
+   
+   override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    
+   }
    
    
    @objc func panView(sender: UIPanGestureRecognizer) {
@@ -441,23 +452,21 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       let x = CGFloat(location.x / 55) // 65
       let z = CGFloat(location.y / 55)
       
-
       
       let queue = OperationQueue()
       let operation = BlockOperation {
-         self.sun.position.z = self.sun.position.z + Float(z)
-         self.sun.position.x = self.sun.position.x + Float(x)
+         
+         //self.sun.position = SCNVector3( self.sun.position.x + Float(x), self.sun.position.y, self.sun.position.z + Float(z))
+         
+         self.sun.position.z +=  Float(z)
+         self.sun.position.x += Float(x)
          self.Camera_Node.position.y = self.sun.position.y + 7.5
          self.SpotLightNode.position.x = self.sun.position.x
          self.SpotLightNode.position.z = self.sun.position.z
       }
       queue.addOperation(operation)
-      
-   
-     
 
-      
-      
+
 
       if sun.position.z > 1.5 {
          self.sun.position.z = 1.5
@@ -473,7 +482,6 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
          self.sun.position.x = -1.5
       }
       
-   
 
       sender.setTranslation(CGPoint(x: 0, y: 0), in: view)
    }
@@ -484,8 +492,6 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
    func GameOver(){
       
       sun.removeAllActions()
-      Camera_Node.removeAllActions()
-      SpotLightNode.removeAllActions()
       
       if RewardAD == true {
       
@@ -568,8 +574,6 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
          let queue = OperationQueue()
          let operation = BlockOperation {
             self.sun.runAction(self.AfterAction)
-            self.Camera_Node.runAction(self.AfterAction)
-            self.SpotLightNode.runAction(self.AfterAction)
          }
          self.Speed -= 4
          self.AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: self.Speed)
@@ -585,7 +589,41 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       
       let HightScore1: Int = UserScore1.object(forKey: "Stage1") as! Int
       
-      Analytics.logEvent("Stage1Score", parameters: ["Score": score - 1 as Int])
+      
+      
+      Analytics.logEvent("GamePlayCount", parameters: ["GamePlaylayCount": 1 as Int])
+      Analytics.logEvent("Stage1PlayCount", parameters: ["GamePlaylayCount": 1 as Int])
+      
+      let UserScore = score - 1
+      
+      switch UserScore {
+      case 0:
+         Analytics.logEvent("Stage1Score0", parameters: ["Score": UserScore as Int])
+      case 1 ... 9:
+         Analytics.logEvent("Stage1Score1to9", parameters: ["Score": UserScore as Int])
+      case 10 ... 19:
+         Analytics.logEvent("Stage1Score10to19", parameters: ["Score": UserScore as Int])
+      case 20 ... 29:
+         Analytics.logEvent("Stage1Score20to29", parameters: ["Score": UserScore as Int])
+      case 30 ... 39:
+         Analytics.logEvent("Stage1Score30to39", parameters: ["Score": UserScore as Int])
+      case 40 ... 49:
+         Analytics.logEvent("Stage1Score40to49", parameters: ["Score": UserScore as Int])
+      case 50 ... 59:
+         Analytics.logEvent("Stage1Score50to59", parameters: ["Score": UserScore as Int])
+      case 60 ... 69:
+         Analytics.logEvent("Stage1Score60to69", parameters: ["Score": UserScore as Int])
+      case 70 ... 79:
+         Analytics.logEvent("Stage1Score70to79", parameters: ["Score": UserScore as Int])
+      case 80 ... 89:
+         Analytics.logEvent("Stage1Score80to89", parameters: ["Score": UserScore as Int])
+      case 90 ... 99:
+         Analytics.logEvent("Stage1Score90to99", parameters: ["Score": UserScore as Int])
+      case 100 ... 10000:
+         Analytics.logEvent("Stage1ScoreOver100", parameters: ["Score": UserScore as Int])
+      default:
+         Analytics.logEvent("ErroScore1", parameters: ["Score": UserScore as Int])
+      }
       
       if HightScore1 < score {
          UserScore1.set(score - 1, forKey: "Stage1")
@@ -607,7 +645,13 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
          //send score finished
       }
 
+      self.MyTimer.invalidate()
+      
+      
+      
       self.dismiss(animated: true)
+      
+      self.removeFromParent()
 
       
    }

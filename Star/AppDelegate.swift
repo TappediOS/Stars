@@ -65,14 +65,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       //--------------------FIREBASE-----------------------//
       
       
-      GADMobileAds.configure(withApplicationID: "ca-app-pub-1460017825820383/4573050858")
-      GADMobileAds.configure(withApplicationID: "ca-app-pub-1460017825820383/4975950503")
-      GADMobileAds.configure(withApplicationID: "ca-app-pub-1460017825820383/7550567986")
-      GADMobileAds.configure(withApplicationID: "ca-app-pub-1460017825820383/8459243400")
-      
-      // Initialize Google Mobile Ads SDK
-      GADMobileAds.configure(withApplicationID: "ca-app-pub-1460017825820383~9853297696")
 
+
+      GADMobileAds.sharedInstance().start(completionHandler: nil)
 
 
 

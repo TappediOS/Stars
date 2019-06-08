@@ -91,7 +91,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
    let key2 = SCNParticleSystem(named: "key2.scnp", inDirectory: "")
    let key3 = SCNParticleSystem(named: "key3.scnp", inDirectory: "")
    
-   let bokeh = SCNParticleSystem(named: "Myparticle.scnp", inDirectory: "")
+   let bokeh = SCNParticleSystem(named: "Myparticle3.scnp", inDirectory: "")
    let Stars = SCNParticleSystem(named: "Stars.scnp", inDirectory: "")
    
    var MyTimer = Timer()
@@ -114,16 +114,6 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
       view.accessibilityIgnoresInvertColors = true
       
       
-      // シーンに光を与える為のノードを作成
-      let lightNode = SCNNode()
-      // ライトノードに光を表すライトオブジェクトを追加
-      lightNode.light = SCNLight()
-      // ライトオブジェクトの光属性を全方位への光を表す属性とする
-      lightNode.light?.type = SCNLight.LightType.omni
-      // ライトオブジェクトの位置を設定する
-      lightNode.position = SCNVector3(x: 0, y: 1000000, z: 0)
-      // シーンのルートノードにライトノードを追加
-      scene.rootNode.addChildNode(lightNode)
       
       let MoveSpotLightNode = SCNNode()
       MoveSpotLightNode.light = SCNLight()
@@ -133,8 +123,8 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
       MoveSpotLightNode.eulerAngles.x = -90
       MoveSpotLightNode.light?.spotOuterAngle = 65
       MoveSpotLightNode.light?.spotInnerAngle = 48
-      MoveSpotLightNode.light?.shadowMapSize.width = 3000
-      MoveSpotLightNode.light?.shadowMapSize.height = 3000
+      MoveSpotLightNode.light?.shadowMapSize.width = 4500
+      MoveSpotLightNode.light?.shadowMapSize.height = 4500
       MoveSpotLightNode.light?.zNear = 48
       scene.rootNode.addChildNode(MoveSpotLightNode)
       SpotLightNode = MoveSpotLightNode
@@ -158,6 +148,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
       CameraNode.camera = SCNCamera()
       CameraNode.position = SCNVector3(x: 0, y: 10035 , z: -3.5)
       CameraNode.eulerAngles.x = -90
+      CameraNode.castsShadow = false
       let action33 = SCNAction.moveBy(x: 0, y: y_speed, z: 0, duration: 1)
       //CameraNode.runAction(SCNAction.repeatForever(action33))
       scene.rootNode.addChildNode(CameraNode)
@@ -241,6 +232,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
                   WallNode0.physicsBody?.categoryBitMask = Int(Wall0Category)
                   WallNode0.physicsBody?.collisionBitMask = 0
                   WallNode0.physicsBody?.contactTestBitMask = Int(SunCategory)
+                  WallNode0.castsShadow = false
                   SceneView.scene?.rootNode.addChildNode(WallNode0)
                   wall0 = WallNode0
                   
@@ -258,6 +250,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
                   WallNode1.physicsBody?.categoryBitMask = Int(Wall1Category)
                   WallNode1.physicsBody?.collisionBitMask = 0
                   WallNode1.physicsBody?.contactTestBitMask = Int(SunCategory)
+                  WallNode1.castsShadow = false
                   SceneView.scene?.rootNode.addChildNode(WallNode1)
                   wall1 = WallNode1
                   
@@ -275,6 +268,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
                   WallNode1.physicsBody?.categoryBitMask = Int(Wall1Category)
                   WallNode1.physicsBody?.collisionBitMask = 0
                   WallNode1.physicsBody?.contactTestBitMask = Int(SunCategory)
+                  WallNode1.castsShadow = false
                   SceneView.scene?.rootNode.addChildNode(WallNode1)
                   wall1 = WallNode1
                   
@@ -293,6 +287,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
                   WallNode1.physicsBody?.collisionBitMask = 0
                   WallNode1.physicsBody?.contactTestBitMask = Int(SunCategory)
                   SceneView.scene?.rootNode.addChildNode(WallNode1)
+                  WallNode1.castsShadow = false
                   wall1 = WallNode1
                   
                }else if wall[tmp][x][y] == 4 {
@@ -310,6 +305,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
                   WallNode1.physicsBody?.collisionBitMask = 0
                   WallNode1.physicsBody?.contactTestBitMask = Int(SunCategory)
                   SceneView.scene?.rootNode.addChildNode(WallNode1)
+                  WallNode1.castsShadow = false
                   wall1 = WallNode1
                   
                }
@@ -336,6 +332,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
       GorldNode.position = SCNVector3(0, 10027.5, 0)
       //やっとシーンに追加できる
       SceneView.scene?.rootNode.addChildNode(GorldNode)
+      GorldNode.castsShadow = true
       sun = GorldNode
       
       //パーティクルシステムのオブジェクト生成、およびノードへの追加
@@ -400,7 +397,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
       View2.backgroundColor = UIColor.white
       View2.alpha = 0.21
       
-      self.MyTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(FifthViewController.TimerUpdate(timer:)), userInfo: nil, repeats: true)
+      self.MyTimer = Timer.scheduledTimer(timeInterval: 0.0001, target: self, selector: #selector(FifthViewController.TimerUpdate(timer:)), userInfo: nil, repeats: true)
       
       
       if TARGET_OS_SIMULATOR == 1 {
@@ -435,6 +432,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
    @objc func TimerUpdate(timer : Timer){
       
       self.Camera_Node.position.y = self.sun.position.y + 7.5
+      self.SpotLightNode.position.y  =  self.sun.position.y + 54.78125
       
    }
    
@@ -600,16 +598,14 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
          queue0.addOperation(operation0)
          
          
-            self.SpotLightNode.removeAllActions()
             self.sun.removeAllActions()
             
             self.sun.runAction(self.AfterAction)
-            self.SpotLightNode.runAction(self.AfterAction)
+         
             
             
             
-            
-            self.Speed -= 2
+            self.Speed -= 3
             self.AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: self.Speed)
 
       }
@@ -618,8 +614,8 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
    @objc func panView(sender: UIPanGestureRecognizer) {
       //移動後の相対位置を取得
       let location: CGPoint = sender.translation(in: self.view)  //Swift3
-      let x = CGFloat(location.x / 65)
-      let z = CGFloat(location.y / 65)
+      let x = CGFloat(location.x / 55)
+      let z = CGFloat(location.y / 55)
       
       
       // オペレーションキューを生成。
@@ -656,8 +652,6 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
    func GameOver(){
       
       sun.removeAllActions()
-      Camera_Node.removeAllActions()
-      SpotLightNode.removeAllActions()
       
       if RewardAD == true {
          
@@ -739,8 +733,6 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
             self.y_speed += 0.5
             let action = SCNAction.moveBy(x: 0, y: self.y_speed, z: 0, duration: 1)
             self.sun.runAction(SCNAction.repeatForever(action))
-            self.Camera_Node.runAction(SCNAction.repeatForever(action))
-            self.SpotLightNode.runAction(self.AfterAction)
          }
          queue.addOperation(operation)
       }
@@ -752,7 +744,39 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
       
       let HightScore4: Int = UserScore4.object(forKey: "Stage4") as! Int
  
-      Analytics.logEvent("Stage4Score", parameters: ["Score": score - 1 as Int])
+      Analytics.logEvent("GamePlayCount", parameters: ["GamePlaylayCount": 1 as Int])
+      Analytics.logEvent("Stage5PlayCount", parameters: ["GamePlaylayCount": 1 as Int])
+      
+      let UserScore = score - 1
+      
+      switch UserScore {
+      case 0:
+         Analytics.logEvent("Stage5Score0", parameters: ["Score": UserScore as Int])
+      case 1 ... 9:
+         Analytics.logEvent("Stage5Score1to9", parameters: ["Score": UserScore as Int])
+      case 10 ... 19:
+         Analytics.logEvent("Stage5Score10to19", parameters: ["Score": UserScore as Int])
+      case 20 ... 29:
+         Analytics.logEvent("Stage5Score20to29", parameters: ["Score": UserScore as Int])
+      case 30 ... 39:
+         Analytics.logEvent("Stage5Score30to39", parameters: ["Score": UserScore as Int])
+      case 40 ... 49:
+         Analytics.logEvent("Stage5Score40to49", parameters: ["Score": UserScore as Int])
+      case 50 ... 59:
+         Analytics.logEvent("Stage5Score50to59", parameters: ["Score": UserScore as Int])
+      case 60 ... 69:
+         Analytics.logEvent("Stage5Score60to69", parameters: ["Score": UserScore as Int])
+      case 70 ... 79:
+         Analytics.logEvent("Stage5Score70to79", parameters: ["Score": UserScore as Int])
+      case 80 ... 89:
+         Analytics.logEvent("Stage5Score80to89", parameters: ["Score": UserScore as Int])
+      case 90 ... 99:
+         Analytics.logEvent("Stage5Score90to99", parameters: ["Score": UserScore as Int])
+      case 100 ... 10000:
+         Analytics.logEvent("Stage5ScoreOver100", parameters: ["Score": UserScore as Int])
+      default:
+         Analytics.logEvent("ErroScore5", parameters: ["Score": UserScore as Int])
+      }
       
       
       if HightScore4 < score {
@@ -775,7 +799,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
          //send score finished
       }
       
-
+      self.MyTimer.invalidate()
       self.dismiss(animated: true)
       
       

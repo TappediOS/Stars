@@ -92,7 +92,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    let key2 = SCNParticleSystem(named: "key2.scnp", inDirectory: "")
    let key3 = SCNParticleSystem(named: "key3.scnp", inDirectory: "")
    
-   let bokeh = SCNParticleSystem(named: "Myparticle.scnp", inDirectory: "")
+   let bokeh = SCNParticleSystem(named: "Myparticle3.scnp", inDirectory: "")
    let Stars = SCNParticleSystem(named: "Stars.scnp", inDirectory: "")
    
    var MyTimer = Timer()
@@ -115,16 +115,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       view.accessibilityIgnoresInvertColors = true
       
       
-      // シーンに光を与える為のノードを作成
-      let lightNode = SCNNode()
-      // ライトノードに光を表すライトオブジェクトを追加
-      lightNode.light = SCNLight()
-      // ライトオブジェクトの光属性を全方位への光を表す属性とする
-      lightNode.light?.type = SCNLight.LightType.omni
-      // ライトオブジェクトの位置を設定する
-      lightNode.position = SCNVector3(x: 0, y: 1000000, z: 0)
-      // シーンのルートノードにライトノードを追加
-      scene.rootNode.addChildNode(lightNode)
+ 
       
       let MoveSpotLightNode = SCNNode()
       MoveSpotLightNode.light = SCNLight()
@@ -134,8 +125,8 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       MoveSpotLightNode.eulerAngles.x = -90
       MoveSpotLightNode.light?.spotOuterAngle = 65
       MoveSpotLightNode.light?.spotInnerAngle = 48
-      MoveSpotLightNode.light?.shadowMapSize.width = 3000
-      MoveSpotLightNode.light?.shadowMapSize.height = 3000
+      MoveSpotLightNode.light?.shadowMapSize.width = 4500
+      MoveSpotLightNode.light?.shadowMapSize.height = 4500
       MoveSpotLightNode.light?.zNear = 48
       scene.rootNode.addChildNode(MoveSpotLightNode)
       SpotLightNode = MoveSpotLightNode
@@ -159,6 +150,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       CameraNode.camera = SCNCamera()
       CameraNode.position = SCNVector3(x: 0, y: 10035 , z: -3.5)
       CameraNode.eulerAngles.x = -90
+      CameraNode.castsShadow = false
       let action33 = SCNAction.moveBy(x: 0, y: y_speed, z: 0, duration: 1)
       //CameraNode.runAction(SCNAction.repeatForever(action33))
       scene.rootNode.addChildNode(CameraNode)
@@ -234,6 +226,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
                   WallNode0.physicsBody?.categoryBitMask = Int(Wall0Category)
                   WallNode0.physicsBody?.collisionBitMask = 0
                   WallNode0.physicsBody?.contactTestBitMask = Int(SunCategory)
+                  WallNode0.castsShadow = false
                   SceneView.scene?.rootNode.addChildNode(WallNode0)
                   wall0 = WallNode0
                   
@@ -251,6 +244,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
                   WallNode1.physicsBody?.categoryBitMask = Int(Wall1Category)
                   WallNode1.physicsBody?.collisionBitMask = 0
                   WallNode1.physicsBody?.contactTestBitMask = Int(SunCategory)
+                  WallNode1.castsShadow = false
                   SceneView.scene?.rootNode.addChildNode(WallNode1)
                   wall1 = WallNode1
                   
@@ -268,6 +262,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
                   WallNode1.physicsBody?.categoryBitMask = Int(Wall1Category)
                   WallNode1.physicsBody?.collisionBitMask = 0
                   WallNode1.physicsBody?.contactTestBitMask = Int(SunCategory)
+                  WallNode1.castsShadow = false
                   SceneView.scene?.rootNode.addChildNode(WallNode1)
                   wall1 = WallNode1
                   
@@ -285,6 +280,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
                   WallNode1.physicsBody?.categoryBitMask = Int(Wall1Category)
                   WallNode1.physicsBody?.collisionBitMask = 0
                   WallNode1.physicsBody?.contactTestBitMask = Int(SunCategory)
+                  WallNode1.castsShadow = false
                   SceneView.scene?.rootNode.addChildNode(WallNode1)
                   wall1 = WallNode1
                   
@@ -312,6 +308,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       GorldNode.position = SCNVector3(0, 10027.5, 0)
       //やっとシーンに追加できる
       SceneView.scene?.rootNode.addChildNode(GorldNode)
+      GorldNode.castsShadow = true
       sun = GorldNode
       
       //パーティクルシステムのオブジェクト生成、およびノードへの追加
@@ -376,7 +373,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       View2.backgroundColor = UIColor.white
       View2.alpha = 0.21
       
-      self.MyTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(FourthViewController.TimerUpdate(timer:)), userInfo: nil, repeats: true)
+      self.MyTimer = Timer.scheduledTimer(timeInterval: 0.0001, target: self, selector: #selector(FourthViewController.TimerUpdate(timer:)), userInfo: nil, repeats: true)
       
       
       if TARGET_OS_SIMULATOR == 1 {
@@ -411,6 +408,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    @objc func TimerUpdate(timer : Timer){
       
       self.Camera_Node.position.y = self.sun.position.y + 7.5
+      self.SpotLightNode.position.y  =  self.sun.position.y + 54.78125
       
    }
    
@@ -541,16 +539,14 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
          }
          queue0.addOperation(operation0)
          
-            self.SpotLightNode.removeAllActions()
             self.sun.removeAllActions()
             
             self.sun.runAction(self.AfterAction)
-            self.SpotLightNode.runAction(self.AfterAction)
+         
             
             
             
-            
-            self.Speed -= 2
+            self.Speed -= 3
             self.AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: self.Speed)
 
          
@@ -560,8 +556,8 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    @objc func panView(sender: UIPanGestureRecognizer) {
       //移動後の相対位置を取得
       let location: CGPoint = sender.translation(in: self.view)  //Swift3
-      let x = CGFloat(location.x / 65)
-      let z = CGFloat(location.y / 65)
+      let x = CGFloat(location.x / 55)
+      let z = CGFloat(location.y / 55)
       
       
       // オペレーションキューを生成。
@@ -598,8 +594,6 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    func GameOver(){
       
       sun.removeAllActions()
-      Camera_Node.removeAllActions()
-      SpotLightNode.removeAllActions()
       
       if RewardAD == true {
          
@@ -682,8 +676,6 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
             self.y_speed += 0.5
             let action = SCNAction.moveBy(x: 0, y: self.y_speed, z: 0, duration: 1)
             self.sun.runAction(SCNAction.repeatForever(action))
-            self.Camera_Node.runAction(SCNAction.repeatForever(action))
-            self.SpotLightNode.runAction(self.AfterAction)
          }
          queue.addOperation(operation)
       }
@@ -695,7 +687,39 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       
       let HightScore3: Int = UserScore3.object(forKey: "Stage3") as! Int
       
-      Analytics.logEvent("Stage3Score", parameters: ["Score": score - 1 as Int])
+      Analytics.logEvent("GamePlayCount", parameters: ["GamePlaylayCount": 1 as Int])
+      Analytics.logEvent("Stage3PlayCount", parameters: ["GamePlaylayCount": 1 as Int])
+      
+      let UserScore = score - 1
+      
+      switch UserScore {
+      case 0:
+         Analytics.logEvent("Stage3Score0", parameters: ["Score": UserScore as Int])
+      case 1 ... 9:
+         Analytics.logEvent("Stage3Score1to9", parameters: ["Score": UserScore as Int])
+      case 10 ... 19:
+         Analytics.logEvent("Stage3Score10to19", parameters: ["Score": UserScore as Int])
+      case 20 ... 29:
+         Analytics.logEvent("Stage3Score20to29", parameters: ["Score": UserScore as Int])
+      case 30 ... 39:
+         Analytics.logEvent("Stage3Score30to39", parameters: ["Score": UserScore as Int])
+      case 40 ... 49:
+         Analytics.logEvent("Stage3Score40to49", parameters: ["Score": UserScore as Int])
+      case 50 ... 59:
+         Analytics.logEvent("Stage3Score50to59", parameters: ["Score": UserScore as Int])
+      case 60 ... 69:
+         Analytics.logEvent("Stage3Score60to69", parameters: ["Score": UserScore as Int])
+      case 70 ... 79:
+         Analytics.logEvent("Stage3Score70to79", parameters: ["Score": UserScore as Int])
+      case 80 ... 89:
+         Analytics.logEvent("Stage3Score80to89", parameters: ["Score": UserScore as Int])
+      case 90 ... 99:
+         Analytics.logEvent("Stage3Score90to99", parameters: ["Score": UserScore as Int])
+      case 100 ... 10000:
+         Analytics.logEvent("Stage3ScoreOver100", parameters: ["Score": UserScore as Int])
+      default:
+         Analytics.logEvent("ErroScore3", parameters: ["Score": UserScore as Int])
+      }
       
       
       if HightScore3 < score {
@@ -718,6 +742,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
          //send score finished
       }
       
+      self.MyTimer.invalidate()
       self.dismiss(animated: true)   
    }
    

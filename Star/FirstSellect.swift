@@ -216,7 +216,7 @@ class FirstSellectViewController: UIViewController {
       
 
       bannreView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0)
-      bannreView.frame = CGRect(x: 0, y: Size.height - (tabBarController?.tabBar.frame.size.height)! - 83, width: Size.width, height: 50)
+      bannreView.frame = CGRect(x: 0, y: Size.height - (tabBarController?.tabBar.frame.size.height)! - 50, width: Size.width, height: 50)
 
       view.addSubview(bannreView)
       view.bringSubviewToFront(bannreView)
