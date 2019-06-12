@@ -19,6 +19,12 @@ class StageCamera : SCNNode {
       self.position = SCNVector3(x: 0, y: 10035 , z: -3.5)
       self.eulerAngles.x = -90
       self.castsShadow = false
+      
+      
+      self.camera?.wantsHDR = true
+     
+      self.camera?.motionBlurIntensity = 0.45
+      
    }
    
    required init?(coder aDecoder: NSCoder) {

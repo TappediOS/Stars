@@ -325,7 +325,7 @@ class FourthSellectViewController: UIViewController {
       Score.text = String(HightScore3)
       
       if HightScore3 > 30 {
-         SKStoreReviewController.requestReview()
+         //SKStoreReviewController.requestReview()
       }
       Analytics.logEvent("LoadStage3", parameters: nil)
 

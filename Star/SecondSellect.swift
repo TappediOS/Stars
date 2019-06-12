@@ -60,6 +60,7 @@ class SecondSellectViewController: UIViewController {
    let bokeh = SCNParticleSystem(named: "Myparticle2.scnp", inDirectory: "")
    let Stars = SCNParticleSystem(named: "Stars.scnp", inDirectory: "")
 
+   let FlowStart = SCNParticleSystem(named: "FlowStar.scnp", inDirectory: "")
 
    
    override func viewDidLoad() {
@@ -74,6 +75,7 @@ class SecondSellectViewController: UIViewController {
       SceneView.scene = scene
       SceneView.showsStatistics = false
       view.accessibilityIgnoresInvertColors = true
+      SceneView.allowsCameraControl = true
       
       let lightNode = SCNNode()
       lightNode.light = SCNLight()
@@ -98,6 +100,10 @@ class SecondSellectViewController: UIViewController {
       SceneView.scene?.rootNode.addChildNode(GorldNode)
       GorldNode.addParticleSystem(self.bokeh!)
       GorldNode.addParticleSystem(self.Stars!)
+      
+      //GorldNode.addParticleSystem(self.FlowStart!)
+      
+      
       sun = GorldNode
       
       

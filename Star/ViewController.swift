@@ -16,6 +16,12 @@ import GameKit
 import FirebaseAnalytics
 //1
 import GoogleMobileAds
+import FlatUIKit
+import ChameleonFramework
+import SCLAlertView
+import Firebase
+import TapticEngine
+
 
 //2
 class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterControllerDelegate, SCNSceneRendererDelegate, GADRewardBasedVideoAdDelegate {
@@ -23,6 +29,8 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
    var wall:[[[Int]]] = [[[]]]
    
    var score:Int = 0
+   let FoundSpeed: Float = 0.18
+   var dr: Float = 0.00051
    var Action = SCNAction.repeatForever(SCNAction.moveBy(x: 0, y: -24, z: 0, duration: 1))
    var Speed: Double = 419
    var BeforAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: 419)
@@ -37,8 +45,8 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
    var set:Bool = true
    let SceneView = SCNView()
    var Node = SCNNode()
-   var Camera_Node = SCNNode()
-   var SpotLightNode = SCNNode()
+   var Camera_Node = StageCamera()
+   var SpotLightNode = StageSpotLight()
    var count: Int = 100
    var up: Int = 0
    var right: Int = 1
@@ -95,7 +103,11 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
    let Stars = SCNParticleSystem(named: "Stars.scnp", inDirectory: "")
    
    
+   let gameBGM = BGM()
+   
    var MyTimer = Timer()
+   
+   var LockSunMove = false
 
    
    override func viewDidLoad() {
@@ -113,23 +125,13 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       SceneView.backgroundColor = UIColor.black
       SceneView.scene = scene
       SceneView.showsStatistics = false
-      SceneView.allowsCameraControl = false
+      SceneView.delegate = self
+      SceneView.isPlaying = true
       view.accessibilityIgnoresInvertColors = true
       
       
-      let MoveSpotLightNode = SCNNode()
-      MoveSpotLightNode.light = SCNLight()
-      MoveSpotLightNode.light?.type = SCNLight.LightType.spot
-      MoveSpotLightNode.light?.castsShadow = true
-      MoveSpotLightNode.position = SCNVector3(x: 0, y: 10035, z: 0)
-      MoveSpotLightNode.eulerAngles.x = -90
-      MoveSpotLightNode.light?.spotOuterAngle = 65
-      MoveSpotLightNode.light?.spotInnerAngle = 48
-      MoveSpotLightNode.light?.shadowMapSize.width = 4500
-      MoveSpotLightNode.light?.shadowMapSize.height = 4500
-      MoveSpotLightNode.light?.zNear = 48
-      scene.rootNode.addChildNode(MoveSpotLightNode)
-      SpotLightNode = MoveSpotLightNode
+      
+      scene.rootNode.addChildNode(SpotLightNode)
       
       let floor = SCNFloor()
       floor.reflectivity = 0.5
@@ -146,14 +148,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       floorNode.physicsBody?.categoryBitMask = Int(FloorCategoyr)
       scene.rootNode.addChildNode(floorNode)
       
-      let CameraNode = SCNNode()
-      CameraNode.camera = SCNCamera()
-      CameraNode.position = SCNVector3(x: 0, y: 10035 , z: -3.5)
-      CameraNode.eulerAngles.x = -90
-      CameraNode.castsShadow = false
-      //CameraNode.runAction(AfterAction)
-      scene.rootNode.addChildNode(CameraNode)
-      Camera_Node = CameraNode
+
       
       wall.removeAll()
       
@@ -244,9 +239,8 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       GorldNode.physicsBody?.contactTestBitMask = Int(Wall1Category) + Int(Wall0Category)
       GorldNode.physicsBody?.collisionBitMask = Int(BoxCategory) + Int(FloorCategoyr) + Int(SunCategory)
       GorldNode.physicsBody?.mass = 0
-      GorldNode.runAction(AfterAction)
       GorldNode.castsShadow = true
-//      GorldNode.light?.castsShadow = true
+      GorldNode.light?.castsShadow = true
 
    
       //位置を決める
@@ -264,7 +258,33 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       GorldNode.addParticleSystem(self.Stars!)
 
       
-      //use Size.width or Size.height
+      let Transform = SCNTransformConstraint(inWorldSpace: true, with: { (sun, transform) -> SCNMatrix4 in
+         let pos = sun.position
+         return SCNMatrix4MakeTranslation(pos.x, pos.y - 7.5, pos.z)
+      })
+      
+      let LookAt = SCNLookAtConstraint(target: sun)
+      
+      let Replicator = SCNReplicatorConstraint(target: sun)
+      
+      let Distance = SCNDistanceConstraint(target: sun)
+      Distance.maximumDistance = 11
+      Distance.minimumDistance = 7.5
+      
+      
+      let Acceleration = SCNAccelerationConstraint()
+      
+      Acceleration.maximumLinearVelocity = 150
+      Acceleration.maximumLinearAcceleration = 150
+      
+      
+      LookAt.isGimbalLockEnabled = false
+      LookAt.influenceFactor = 0.001
+      Replicator.replicatesPosition = true
+      
+      //Camera_Node.constraints = [LookAt, Acceleration ]
+      
+      scene.rootNode.addChildNode(Camera_Node)
       
       //FIXME:- me
       let panGesture = UIPanGestureRecognizer(target: self, action: #selector(ViewController.panView(sender:)))  //Swift3
@@ -318,32 +338,32 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       View.backgroundColor = UIColor.white
       View.alpha = 0.35
       View2.backgroundColor = UIColor.white
-      View2.alpha = 0.21
       
       
       
-      self.MyTimer = Timer.scheduledTimer(timeInterval: 0.0001, target: self, selector: #selector(ViewController.TimerUpdate(timer:)), userInfo: nil, repeats: true)
       
-      
+      InitReward()
+      StartBGM()
+   }
+   
+   private func InitReward() {
+      rewardBasedVideo = GADRewardBasedVideoAd.sharedInstance()
+      rewardBasedVideo?.delegate = self
       #if DEBUG
-         print("This is debug, so NOT AD")
-         //SceneView.showsStatistics = true
+      print("リワード:テスト環境")
+      rewardBasedVideo?.load(GADRequest(), withAdUnitID: TEST_ID)
+      print("ID = \(TEST_ID)")
       #else
-      
-         if TARGET_OS_SIMULATOR == 1 {
-            print("テスト広告")
-            AdUnitID = TEST_ID
-         }else{
-            print("本番広告")
-            AdUnitID = AdMobID
-         }
-
-         rewardBasedVideo = GADRewardBasedVideoAd.sharedInstance()
-         rewardBasedVideo?.delegate = self
-
-         setupRewardBasedVideoAd()
+      print("リワード:本番環境")
+      rewardBasedVideo.load(GADRequest(), withAdUnitID: AdMobID)
+      print("ID = \(AdMobID)")
       #endif
-
+      
+      
+   }
+   
+   private func StartBGM() {
+      gameBGM.PlaySounds()
    }
    
    @objc func TimerUpdate(timer : Timer){
@@ -352,21 +372,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       self.SpotLightNode.position.y  =  self.sun.position.y + 54.78125
       
    }
-   
-   
-   //8
-   func setupRewardBasedVideoAd(){
-      
-      if !adRequestInProgress && rewardBasedVideo?.isReady == false {
-         
-         rewardBasedVideo?.load(GADRequest(), withAdUnitID: AdUnitID! )
-         adRequestInProgress = true
-      
-      }else{
-         print("Error: setup RewardBasedVideoAd")
-      }
-   }
-   
+
 
    
    
@@ -397,7 +403,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
          GameOver()
          return
       }else{
-         AudioServicesPlaySystemSound(1519);
+         Play3DtouchHeavy()
 
       }
 
@@ -419,70 +425,59 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
             
       }
       queue0.addOperation(operation0)
-
  
       self.sun.removeAllActions()
+      dr += 0.004375
 
-      self.sun.runAction(self.AfterAction)
-  
+   }
+   
+   func renderer(_ aRenderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
       
- 
+      self.Camera_Node.position.y = self.sun.position.y + 8
+      self.SpotLightNode.position.y  =  self.sun.position.y + 58
       
-      self.Speed -= 4
-      self.AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: self.Speed)
-
-   }
-   
-   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
-   }
-   
-   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-  
-   }
-   
-   override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-    
+      // per-frame code here
+      if sun.position.z > 1.5 {
+         Play3DtouchLight()
+         self.sun.position.z = 1.5
+      }
+      if sun.position.z < -1.5 {
+         Play3DtouchLight()
+         self.sun.position.z = -1.5
+      }
+      
+      if sun.position.x > 1.5 {
+         Play3DtouchLight()
+         self.sun.position.x = 1.5
+      }
+      if sun.position.x < -1.5 {
+         Play3DtouchLight()
+         self.sun.position.x = -1.5
+      }
+      
+      guard LockSunMove == false else {
+         return
+      }
+      
+      self.sun.position.y -= FoundSpeed + dr + dr / 5
    }
    
    
    @objc func panView(sender: UIPanGestureRecognizer) {
       //移動後の相対位置を取得
       let location: CGPoint = sender.translation(in: self.view)  //Swift3
-      let x = CGFloat(location.x / 55) // 65
-      let z = CGFloat(location.y / 55)
+      let x = CGFloat(location.x / 60)
+      let z = CGFloat(location.y / 60)
       
       
       let queue = OperationQueue()
       let operation = BlockOperation {
-         
-         //self.sun.position = SCNVector3( self.sun.position.x + Float(x), self.sun.position.y, self.sun.position.z + Float(z))
-         
-         self.sun.position.z +=  Float(z)
-         self.sun.position.x += Float(x)
-         self.Camera_Node.position.y = self.sun.position.y + 7.5
+         self.sun.position.z = self.sun.position.z + Float(z)
+         self.sun.position.x = self.sun.position.x + Float(x)
          self.SpotLightNode.position.x = self.sun.position.x
          self.SpotLightNode.position.z = self.sun.position.z
       }
       queue.addOperation(operation)
-
-
-
-      if sun.position.z > 1.5 {
-         self.sun.position.z = 1.5
-      }
-      if sun.position.z < -1.5 {
-         self.sun.position.z = -1.5
-      }
-
-      if sun.position.x > 1.5 {
-         self.sun.position.x = 1.5
-      }
-      if sun.position.x < -1.5 {
-         self.sun.position.x = -1.5
-      }
-      
-
       sender.setTranslation(CGPoint(x: 0, y: 0), in: view)
    }
    
@@ -491,35 +486,36 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
    //9
    func GameOver(){
       
+      gameBGM.BeSmallSound()
       sun.removeAllActions()
+      LockSunMove = true
       
       if RewardAD == true {
-      
+         
          RewardAD = false
          DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-
-            self.view.addSubview(self.View)
-            self.View.bringSubviewToFront(self.SceneView)
             
-            let ReturnButton = UIButton(frame: CGRect(x: self.Size.width / 10, y: self.Size.height * 11 / 16, width: self.Size.width * 8 / 10, height: self.Size.height / 4))
-            ReturnButton.backgroundColor = UIColor.black.withAlphaComponent(0.85)
-            ReturnButton.layer.cornerRadius = 10.0
-            ReturnButton.layer.borderColor = UIColor.black.cgColor
-            ReturnButton.setTitle(NSLocalizedString("Return", comment: ""), for: .normal)
-            ReturnButton.titleLabel?.adjustsFontSizeToFitWidth = true
-            ReturnButton.addTarget(self, action: #selector(ViewController.Return), for: .touchUpInside)
-            self.View.addSubview(ReturnButton)
-            //self.view.bringSubview(toFront: bu)
+            let Appearanse = SCLAlertView.SCLAppearance(showCloseButton: false)
+            let ComleateView = SCLAlertView(appearance: Appearanse)
+            ComleateView.addButton(NSLocalizedString("ReTry", comment: "")){
+               print("tap ReTry")
+               self.gameBGM.StopSound()
+               if GADRewardBasedVideoAd.sharedInstance().isReady && self.adRedy {
+                  GADRewardBasedVideoAd.sharedInstance().present(fromRootViewController: self)
+                  self.adRedy = false
+                  self.NOT_TryAgain()
+               }else{
+                  self.NOT_TryAgain()
+               }
+            }
+            ComleateView.addButton(NSLocalizedString("Return", comment: "")){
+               print("tap Return")
+               self.Return()
+            }
             
-            let TryAgainButton = UIButton(frame: CGRect(x: self.Size.width / 10, y: self.Size.height * 6 / 16, width: self.Size.width * 8 / 10, height: self.Size.height / 4))
-            TryAgainButton.backgroundColor = UIColor.black.withAlphaComponent(0.85)
-            TryAgainButton.layer.cornerRadius = 10.0
-            TryAgainButton.layer.borderColor = UIColor.black.cgColor
-            TryAgainButton.titleLabel?.adjustsFontSizeToFitWidth = true
-            TryAgainButton.setTitle(NSLocalizedString("ReTry", comment: ""), for: .normal)
-            TryAgainButton.addTarget(self, action: #selector(ViewController.TryAgain), for: .touchUpInside)
-            self.View.addSubview(TryAgainButton)
+            let YourScoerIs = "Your Score is " + String(self.score - 1)
             
+            ComleateView.showWarning(NSLocalizedString("Game Over", comment: ""), subTitle: YourScoerIs)
          }
          
       }else{
@@ -527,57 +523,81 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
             self.Return()
          }
       }
- 
+   }
+   
+   func NOT_TryAgain() {
+      
+      self.View2.removeFromSuperview()
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.54) {
+         
+         self.View2.frame = CGRect(x: self.Size.width / 4, y: self.Size.height / 2, width: self.Size.width / 2, height: self.Size.height / 4)
+         self.View2.backgroundColor = UIColor.flatWhiteColorDark()
+         
+         let RestartButton = FUIButton(frame: CGRect(x: 0, y: 0, width: self.View2.frame.width, height: self.View2.frame.height))
+         RestartButton.titleLabel?.adjustsFontSizeToFitWidth = true
+         RestartButton.titleLabel?.adjustsFontForContentSizeCategory = true
+         RestartButton.buttonColor = UIColor.turquoise()
+         RestartButton.shadowColor = UIColor.greenSea()
+         RestartButton.shadowHeight = 3.0
+         RestartButton.cornerRadius = 6.0
+         RestartButton.titleLabel?.font = UIFont.boldFlatFont (ofSize: 16)
+         RestartButton.setTitleColor(UIColor.clouds(), for: UIControl.State.normal)
+         RestartButton.setTitleColor(UIColor.clouds(), for: UIControl.State.highlighted)
+         RestartButton.setTitle(NSLocalizedString(NSLocalizedString("Return", comment: ""), comment: ""), for: .normal)
+         RestartButton.addTarget(self, action: #selector(self.Return), for: .touchUpInside)
+         
+         self.View2.addSubview(RestartButton)
+         
+         self.view.addSubview(self.View2)
+      }
    }
    
    
    
-   
-   
-   //10
    @objc func TryAgain() {
       
-      
-      print("adRedy=\(adRedy)")
-      
-      if GADRewardBasedVideoAd.sharedInstance().isReady && adRedy {
-         GADRewardBasedVideoAd.sharedInstance().present(fromRootViewController: self)
-         adRedy = false
-      }else{
-         print("Error: Reward based video not ready")
-      }
-      
-      View.removeFromSuperview()
+      self.View2.removeFromSuperview()
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.54) {
-         self.view.addSubview(self.View2)
-         self.View2.bringSubviewToFront(self.SceneView)
          
-         let ReStartButton = UIButton(frame: CGRect(x: self.Size.width / 10, y: self.Size.height * 11 / 16, width: self.Size.width * 8 / 10, height: self.Size.height / 4))
-         ReStartButton.backgroundColor = UIColor.black.withAlphaComponent(0.85)
-         ReStartButton.layer.cornerRadius = 10.0
-         ReStartButton.layer.borderColor = UIColor.black.cgColor
-         //ReStartButton.setTitle(NSLocalizedString("Restart", comment: ""), for: .normal)
-         ReStartButton.setTitle(NSLocalizedString("ReStart", comment: ""), for: .normal)
-         ReStartButton.titleLabel?.adjustsFontSizeToFitWidth = true
-         ReStartButton.addTarget(self, action: #selector(ViewController.ReStart), for: .touchUpInside)
-         self.View2.addSubview(ReStartButton)
+         self.View2.frame = CGRect(x: self.Size.width / 4, y: self.Size.height / 2, width: self.Size.width / 2, height: self.Size.height / 4)
+         self.View2.backgroundColor = UIColor.flatWhiteColorDark()
+         
+         let RestartButton = FUIButton(frame: CGRect(x: 0, y: 0, width: self.View2.frame.width, height: self.View2.frame.height))
+         RestartButton.titleLabel?.adjustsFontSizeToFitWidth = true
+         RestartButton.titleLabel?.adjustsFontForContentSizeCategory = true
+         RestartButton.buttonColor = UIColor.turquoise()
+         RestartButton.shadowColor = UIColor.greenSea()
+         RestartButton.shadowHeight = 3.0
+         RestartButton.cornerRadius = 6.0
+         RestartButton.titleLabel?.font = UIFont.boldFlatFont (ofSize: 16)
+         RestartButton.setTitleColor(UIColor.clouds(), for: UIControl.State.normal)
+         RestartButton.setTitleColor(UIColor.clouds(), for: UIControl.State.highlighted)
+         RestartButton.setTitle(NSLocalizedString(NSLocalizedString("ReStart", comment: ""), comment: ""), for: .normal)
+         RestartButton.addTarget(self, action: #selector(self.ReStart), for: .touchUpInside)
+         
+         self.View2.addSubview(RestartButton)
+         self.view.addSubview(self.View2)
       }
-      
-      
    }
    
    @objc func ReStart() {
       
-      View2.removeFromSuperview()
+      self.View2.removeFromSuperview()
+      gameBGM.RestartSound()
       
-      DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) {
+      let BallBackAnimation = SCNAction.move(to: SCNVector3(self.sun.position.x, self.sun.position.y + 17.5, self.sun.position.z), duration: 1.35)
+      self.sun.runAction(BallBackAnimation)
+      
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
          let queue = OperationQueue()
          let operation = BlockOperation {
-            self.sun.runAction(self.AfterAction)
+            //self.sun.runAction(self.AfterAction)
+            self.LockSunMove = false
          }
          self.Speed -= 4
-         self.AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: self.Speed)
+         //self.AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: self.Speed)
          queue.addOperation(operation)
+         
       }
       
    }
@@ -647,11 +667,8 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
 
       self.MyTimer.invalidate()
       
-      
-      
       self.dismiss(animated: true)
       
-      self.removeFromParent()
 
       
    }
@@ -679,9 +696,16 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
    }
    
    func rewardBasedVideoAdDidClose(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
-      setupRewardBasedVideoAd()
-      print("ビデオを閉じた")
-
+      #if DEBUG
+      print("リワード:テスト環境")
+      rewardBasedVideo?.load(GADRequest(), withAdUnitID: TEST_ID)
+      print("ID = \(TEST_ID)")
+      #else
+      print("リワード:本番環境")
+      rewardBasedVideo.load(GADRequest(), withAdUnitID: AdMobID)
+      print("ID = \(AdMobID)")
+      #endif
+      
    }
    
    func rewardBasedVideoAdWillLeaveApplication(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
@@ -690,13 +714,9 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
    
    //ココの関数に特典を与える処理を入れる
    func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd, didRewardUserWith reward: GADAdReward) {
-      print("Reward received with currency: \(reward.type), amount \(reward.amount).")
-      
+      self.TryAgain()
       
    }
-   
-   
-   
    
    //GKGameCenterControllerDelegate実装用
    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
@@ -707,5 +727,25 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       super.didReceiveMemoryWarning()
       // Dispose of any resources that can be recreated.
    }
-
+   
+   
+   private func Play3DtouchLight()  {
+      DispatchQueue.main.async {
+         TapticEngine.impact.feedback(.light)
+      }
+   }
+   
+   private func Play3DtouchMedium() {
+      DispatchQueue.main.async {
+         TapticEngine.impact.feedback(.medium)
+      }
+   }
+   
+   private func Play3DtouchHeavy()  {
+      DispatchQueue.main.async {
+         TapticEngine.impact.feedback(.heavy)
+      }
+      
+   }
+   
 }

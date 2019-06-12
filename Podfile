@@ -21,6 +21,10 @@ target 'Star' do
   pod 'Firebase/RemoteConfig'
   pod 'Firebase/Performance'
 
+  pod 'ChameleonFramework/Swift'
+  pod 'FlatUIKit'
+  pod 'lottie-ios'
+
   pod 'LicensePlist'
 
 end

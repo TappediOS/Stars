@@ -32,9 +32,22 @@
 		BF65632320F064E700294710 /* Myparticle.scnp in Resources */ = {isa = PBXBuildFile; fileRef = BF65632120F064E700294710 /* Myparticle.scnp */; };
 		BF65632720F0677A00294710 /* Conffi.scnp in Resources */ = {isa = PBXBuildFile; fileRef = BF65632520F0677A00294710 /* Conffi.scnp */; };
 		BFB91212215F496C008CECDC /* pan.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BFB91211215F496C008CECDC /* pan.mp3 */; };
+		BFC9C1D822B0C37100F0FFDE /* GameSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9C1D722B0C37100F0FFDE /* GameSound.swift */; };
+		BFC9C1DA22B0C45800F0FFDE /* gameBGM.caf in Resources */ = {isa = PBXBuildFile; fileRef = BFC9C1D922B0C45300F0FFDE /* gameBGM.caf */; };
+		BFC9C1DC22B0D09C00F0FFDE /* dot.png in Resources */ = {isa = PBXBuildFile; fileRef = BFC9C1DB22B0D09B00F0FFDE /* dot.png */; };
 		BFDAC0B222ABA6FC002A8C37 /* Floor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDAC0B122ABA6FC002A8C37 /* Floor.swift */; };
 		BFDAC0B422ABA855002A8C37 /* StageSpotLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDAC0B322ABA855002A8C37 /* StageSpotLight.swift */; };
 		BFDAC0B622ABA943002A8C37 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDAC0B522ABA943002A8C37 /* Camera.swift */; };
+		BFDAC0B822ABAABF002A8C37 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDAC0B722ABAABF002A8C37 /* Wall.swift */; };
+		BFDAC0BC22ABD9AF002A8C37 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDAC0BB22ABD9AE002A8C37 /* back.png */; };
+		BFDAC0BE22ABDEE6002A8C37 /* flare3.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDAC0BD22ABDEE5002A8C37 /* flare3.png */; };
+		BFDAC0C022ACF180002A8C37 /* f4.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDAC0BF22ACF180002A8C37 /* f4.png */; };
+		BFDAC0C222ACF3B2002A8C37 /* f5.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDAC0C122ACF3B1002A8C37 /* f5.png */; };
+		BFDAC0C422ADCBA4002A8C37 /* s2.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDAC0C322ADCBA4002A8C37 /* s2.png */; };
+		BFDAC0C622AE3A56002A8C37 /* b3.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDAC0C522AE3A56002A8C37 /* b3.png */; };
+		BFDAC0C822AE3D78002A8C37 /* f6.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDAC0C722AE3D77002A8C37 /* f6.png */; };
+		BFDAC0CB22AE4353002A8C37 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDAC0C922AE4353002A8C37 /* spark.png */; };
+		BFDAC0CC22AE4353002A8C37 /* FlowStar.scnp in Resources */ = {isa = PBXBuildFile; fileRef = BFDAC0CA22AE4353002A8C37 /* FlowStar.scnp */; };
 		BFDE32DC20F09A1C00D0DE06 /* Stars.scnp in Resources */ = {isa = PBXBuildFile; fileRef = BFDE32DA20F09A1C00D0DE06 /* Stars.scnp */; };
 		BFE8F6CB210C365100830A07 /* Myparticle3.scnp in Resources */ = {isa = PBXBuildFile; fileRef = BFE8F6CA210C365100830A07 /* Myparticle3.scnp */; };
 		BFE8F6CD210C365B00830A07 /* Myparticle2.scnp in Resources */ = {isa = PBXBuildFile; fileRef = BFE8F6CC210C365B00830A07 /* Myparticle2.scnp */; };
@@ -81,9 +94,22 @@
 		BF65632120F064E700294710 /* Myparticle.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Myparticle.scnp; sourceTree = "<group>"; };
 		BF65632520F0677A00294710 /* Conffi.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Conffi.scnp; sourceTree = "<group>"; };
 		BFB91211215F496C008CECDC /* pan.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = pan.mp3; path = ../../../.Trash/pan.mp3; sourceTree = "<group>"; };
+		BFC9C1D722B0C37100F0FFDE /* GameSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSound.swift; sourceTree = "<group>"; };
+		BFC9C1D922B0C45300F0FFDE /* gameBGM.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = gameBGM.caf; sourceTree = "<group>"; };
+		BFC9C1DB22B0D09B00F0FFDE /* dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dot.png; path = Assets.xcassets/dot.imageset/dot.png; sourceTree = "<group>"; };
 		BFDAC0B122ABA6FC002A8C37 /* Floor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Floor.swift; sourceTree = "<group>"; };
 		BFDAC0B322ABA855002A8C37 /* StageSpotLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageSpotLight.swift; sourceTree = "<group>"; };
 		BFDAC0B522ABA943002A8C37 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		BFDAC0B722ABAABF002A8C37 /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
+		BFDAC0BB22ABD9AE002A8C37 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		BFDAC0BD22ABDEE5002A8C37 /* flare3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flare3.png; sourceTree = "<group>"; };
+		BFDAC0BF22ACF180002A8C37 /* f4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = f4.png; sourceTree = "<group>"; };
+		BFDAC0C122ACF3B1002A8C37 /* f5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = f5.png; sourceTree = "<group>"; };
+		BFDAC0C322ADCBA4002A8C37 /* s2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s2.png; sourceTree = "<group>"; };
+		BFDAC0C522AE3A56002A8C37 /* b3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b3.png; sourceTree = "<group>"; };
+		BFDAC0C722AE3D77002A8C37 /* f6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = f6.png; sourceTree = "<group>"; };
+		BFDAC0C922AE4353002A8C37 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		BFDAC0CA22AE4353002A8C37 /* FlowStar.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = FlowStar.scnp; sourceTree = "<group>"; };
 		BFDE32DA20F09A1C00D0DE06 /* Stars.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Stars.scnp; sourceTree = "<group>"; };
 		BFE8F6CA210C365100830A07 /* Myparticle3.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Myparticle3.scnp; sourceTree = "<group>"; };
 		BFE8F6CC210C365B00830A07 /* Myparticle2.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Myparticle2.scnp; sourceTree = "<group>"; };
@@ -194,9 +220,14 @@
 				BF2EBFBC211EB21000FE7449 /* FourthSellect.swift */,
 				BF2EBFBE211EB23000FE7449 /* FifthSllect.swift */,
 				BFDE32DA20F09A1C00D0DE06 /* Stars.scnp */,
+				BFDAC0C922AE4353002A8C37 /* spark.png */,
+				BFDAC0CA22AE4353002A8C37 /* FlowStar.scnp */,
+				BFC9C1DB22B0D09B00F0FFDE /* dot.png */,
+				BFDAC0C322ADCBA4002A8C37 /* s2.png */,
 				BFF4AC1A20F605180048853C /* key1.scnp */,
 				BFF4AC1D20F608380048853C /* key2.scnp */,
 				BF2EBFCC212296A800FE7449 /* flear2.png */,
+				BFDAC0BD22ABDEE5002A8C37 /* flare3.png */,
 				BFF4AC1F20F60A4D0048853C /* key3.scnp */,
 				BF250635215F4BE300B1BFA7 /* Circle.png */,
 				BF65632520F0677A00294710 /* Conffi.scnp */,
@@ -204,6 +235,11 @@
 				BFE8F6CA210C365100830A07 /* Myparticle3.scnp */,
 				BFE8F6CC210C365B00830A07 /* Myparticle2.scnp */,
 				BF24DFEC22A794CC00862C21 /* SStar.jpeg */,
+				BFDAC0C522AE3A56002A8C37 /* b3.png */,
+				BFDAC0BF22ACF180002A8C37 /* f4.png */,
+				BFDAC0C122ACF3B1002A8C37 /* f5.png */,
+				BFDAC0C722AE3D77002A8C37 /* f6.png */,
+				BFDAC0BB22ABD9AE002A8C37 /* back.png */,
 				BF2EBFDA2123DBB600FE7449 /* Localizable.strings */,
 				BF2EBFE22123DEA500FE7449 /* InfoPlist.strings */,
 				BF65630620EC8BF000294710 /* Main.storyboard */,
@@ -221,8 +257,11 @@
 			isa = PBXGroup;
 			children = (
 				BFDAC0B122ABA6FC002A8C37 /* Floor.swift */,
+				BFC9C1D722B0C37100F0FFDE /* GameSound.swift */,
+				BFC9C1D922B0C45300F0FFDE /* gameBGM.caf */,
 				BFDAC0B322ABA855002A8C37 /* StageSpotLight.swift */,
 				BFDAC0B522ABA943002A8C37 /* Camera.swift */,
+				BFDAC0B722ABAABF002A8C37 /* Wall.swift */,
 			);
 			path = "Stage Objects";
 			sourceTree = "<group>";
@@ -302,11 +341,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFDAC0C422ADCBA4002A8C37 /* s2.png in Resources */,
 				BFB91212215F496C008CECDC /* pan.mp3 in Resources */,
+				BFC9C1DC22B0D09C00F0FFDE /* dot.png in Resources */,
 				BFF4AC1E20F608380048853C /* key2.scnp in Resources */,
 				BFF330DF2151F5EF00C8C2E5 /* GoogleService-Info-Dev.plist in Resources */,
+				BFDAC0C022ACF180002A8C37 /* f4.png in Resources */,
 				BFE8F6CB210C365100830A07 /* Myparticle3.scnp in Resources */,
 				BFDE32DC20F09A1C00D0DE06 /* Stars.scnp in Resources */,
+				BFDAC0CC22AE4353002A8C37 /* FlowStar.scnp in Resources */,
 				BF250636215F4BE300B1BFA7 /* Circle.png in Resources */,
 				BFF4AC1C20F605180048853C /* key1.scnp in Resources */,
 				BF2EBFCD212296A800FE7449 /* flear2.png in Resources */,
@@ -315,11 +358,18 @@
 				BF24DFED22A794CC00862C21 /* SStar.jpeg in Resources */,
 				BF2EBFE02123DEA500FE7449 /* InfoPlist.strings in Resources */,
 				BFE8F6CD210C365B00830A07 /* Myparticle2.scnp in Resources */,
+				BFDAC0CB22AE4353002A8C37 /* spark.png in Resources */,
 				BF65630D20EC8BF100294710 /* LaunchScreen.storyboard in Resources */,
+				BFC9C1DA22B0C45800F0FFDE /* gameBGM.caf in Resources */,
+				BFDAC0C222ACF3B2002A8C37 /* f5.png in Resources */,
+				BFDAC0C622AE3A56002A8C37 /* b3.png in Resources */,
 				BF65630A20EC8BF100294710 /* Assets.xcassets in Resources */,
 				BF65630820EC8BF000294710 /* Main.storyboard in Resources */,
+				BFDAC0C822AE3D78002A8C37 /* f6.png in Resources */,
 				BF65631920ECA82D00294710 /* main.scn in Resources */,
+				BFDAC0BC22ABD9AF002A8C37 /* back.png in Resources */,
 				BF2EBFD82123DBB600FE7449 /* Localizable.strings in Resources */,
+				BFDAC0BE22ABDEE6002A8C37 /* flare3.png in Resources */,
 				BFEF99B4213415A900A64698 /* GoogleService-Info.plist in Resources */,
 				BF65632320F064E700294710 /* Myparticle.scnp in Resources */,
 			);
@@ -336,6 +386,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Star/Pods-Star-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/FlatUIKit/FlatUIKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
@@ -343,11 +394,13 @@
 				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/SpriteKitEasingSwift/SpriteKitEasingSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/TapticEngine/TapticEngine.framework",
+				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FlatUIKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
@@ -355,6 +408,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SpriteKitEasingSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TapticEngine.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -387,11 +441,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFC9C1D822B0C37100F0FFDE /* GameSound.swift in Sources */,
 				BF2EBFC52121CBA000FE7449 /* IAPManager.swift in Sources */,
 				BFDAC0B422ABA855002A8C37 /* StageSpotLight.swift in Sources */,
 				BF2EBFBD211EB21000FE7449 /* FourthSellect.swift in Sources */,
 				BF2EBFB7211EB17800FE7449 /* FirstSellect.swift in Sources */,
 				BF2EBFBF211EB23000FE7449 /* FifthSllect.swift in Sources */,
+				BFDAC0B822ABAABF002A8C37 /* Wall.swift in Sources */,
 				BF65630520EC8BF000294710 /* ViewController.swift in Sources */,
 				BF03548720FD8232004BF8A2 /* SecondView.swift in Sources */,
 				BF65630320EC8BF000294710 /* AppDelegate.swift in Sources */,
