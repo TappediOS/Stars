@@ -25,8 +25,9 @@ import Firebase
 class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterControllerDelegate, GADRewardBasedVideoAdDelegate, SCNSceneRendererDelegate {
    
    var wall:[[[Int]]] = [[[]]]
-   let FoundSpeed: Float = 0.18
-   var dr: Float = 0.00051
+   let FoundSpeed: Float = 0.1752
+   var dr: Float = 0.000505
+   var PlusSpeed: Float = 0.00498
    
    var score:Int = 0
    var y_speed:CGFloat = -22
@@ -76,7 +77,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    //4
    let View = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height))
    let View2 = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height))
-   
+   let userDefault = UserDefaults.standard
    //5
    let AdMobID = "ca-app-pub-1460017825820383/4745063368"
    //この394で始まってるやつはgoogleが用意しているテストID
@@ -146,7 +147,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       
       wall.removeAll()
       
-      for tmp in 0 ... 150 {
+      for tmp in 0 ... 175 {
          wall.append([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
          count1 = 0
          count2 = 0
@@ -197,7 +198,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
          }
       }
       
-      for tmp in 0 ... 150 {
+      for tmp in 0 ... 175 {
          for x in 0 ... 2 {
             for y in 0 ... 2 {
                if wall[tmp][x][y] == 0 {
@@ -535,7 +536,8 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
          queue0.addOperation(operation0)
          
          self.sun.removeAllActions()
-         dr += 0.004375
+         dr += PlusSpeed
+         PlusSpeed += PlusSpeed / 110
       }
    }
    
@@ -567,7 +569,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
          return
       }
       
-      self.sun.position.y -= FoundSpeed + dr + dr / 5
+      self.sun.position.y -= FoundSpeed + dr + dr / 15
    }
    
    @objc func panView(sender: UIPanGestureRecognizer) {

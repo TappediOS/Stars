@@ -57,14 +57,18 @@ class FirstSellectViewController: UIViewController {
    var marucount: Int = 1
    let bannreView = GADBannerView()
    let request:GADRequest = GADRequest()
+   
+   let BANNER_VIEW_TEST_ID: String = "ca-app-pub-3940256099942544/2934735716"
+   let BANNER_VIEW_ID: String = "ca-app-pub-1460017825820383/4573050858"
 
    
    let bokeh = SCNParticleSystem(named: "Myparticle.scnp", inDirectory: "")
    let Stars = SCNParticleSystem(named: "Stars.scnp", inDirectory: "")
    
+   let userDefault = UserDefaults.standard
+   
    override func viewDidLoad() {
       super.viewDidLoad()
-      
       
       
       let scene = SCNScene(named: "main.scn")!
@@ -222,30 +226,26 @@ class FirstSellectViewController: UIViewController {
       view.bringSubviewToFront(bannreView)
       
       
-      #if DEBUG
-
       print("\n--------INFO ADMOB--------------\n")
       print("Google Mobile ads SDK Versioin -> " + GADRequest.sdkVersion())
       
-      #else
       
-      print("\n--------INFO ADMOB--------------\n")
-      print("Google Mobile ads SDK Versioin -> " + GADRequest.sdkVersion())
-
-      bannreView.adUnitID = "ca-app-pub-1460017825820383/4573050858"
       bannreView.rootViewController = self
-
-      print("Target ->", TARGET_OS_SIMULATOR)
-
-      if TARGET_OS_SIMULATOR == 1{
-         request.testDevices = [kGADSimulatorID]
-      }else{
-         request.testDevices = ["c50facd3fc62377f872eacd38f43b291"]
-      }
-
-      bannreView.load(request)
       
+      print("Target ->", TARGET_OS_SIMULATOR)
+      
+      #if DEBUG
+      print("this is test ad")
+      bannreView.adUnitID = BANNER_VIEW_TEST_ID
+      self.request.testDevices = ["9d012329e337de42666c706e842b7819"];
+      #else
+      print("\n\n--------INFO ADMOB--------------\n")
+      print("Google Mobile ads SDK Versioin -> " + GADRequest.sdkVersion() + "\n")
+      self.bannreView.adUnitID = BANNER_VIEW_ID
+      print("バナー広告：本番環境")
       #endif
+      
+      bannreView.load(request)
       
 
       
@@ -262,6 +262,9 @@ class FirstSellectViewController: UIViewController {
    }
    
    @objc func handleTap(_ gestureRecognize: UIGestureRecognizer) {
+      
+      userDefault.set(userDefault.integer(forKey: "PlayStage") + 1, forKey: "PlayStage")
+      
       // retrieve the SCNView
       let SceneView = self.view as! SCNView
       

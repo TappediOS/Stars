@@ -25,8 +25,9 @@ import Firebase
 class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterControllerDelegate, GADRewardBasedVideoAdDelegate, SCNSceneRendererDelegate {
    
    var wall:[[[Int]]] = [[[]]]
-   let FoundSpeed: Float = 0.18
-   var dr: Float = 0.00051
+   let FoundSpeed: Float = 0.1752
+   var dr: Float = 0.000505
+   var PlusSpeed: Float = 0.00498
    var AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: 480)
    var score:Int = 0
    var y_speed:CGFloat = -22
@@ -69,7 +70,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
    var UserScore4: UserDefaults = UserDefaults.standard
    var SpotLightNode = StageSpotLight()
    let LEADERBOARD_ID = "Stage4"
-   
+   let userDefault = UserDefaults.standard
    //3
    let Size: CGSize = UIScreen.main.bounds.size
    
@@ -145,7 +146,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
      
       wall.removeAll()
       
-      for tmp in 0 ... 150 {
+      for tmp in 0 ... 175 {
          count1 = 0
          count2 = 0
          count3 = 0
@@ -204,7 +205,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
          }
       }
       
-      for tmp in 0 ... 150 {
+      for tmp in 0 ... 175 {
          for x in 0 ... 2 {
             for y in 0 ... 2 {
                if wall[tmp][x][y] == 0 {
@@ -595,7 +596,8 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
          queue0.addOperation(operation0)
          
          self.sun.removeAllActions()
-         dr += 0.004375
+         dr += PlusSpeed
+         PlusSpeed += PlusSpeed / 110
       }
    }
    
@@ -627,7 +629,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
          return
       }
       
-      self.sun.position.y -= FoundSpeed + dr + dr / 5
+      self.sun.position.y -= FoundSpeed + dr + dr / 15
    }
    
    

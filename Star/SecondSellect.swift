@@ -61,12 +61,17 @@ class SecondSellectViewController: UIViewController {
    let Stars = SCNParticleSystem(named: "Stars.scnp", inDirectory: "")
 
    let FlowStart = SCNParticleSystem(named: "FlowStar.scnp", inDirectory: "")
+   
+   let userDefault = UserDefaults.standard
 
+   let BANNER_VIEW_TEST_ID: String = "ca-app-pub-3940256099942544/2934735716"
+   let BANNER_VIEW_ID: String = "ca-app-pub-1460017825820383/4975950503"
    
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      
+      userDefault.register(defaults: ["ShowRequestReview": false])
+      userDefault.register(defaults: ["PlayStage": 0])
       
       let scene = SCNScene(named: "main.scn")!
       let SceneView = SCNView()
@@ -75,7 +80,6 @@ class SecondSellectViewController: UIViewController {
       SceneView.scene = scene
       SceneView.showsStatistics = false
       view.accessibilityIgnoresInvertColors = true
-      SceneView.allowsCameraControl = true
       
       let lightNode = SCNNode()
       lightNode.light = SCNLight()
@@ -242,23 +246,23 @@ class SecondSellectViewController: UIViewController {
       print("\n--------INFO ADMOB--------------\n")
       print("Google Mobile ads SDK Versioin -> " + GADRequest.sdkVersion())
       
-      bannreView.adUnitID = "ca-app-pub-1460017825820383/4975950503"
+      
       bannreView.rootViewController = self
       
       print("Target ->", TARGET_OS_SIMULATOR)
       
       #if DEBUG
-         print("this is test ad")
-         request.testDevices = ["32469097af622f72ff0f6d1ded471f0c"]
+      print("this is test ad")
+      bannreView.adUnitID = BANNER_VIEW_TEST_ID
+      self.request.testDevices = ["9d012329e337de42666c706e842b7819"];
       #else
-         if TARGET_OS_SIMULATOR == 1{
-            request.testDevices = [kGADSimulatorID]
-         }else{
-            request.testDevices = ["32469097af622f72ff0f6d1ded471f0c"]
-         }
-      
-         bannreView.load(request)
+      print("\n\n--------INFO ADMOB--------------\n")
+      print("Google Mobile ads SDK Versioin -> " + GADRequest.sdkVersion() + "\n")
+      self.bannreView.adUnitID = BANNER_VIEW_ID
+      print("バナー広告：本番環境")
       #endif
+      
+      bannreView.load(request)
       
       
      
@@ -273,6 +277,10 @@ class SecondSellectViewController: UIViewController {
    }
    
    @objc func handleTap(_ gestureRecognize: UIGestureRecognizer) {
+      
+      
+      userDefault.set(userDefault.integer(forKey: "PlayStage") + 1, forKey: "PlayStage")
+      
       // retrieve the SCNView
       let SceneView = self.view as! SCNView
       
@@ -307,6 +315,10 @@ class SecondSellectViewController: UIViewController {
       
       Analytics.logEvent("LoadStage2", parameters: nil)
 
+      if userDefault.integer(forKey: "PlayStage") > 3 && userDefault.bool(forKey: "ShowRequestReview") == false{
+         userDefault.set(true, forKey: "ShowRequestReview")
+         SKStoreReviewController.requestReview()
+      }
 
    }
    

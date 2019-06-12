@@ -60,6 +60,7 @@ class FifthSellectViewController: UIViewController, IAPManagerDelegate {
    let bokeh = SCNParticleSystem(named: "Myparticle3.scnp", inDirectory: "")
    let Stars = SCNParticleSystem(named: "Stars.scnp", inDirectory: "")
    
+   let userDefault = UserDefaults.standard
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -368,7 +369,6 @@ class FifthSellectViewController: UIViewController, IAPManagerDelegate {
             
             loadView()
             viewDidLoad()
-            SKStoreReviewController.requestReview()
          }
       }
       //Indicatorを隠す処理
@@ -400,6 +400,10 @@ class FifthSellectViewController: UIViewController, IAPManagerDelegate {
    
    
    @objc func handleTap(_ gestureRecognize: UIGestureRecognizer) {
+      
+      
+      userDefault.set(userDefault.integer(forKey: "PlayStage") + 1, forKey: "PlayStage")
+      
       // retrieve the SCNView
       let SceneView = self.view as! SCNView
       

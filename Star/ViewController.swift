@@ -29,10 +29,11 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
    var wall:[[[Int]]] = [[[]]]
    
    var score:Int = 0
-   let FoundSpeed: Float = 0.18
-   var dr: Float = 0.00051
+   let FoundSpeed: Float = 0.1752
+   var dr: Float = 0.000505
+   var PlusSpeed: Float = 0.00498
+   var Speed: Double = 480
    var Action = SCNAction.repeatForever(SCNAction.moveBy(x: 0, y: -24, z: 0, duration: 1))
-   var Speed: Double = 419
    var BeforAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: 419)
    var AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: 419)
    let BoxCategory: UInt32 = 0b0001
@@ -69,7 +70,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
    var UserScore1: UserDefaults = UserDefaults.standard
    //Leaderboard ID
    let LEADERBOARD_ID = "Stage1"
-   
+   let userDefault = UserDefaults.standard
    
    //3
    let Size: CGSize = UIScreen.main.bounds.size
@@ -152,7 +153,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       
       wall.removeAll()
       
-      for tmp in 0 ... 126 {
+      for tmp in 0 ... 175 {
          batucount = 1
          marucount = 1
          
@@ -180,7 +181,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       }
       
       
-      for tmp in 0 ... 126 {
+      for tmp in 0 ... 175 {
          for x in 0 ... 2 {
             for y in 0 ... 2 {
                if wall[tmp][x][y] == 0 {
@@ -427,7 +428,8 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       queue0.addOperation(operation0)
  
       self.sun.removeAllActions()
-      dr += 0.004375
+      dr += PlusSpeed
+      PlusSpeed += PlusSpeed / 110
 
    }
    
@@ -459,7 +461,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
          return
       }
       
-      self.sun.position.y -= FoundSpeed + dr + dr / 5
+      self.sun.position.y -= FoundSpeed + dr + dr / 15
    }
    
    

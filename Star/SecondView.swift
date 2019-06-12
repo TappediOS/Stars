@@ -25,8 +25,9 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    
    var wall:[[[Int]]] = [[[]]]
    var score:Int = 0
-   let FoundSpeed: Float = 0.18
-   var dr: Float = 0.00051
+   let FoundSpeed: Float = 0.1752
+   var dr: Float = 0.000505
+   var PlusSpeed: Float = 0.00498
    var Speed: Double = 480
    //var AfterAction = SCNAction.move(by: SCNVector3(x: 0, y: -10000, z: 0), duration: 480)
    let BoxCategory: UInt32 = 0b0001
@@ -90,7 +91,7 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    //let FlowStars = SCNParticleSystem(named: "FlowStar.scnp", inDirectory: "")
    
    let gameBGM = BGM()
-   
+   let userDefault = UserDefaults.standard
    var MyTimer = Timer()
    
    var LockSunMove = false
@@ -136,7 +137,7 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       
       wall.removeAll()
       
-      for tmp in 0 ... 150 {
+      for tmp in 0 ... 175 {
          
          wall.append([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
          
@@ -177,7 +178,7 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
          }
       }
       
-      for tmp in 0 ... 130 {
+      for tmp in 0 ... 175 {
          for x in 0 ... 2 {
             for y in 0 ... 2 {
                if wall[tmp][x][y] == 0 {
@@ -486,7 +487,8 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
          queue0.addOperation(operation0)
 
          self.sun.removeAllActions()
-         dr += 0.004375
+         dr += PlusSpeed
+         PlusSpeed += PlusSpeed / 110
       }
    }
    
@@ -518,7 +520,7 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
          return
       }
       
-      self.sun.position.y -= FoundSpeed + dr + dr / 5
+      self.sun.position.y -= FoundSpeed + dr + dr / 15
    }
    
 

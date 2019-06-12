@@ -20,6 +20,11 @@ class ThirdSellectViewController: UIViewController, GKGameCenterControllerDelega
    let LEADERBOARD_ID = "Stage1"
    let bannreView = GADBannerView()
    let request:GADRequest = GADRequest()
+
+   let BANNER_VIEW_TEST_ID: String = "ca-app-pub-3940256099942544/2934735716"
+   let BANNER_VIEW_ID: String = "ca-app-pub-1460017825820383/8459243400"
+   
+   
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -75,25 +80,23 @@ class ThirdSellectViewController: UIViewController, GKGameCenterControllerDelega
       print("\n--------INFO ADMOB--------------\n")
       print("Google Mobile ads SDK Versioin -> " + GADRequest.sdkVersion())
       
-      bannreView.adUnitID = "ca-app-pub-1460017825820383/8459243400"
+     
       bannreView.rootViewController = self
       
       print("Target ->", TARGET_OS_SIMULATOR)
       
       #if DEBUG
       print("this is test ad")
-      request.testDevices = ["32469097af622f72ff0f6d1ded471f0c"]
+       bannreView.adUnitID = BANNER_VIEW_TEST_ID
+      self.request.testDevices = ["9d012329e337de42666c706e842b7819"];
       #else
-      if TARGET_OS_SIMULATOR == 1{
-         request.testDevices = [kGADSimulatorID]
-      }else{
-         request.testDevices = ["32469097af622f72ff0f6d1ded471f0c"]
-      }
-      
-       bannreView.load(request)
+      print("\n\n--------INFO ADMOB--------------\n")
+      print("Google Mobile ads SDK Versioin -> " + GADRequest.sdkVersion() + "\n")
+      self.bannreView.adUnitID = BANNER_VIEW_ID
+      print("バナー広告：本番環境")
       #endif
       
-     
+     bannreView.load(request)
       
       
    }
@@ -116,26 +119,7 @@ class ThirdSellectViewController: UIViewController, GKGameCenterControllerDelega
       gameCenterViewController.dismiss(animated: true, completion: nil)
    }
    
-   //leaderboard取得
-//   func showLeaderboard() {
-//
-//      let localPlayer = GKLocalPlayer()
-//      localPlayer.loadDefaultLeaderboardIdentifier(completionHandler: {
-//         (leaderboardIdentifier : String?, error : NSError?) -> Void in
-//         if error != nil {
-//            print(error!.localizedDescription)
-//            print("error")
-//         } else {
-//            let gameCenterController: GKGameCenterViewController = GKGameCenterViewController()
-//            gameCenterController.gameCenterDelegate = self
-//            gameCenterController.viewState = GKGameCenterViewControllerState.leaderboards
-//            gameCenterController.leaderboardIdentifier = self.LEADERBOARD_ID
-//            self.view?.window?.rootViewController?.present(
-//               gameCenterController, animated: true, completion: nil)
-//         }
-//         } as? (String?, Error?) -> Void)
-//   }
-   
+
    override func didReceiveMemoryWarning() {
       super.didReceiveMemoryWarning()
       // Dispose of any resources that can be recreated.
