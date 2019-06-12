@@ -117,6 +117,7 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       SceneView.delegate = self
       SceneView.isPlaying = true
       view.accessibilityIgnoresInvertColors = true
+      SceneView.preferredFramesPerSecond = 60
       
       
  

@@ -133,7 +133,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       SceneView.delegate = self
       SceneView.isPlaying = true
       view.accessibilityIgnoresInvertColors = true
-      
+      SceneView.preferredFramesPerSecond = 60
       
       
       scene.rootNode.addChildNode(SpotLightNode)

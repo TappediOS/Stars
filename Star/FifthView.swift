@@ -129,6 +129,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
       SceneView.showsStatistics = false
       SceneView.delegate = self
       view.accessibilityIgnoresInvertColors = true
+      SceneView.preferredFramesPerSecond = 60
       
       scene.rootNode.addChildNode(SpotLightNode)
       
