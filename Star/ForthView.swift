@@ -22,7 +22,7 @@ import ChameleonFramework
 import SCLAlertView
 import Firebase
 
-class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterControllerDelegate, GADRewardBasedVideoAdDelegate, SCNSceneRendererDelegate {
+class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterControllerDelegate, GADRewardBasedVideoAdDelegate, SCNSceneRendererDelegate, GADInterstitialDelegate {
    
    var wall:[[[Int]]] = [[[]]]
    let FoundSpeed: Float = 0.1752
@@ -107,6 +107,10 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    var MyTimer = Timer()
    
    var LockSunMove = false
+   
+   var Interstitial: GADInterstitial!
+   let INTERSTITIAL_TEST_ID = "ca-app-pub-3940256099942544/4411468910"
+   let INTERSTITIAL_ID = "ca-app-pub-1460017825820383/8064464410"
 
    
    override func viewDidLoad() {
@@ -387,7 +391,29 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       View2.backgroundColor = UIColor.white
       
       InitReward()
+      InitInstitial()
       StartBGM()
+   }
+   
+   private func InitInstitial() {
+      print(userDefault.integer(forKey: "PlayStage"))
+      
+      #if DEBUG
+      print("インターステイシャル:テスト環境")
+      Interstitial = GADInterstitial(adUnitID: INTERSTITIAL_TEST_ID)
+      if let ADID = Interstitial.adUnitID {
+         print("インタースティシャルテスト広告ID読み込み完了")
+         print("TestID = \(ADID)")
+      }else{
+         print("インタースティシャルテスト広告ID読み込み失敗")
+      }
+      #else
+      print("インターステイシャル:本番環境")
+      Interstitial = GADInterstitial(adUnitID: INTERSTITIAL_ID)
+      #endif
+      
+      self.Interstitial.delegate = self
+      Interstitial.load(GADRequest())
    }
    
    private func InitReward() {
@@ -772,6 +798,16 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       }
       
       self.MyTimer.invalidate()
+      if userDefault.integer(forKey: "PlayStage") % 3 == 0{
+         if Interstitial.isReady {
+            print("インタースティシャル広告の準備できてるからpresentする!")
+            Interstitial.present(fromRootViewController: self)
+            return
+         }else{
+            self.dismiss(animated: true)
+            return
+         }
+      }
       self.dismiss(animated: true)   
    }
    
@@ -827,6 +863,38 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    override func didReceiveMemoryWarning() {
       super.didReceiveMemoryWarning()
       // Dispose of any resources that can be recreated.
+   }
+   
+   //広告の読み込みが完了した時
+   func interstitialDidReceiveAd(_ ad: GADInterstitial) {
+      print("\n-- Interstitial広告の読み込み完了 --\n")
+      //Analytics.logEvent("AdReadyOK", parameters: nil)
+   }
+   //広告の読み込みが失敗した時
+   func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {
+      print("\n-- Interstitial広告の読み込み失敗 --\n")
+      //Analytics.logEvent("AdNotReady", parameters: nil)
+      
+   }
+   //広告画面が開いた時
+   func interstitialWillPresentScreen(_ ad: GADInterstitial) {
+      print("インタースティシャル広告開いた")
+      gameBGM.StopSound()
+   }
+   //広告をクリックして開いた画面を閉じる直前
+   func interstitialWillDismissScreen(_ ad: GADInterstitial) {
+      print("インタースティシャル広告閉じる直前")
+   }
+   //広告をクリックして開いた画面を閉じる直後
+   func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+      print("インタースティシャル広告閉じる直後")
+      AudioServicesPlaySystemSound(1519)
+      
+      self.dismiss(animated: true)
+   }
+   //広告をクリックした時
+   func interstitialWillLeaveApplication(_ ad: GADInterstitial) {
+      print("インタースティシャル広告ボタンクリックした")
    }
    
    
