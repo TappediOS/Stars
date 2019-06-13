@@ -22,9 +22,10 @@ class StageSpotLight: SCNNode {
       self.eulerAngles.x = -90
       self.light?.spotOuterAngle = 65
       self.light?.spotInnerAngle = 48
-      self.light?.shadowMapSize.width = 5000
-      self.light?.shadowMapSize.height = 5000
-      self.light?.zNear = 48
+      self.light?.shadowMapSize.width = 5100
+      self.light?.shadowMapSize.height = 5100
+      self.light?.zNear = 50 //48
+      
    }
    
    required init?(coder aDecoder: NSCoder) {

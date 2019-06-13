@@ -402,7 +402,7 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       print("ID = \(TEST_ID)")
       #else
       print("リワード:本番環境")
-      rewardBasedVideo.load(GADRequest(), withAdUnitID: AdMobID)
+      rewardBasedVideo?.load(GADRequest(), withAdUnitID: AdMobID)
       print("ID = \(AdMobID)")
       #endif
       
@@ -793,7 +793,7 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       print("ID = \(TEST_ID)")
       #else
       print("リワード:本番環境")
-      rewardBasedVideo.load(GADRequest(), withAdUnitID: AdMobID)
+      rewardBasedVideo?.load(GADRequest(), withAdUnitID: AdMobID)
       print("ID = \(AdMobID)")
       #endif
       
