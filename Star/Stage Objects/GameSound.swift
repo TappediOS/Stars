@@ -14,8 +14,8 @@ class BGM {
    
    var audioPlayer1: AVAudioPlayer! = nil
    
-   let SoundVolume: Float = 0.05
-   let SmallSoundVolume: Float = 0.05 / 3
+   let SoundVolume: Float = 0.22
+   let SmallSoundVolume: Float = 0.22 / 3
    
    
    init() {
