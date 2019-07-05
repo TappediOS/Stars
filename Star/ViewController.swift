@@ -113,6 +113,8 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
    var Interstitial: GADInterstitial!
    let INTERSTITIAL_TEST_ID = "ca-app-pub-3940256099942544/4411468910"
    let INTERSTITIAL_ID = "ca-app-pub-1460017825820383/8064464410"
+   
+   let CanPosiBall = CanMoveBall()
 
    
    override func viewDidLoad() {
@@ -465,22 +467,22 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       self.SpotLightNode.position.y  =  self.sun.position.y + 58
       
       // per-frame code here
-      if sun.position.z > 1.5 {
+      if sun.position.z > 1.52 {
          Play3DtouchLight()
-         self.sun.position.z = 1.5
+         self.sun.position.z = 1.52
       }
-      if sun.position.z < -1.5 {
+      if sun.position.z < -1.4 {
          Play3DtouchLight()
-         self.sun.position.z = -1.5
+         self.sun.position.z = -1.4
       }
       
-      if sun.position.x > 1.5 {
+      if sun.position.x > 1.52 {
          Play3DtouchLight()
-         self.sun.position.x = 1.5
+         self.sun.position.x = 1.52
       }
-      if sun.position.x < -1.5 {
+      if sun.position.x < -1.52 {
          Play3DtouchLight()
-         self.sun.position.x = -1.5
+         self.sun.position.x = -1.52
       }
       
       guard LockSunMove == false else {

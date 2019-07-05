@@ -14,6 +14,8 @@ import Foundation
 import StoreKit
 import AudioToolbox
 import FirebaseAnalytics
+import Firebase
+
 
 class FifthSellectViewController: UIViewController, IAPManagerDelegate {
    
@@ -316,6 +318,8 @@ class FifthSellectViewController: UIViewController, IAPManagerDelegate {
    
    @objc func Buy() {
       print("tap buy")
+      
+      Crashlytics.sharedInstance().crash()
       Analytics.logEvent("TapBuyButton", parameters: nil)
 
       

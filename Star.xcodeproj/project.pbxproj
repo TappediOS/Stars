@@ -10,6 +10,7 @@
 		BF03548720FD8232004BF8A2 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF03548620FD8232004BF8A2 /* SecondView.swift */; };
 		BF24DFED22A794CC00862C21 /* SStar.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = BF24DFEC22A794CC00862C21 /* SStar.jpeg */; };
 		BF250636215F4BE300B1BFA7 /* Circle.png in Resources */ = {isa = PBXBuildFile; fileRef = BF250635215F4BE300B1BFA7 /* Circle.png */; };
+		BF2CFCEB22CF409500D777A4 /* CanMoveBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2CFCEA22CF409500D777A4 /* CanMoveBall.swift */; };
 		BF2EBFB7211EB17800FE7449 /* FirstSellect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2EBFB6211EB17800FE7449 /* FirstSellect.swift */; };
 		BF2EBFB9211EB1B600FE7449 /* SecondSellect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2EBFB8211EB1B600FE7449 /* SecondSellect.swift */; };
 		BF2EBFBB211EB1EA00FE7449 /* ThirdSellect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2EBFBA211EB1EA00FE7449 /* ThirdSellect.swift */; };
@@ -65,6 +66,7 @@
 		BF03548620FD8232004BF8A2 /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
 		BF24DFEC22A794CC00862C21 /* SStar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SStar.jpeg; sourceTree = "<group>"; };
 		BF250635215F4BE300B1BFA7 /* Circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Circle.png; path = ../../../.Trash/Circle.png; sourceTree = "<group>"; };
+		BF2CFCEA22CF409500D777A4 /* CanMoveBall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanMoveBall.swift; sourceTree = "<group>"; };
 		BF2EBFB6211EB17800FE7449 /* FirstSellect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstSellect.swift; sourceTree = "<group>"; };
 		BF2EBFB8211EB1B600FE7449 /* SecondSellect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSellect.swift; sourceTree = "<group>"; };
 		BF2EBFBA211EB1EA00FE7449 /* ThirdSellect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdSellect.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				BF65631820ECA82D00294710 /* main.scn */,
 				BF65630220EC8BF000294710 /* AppDelegate.swift */,
 				BF2EBFC42121CBA000FE7449 /* IAPManager.swift */,
+				BF2CFCEA22CF409500D777A4 /* CanMoveBall.swift */,
 				BF65630420EC8BF000294710 /* ViewController.swift */,
 				BF03548620FD8232004BF8A2 /* SecondView.swift */,
 				BFDDC6C322ABA69400A09A4B /* Stage Objects */,
@@ -441,6 +444,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF2CFCEB22CF409500D777A4 /* CanMoveBall.swift in Sources */,
 				BFC9C1D822B0C37100F0FFDE /* GameSound.swift in Sources */,
 				BF2EBFC52121CBA000FE7449 /* IAPManager.swift in Sources */,
 				BFDAC0B422ABA855002A8C37 /* StageSpotLight.swift in Sources */,
@@ -658,6 +662,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 9R4W53MKG7;
 				INFOPLIST_FILE = Star/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -670,6 +675,7 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -679,6 +685,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 9R4W53MKG7;
 				INFOPLIST_FILE = Star/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -691,6 +698,7 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};

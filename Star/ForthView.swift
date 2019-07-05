@@ -112,6 +112,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    let INTERSTITIAL_TEST_ID = "ca-app-pub-3940256099942544/4411468910"
    let INTERSTITIAL_ID = "ca-app-pub-1460017825820383/8064464410"
 
+   let CanPosiBall = CanMoveBall()
    
    override func viewDidLoad() {
       super.viewDidLoad()
