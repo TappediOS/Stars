@@ -448,7 +448,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
          self.sun.addParticleSystem(self.key1!)
          self.sun.addParticleSystem(self.key2!)
             
-         self.audioPlayerInstance.volume = 0.05
+         self.audioPlayerInstance.volume = 0.35
          self.audioPlayerInstance.currentTime = 0
          self.audioPlayerInstance.play()
             

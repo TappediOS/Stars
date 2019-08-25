@@ -557,7 +557,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
             
             self.sun.addParticleSystem(self.key2!)
             
-            self.audioPlayerInstance.volume = 0.05
+            self.audioPlayerInstance.volume = 0.35
             self.audioPlayerInstance.currentTime = 0
             self.audioPlayerInstance.play()
          }
