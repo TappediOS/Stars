@@ -264,7 +264,6 @@ class SecondSellectViewController: UIViewController {
       
       bannreView.load(request)
       
-      
      
       
       
@@ -299,6 +298,7 @@ class SecondSellectViewController: UIViewController {
          if material == sun.geometry?.firstMaterial {
             Analytics.logEvent("TapStage2Ball", parameters: nil)
             let nextvc = SecondViewController()
+            nextvc.modalPresentationStyle = .fullScreen
             self.present(nextvc, animated: false, completion: nil)
          }
       }

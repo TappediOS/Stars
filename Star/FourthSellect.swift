@@ -316,6 +316,7 @@ class FourthSellectViewController: UIViewController {
             Analytics.logEvent("TapStage3Ball", parameters: nil)
             
             let nextvc = FourthViewController()
+            nextvc.modalPresentationStyle = .fullScreen
             self.present(nextvc, animated: false, completion: nil)
          }
       }

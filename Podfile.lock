@@ -2,102 +2,117 @@ PODS:
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
-  - Crashlytics (3.13.1):
-    - Fabric (~> 1.10.1)
-  - Fabric (1.10.1)
-  - Firebase/AdMob (6.2.0):
+  - Crashlytics (3.14.0):
+    - Fabric (~> 1.10.2)
+  - Fabric (1.10.2)
+  - Firebase/AdMob (6.9.0):
     - Firebase/CoreOnly
-    - Google-Mobile-Ads-SDK (~> 7.44)
-  - Firebase/Core (6.2.0):
+    - Google-Mobile-Ads-SDK (~> 7.49)
+  - Firebase/Core (6.9.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (= 6.0.1)
-  - Firebase/CoreOnly (6.2.0):
-    - FirebaseCore (= 6.0.2)
-  - Firebase/Performance (6.2.0):
+    - FirebaseAnalytics (= 6.1.2)
+  - Firebase/CoreOnly (6.9.0):
+    - FirebaseCore (= 6.3.0)
+  - Firebase/Performance (6.9.0):
     - Firebase/CoreOnly
-    - FirebasePerformance (~> 3.0.0)
-  - Firebase/RemoteConfig (6.2.0):
+    - FirebasePerformance (~> 3.1.4)
+  - Firebase/RemoteConfig (6.9.0):
     - Firebase/CoreOnly
-    - FirebaseRemoteConfig (~> 4.0.0)
-  - FirebaseABTesting (3.0.0):
-    - FirebaseCore (~> 6.0)
-    - Protobuf (~> 3.5)
-  - FirebaseAnalytics (6.0.1):
-    - FirebaseCore (~> 6.0)
-    - FirebaseInstanceID (~> 4.1)
-    - GoogleAppMeasurement (= 6.0.1)
+    - FirebaseRemoteConfig (~> 4.4.1)
+  - FirebaseABTesting (3.1.1):
+    - FirebaseAnalyticsInterop (~> 1.3)
+    - FirebaseCore (~> 6.1)
+    - Protobuf (~> 3.8)
+  - FirebaseAnalytics (6.1.2):
+    - FirebaseCore (~> 6.3)
+    - FirebaseInstanceID (~> 4.2)
+    - GoogleAppMeasurement (= 6.1.2)
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (~> 0.3)
-  - FirebaseCore (6.0.2):
-    - GoogleUtilities/Environment (~> 6.0)
-    - GoogleUtilities/Logger (~> 6.0)
-  - FirebaseInstanceID (4.1.1):
+  - FirebaseAnalyticsInterop (1.4.0)
+  - FirebaseCore (6.3.0):
+    - FirebaseCoreDiagnostics (~> 1.0)
+    - FirebaseCoreDiagnosticsInterop (~> 1.0)
+    - GoogleUtilities/Environment (~> 6.2)
+    - GoogleUtilities/Logger (~> 6.2)
+  - FirebaseCoreDiagnostics (1.1.0):
+    - FirebaseCoreDiagnosticsInterop (~> 1.0)
+    - GoogleDataTransportCCTSupport (~> 1.0)
+    - GoogleUtilities/Environment (~> 6.2)
+    - GoogleUtilities/Logger (~> 6.2)
+  - FirebaseCoreDiagnosticsInterop (1.0.0)
+  - FirebaseInstanceID (4.2.5):
     - FirebaseCore (~> 6.0)
     - GoogleUtilities/Environment (~> 6.0)
     - GoogleUtilities/UserDefaults (~> 6.0)
-  - FirebasePerformance (3.0.0):
-    - FirebaseCore (~> 6.0)
-    - FirebaseInstanceID (~> 4.0)
-    - FirebaseRemoteConfig (~> 4.0)
+  - FirebasePerformance (3.1.4):
+    - FirebaseCore (~> 6.2)
+    - FirebaseInstanceID (~> 4.2)
+    - FirebaseRemoteConfig (~> 4.4)
     - GoogleToolboxForMac/Logger (~> 2.1)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
-    - GoogleUtilities/Environment (~> 6.0)
-    - GoogleUtilities/ISASwizzler (~> 6.0)
-    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Environment (~> 6.2)
+    - GoogleUtilities/ISASwizzler (~> 6.2)
+    - GoogleUtilities/MethodSwizzler (~> 6.2)
     - GTMSessionFetcher/Core (~> 1.1)
-    - Protobuf (~> 3.5)
-  - FirebaseRemoteConfig (4.0.0):
-    - FirebaseABTesting (~> 3.0)
-    - FirebaseCore (~> 6.0)
-    - FirebaseInstanceID (~> 4.0)
-    - GoogleUtilities/Environment (~> 6.0)
-    - "GoogleUtilities/NSData+zlib (~> 6.0)"
-    - Protobuf (~> 3.5)
+    - Protobuf (~> 3.9)
+  - FirebaseRemoteConfig (4.4.1):
+    - FirebaseABTesting (~> 3.1)
+    - FirebaseAnalyticsInterop (~> 1.4)
+    - FirebaseCore (~> 6.2)
+    - FirebaseInstanceID (~> 4.2)
+    - GoogleUtilities/Environment (~> 6.2)
+    - "GoogleUtilities/NSData+zlib (~> 6.2)"
+    - Protobuf (~> 3.9)
   - FlatUIKit (1.6.2)
-  - Google-Mobile-Ads-SDK (7.44.0):
+  - Google-Mobile-Ads-SDK (7.50.0):
     - GoogleAppMeasurement (~> 6.0)
-  - GoogleAppMeasurement (6.0.1):
+  - GoogleAppMeasurement (6.1.2):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (~> 0.3)
+  - GoogleDataTransport (2.0.0)
+  - GoogleDataTransportCCTSupport (1.1.0):
+    - GoogleDataTransport (~> 2.0)
+    - nanopb
   - GoogleToolboxForMac/Defines (2.2.1)
   - GoogleToolboxForMac/Logger (2.2.1):
     - GoogleToolboxForMac/Defines (= 2.2.1)
   - "GoogleToolboxForMac/NSData+zlib (2.2.1)":
     - GoogleToolboxForMac/Defines (= 2.2.1)
-  - GoogleUtilities/AppDelegateSwizzler (6.2.0):
+  - GoogleUtilities/AppDelegateSwizzler (6.3.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (6.2.0)
-  - GoogleUtilities/ISASwizzler (6.2.0)
-  - GoogleUtilities/Logger (6.2.0):
+  - GoogleUtilities/Environment (6.3.0)
+  - GoogleUtilities/ISASwizzler (6.3.0)
+  - GoogleUtilities/Logger (6.3.0):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (6.2.0):
+  - GoogleUtilities/MethodSwizzler (6.3.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (6.2.0):
+  - GoogleUtilities/Network (6.3.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (6.2.0)"
-  - GoogleUtilities/Reachability (6.2.0):
+  - "GoogleUtilities/NSData+zlib (6.3.0)"
+  - GoogleUtilities/Reachability (6.3.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (6.2.0):
+  - GoogleUtilities/UserDefaults (6.3.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.2.2)
-  - LicensePlist (2.5.0)
-  - lottie-ios (3.1.0)
+  - LicensePlist (2.6.0)
+  - lottie-ios (3.1.3)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - Protobuf (3.8.0)
+  - Protobuf (3.9.2)
   - SCLAlertView (0.8)
   - SpriteKitEasingSwift (0.14)
   - TapticEngine (1.2.0)
@@ -117,20 +132,25 @@ DEPENDENCIES:
   - TapticEngine
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - ChameleonFramework
     - Crashlytics
     - Fabric
     - Firebase
     - FirebaseABTesting
     - FirebaseAnalytics
+    - FirebaseAnalyticsInterop
     - FirebaseCore
+    - FirebaseCoreDiagnostics
+    - FirebaseCoreDiagnosticsInterop
     - FirebaseInstanceID
     - FirebasePerformance
     - FirebaseRemoteConfig
     - FlatUIKit
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
+    - GoogleDataTransport
+    - GoogleDataTransportCCTSupport
     - GoogleToolboxForMac
     - GoogleUtilities
     - GTMSessionFetcher
@@ -144,29 +164,34 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
-  Crashlytics: 5aa8e90dcbf2f34898b4f5a0037787531246cca0
-  Fabric: f6f21452846788bb44595d73e9909d79d328e617
-  Firebase: 5965bac23e7fcb5fa6d926ed429c9ecef8a2014e
-  FirebaseABTesting: a32c488eb75089a61eb3d86db061dfb909d765db
-  FirebaseAnalytics: 629301c2b9925f3537d4093a17a72751ae5b7084
-  FirebaseCore: b0f0262acebfa540e5f97b3832dbb13186980822
-  FirebaseInstanceID: cdb3827746d53ece7ae87a5c51c25c3055443366
-  FirebasePerformance: 3dd8dbe6eb1258b8d148eb33768f6aa6e1684127
-  FirebaseRemoteConfig: 40f75c6ea20a52bf65ef44e3898910dd5b57c532
+  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
+  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
+  Firebase: 2d750c54cda57d5a6ae31212cfe5cc813c6be7e4
+  FirebaseABTesting: 662e8de812ceb5d57ad66381f6402f4d28dc5c91
+  FirebaseAnalytics: 5d9ccbf46ed25d3ec9304d263f85bddf1e93e2d2
+  FirebaseAnalyticsInterop: d48b6ab67bcf016a05e55b71fc39c61c0cb6b7f3
+  FirebaseCore: 8b2765c445d40db7137989b7146a3aa3f91b5529
+  FirebaseCoreDiagnostics: be4f7a09d02ab305f18de59a470412caddb64c2a
+  FirebaseCoreDiagnosticsInterop: 6829da2b8d1fc795ff1bd99df751d3788035d2cb
+  FirebaseInstanceID: 550df9be1f99f751d8fcde3ac342a1e21a0e6c42
+  FirebasePerformance: a28490ad3b116380ff2d8300a67051626d01d09e
+  FirebaseRemoteConfig: e84fc50edebbef57e09aa5b8e43960ac3d2582c7
   FlatUIKit: 1b41f0d4952ce8d970d8479ce79df54a960242c4
-  Google-Mobile-Ads-SDK: 1e72b4f438d997ab0f2ee62b3a7b0cbcc87c47cb
-  GoogleAppMeasurement: 51d8d9ea48f0ca44484d29cfbdef976fbd4fc336
+  Google-Mobile-Ads-SDK: d48dbaf5bae1ab7a94a9786f493c26c454bc6f16
+  GoogleAppMeasurement: 0ae90be1cc4dad40f4a27fc767ef59fa032ec87b
+  GoogleDataTransport: c8617c00e4f3eb9418e42ac0e8ac5241a9d555dd
+  GoogleDataTransportCCTSupport: 9f352523e8785a71f6754f51eeff09f49ec19268
   GoogleToolboxForMac: b3553629623a3b1bff17f555e736cd5a6d95ad55
-  GoogleUtilities: 996e0db07153674fd1b54b220fda3a3dc3547cba
+  GoogleUtilities: 9c2c544202301110b29f7974a82e77fdcf12bf51
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
-  LicensePlist: e5f8f2e3465620e53ec4c669955a5a7d0692b9cb
-  lottie-ios: 9467723922dfff46f6d4e3019c32594a62440b7c
+  LicensePlist: 04fb95b572038c87068283afa65518a61aff9342
+  lottie-ios: 496ac5cea1bbf1a7bd1f1f472f3232eb1b8d744b
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  Protobuf: 3f617b9a6e73605565086864c9bc26b2bf2dd5a3
+  Protobuf: 67fb42ba613def994e61854de2b3164f13790cc4
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SpriteKitEasingSwift: d389a59f5531399b69cc9c31f52c2e279c813688
   TapticEngine: ed6f5b4a2e9aa46d4e8fa69a72a7a0b6719bf8ac
 
 PODFILE CHECKSUM: e16c62045018d0423c0f3b35e5c767470fee92e4
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.8.0

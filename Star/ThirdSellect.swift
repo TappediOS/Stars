@@ -68,6 +68,7 @@ class ThirdSellectViewController: UIViewController, GKGameCenterControllerDelega
       let gcView = GKGameCenterViewController()
       gcView.gameCenterDelegate = self
       gcView.viewState = GKGameCenterViewControllerState.leaderboards
+      gcView.modalPresentationStyle = .fullScreen
       self.present(gcView, animated: true, completion: nil)
       
       let Size: CGSize = UIScreen.main.bounds.size
@@ -97,29 +98,16 @@ class ThirdSellectViewController: UIViewController, GKGameCenterControllerDelega
       #endif
       
      bannreView.load(request)
-      
-      
+
    }
    
-   override func viewWillAppear(_ animated: Bool) {
-      super.viewWillAppear(true)
-      
-      let gcView = GKGameCenterViewController()
-      gcView.gameCenterDelegate = self
-      gcView.viewState = GKGameCenterViewControllerState.leaderboards
-      self.present(gcView, animated: true, completion: nil)
-      
-      Analytics.logEvent("LoadRankingView", parameters: nil)
 
-      
-   }
    
    //GKGameCenterControllerDelegate実装用
    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
       gameCenterViewController.dismiss(animated: true, completion: nil)
    }
    
-
    override func didReceiveMemoryWarning() {
       super.didReceiveMemoryWarning()
       // Dispose of any resources that can be recreated.

@@ -286,6 +286,7 @@ class FirstSellectViewController: UIViewController {
 
             Analytics.logEvent("TapStage1Ball", parameters: nil)
             let nextvc = ViewController()
+            nextvc.modalPresentationStyle = .fullScreen
             self.present(nextvc, animated: false, completion: nil)
          }
       }

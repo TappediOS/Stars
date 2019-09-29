@@ -318,20 +318,13 @@ class FifthSellectViewController: UIViewController, IAPManagerDelegate {
    
    @objc func Buy() {
       print("tap buy")
-      
-      Crashlytics.sharedInstance().crash()
       Analytics.logEvent("TapBuyButton", parameters: nil)
-
-      
-      //購入
       IAPManager.shared.buy(productIdentifier: "StageFifthBuy")
    }
    
    @objc func ReBuy() {
       print("tap Rebuy")
       Analytics.logEvent("TapRestoreButton", parameters: nil)
-      
-      //リストア
       IAPManager.shared.restore()
    }
    
@@ -427,6 +420,7 @@ class FifthSellectViewController: UIViewController, IAPManagerDelegate {
             if YesOrNo == true {
                Analytics.logEvent("TapStage4Ball", parameters: nil)
                let nextvc = FifthViewController()
+               nextvc.modalPresentationStyle = .fullScreen
                self.present(nextvc, animated: false, completion: nil)
             }else{
                print("you dont buy")
@@ -436,8 +430,6 @@ class FifthSellectViewController: UIViewController, IAPManagerDelegate {
          }
          
       }
-      
-      
    }
    
    override func viewWillAppear(_ animated: Bool) {
@@ -448,14 +440,8 @@ class FifthSellectViewController: UIViewController, IAPManagerDelegate {
       Score.text = String(HightScore4)
       
       Analytics.logEvent("LoadStage4", parameters: nil)
-
-      
    }
-   
-   
-   
-   
-   
+
    override func didReceiveMemoryWarning() {
       super.didReceiveMemoryWarning()
       // Dispose of any resources that can be recreated.
