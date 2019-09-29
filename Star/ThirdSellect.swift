@@ -24,7 +24,7 @@ class ThirdSellectViewController: UIViewController, GKGameCenterControllerDelega
    let BANNER_VIEW_TEST_ID: String = "ca-app-pub-3940256099942544/2934735716"
    let BANNER_VIEW_ID: String = "ca-app-pub-1460017825820383/8459243400"
    
-   
+   var isLockShowGKView: Bool = false
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -64,13 +64,6 @@ class ThirdSellectViewController: UIViewController, GKGameCenterControllerDelega
       
       
       
-      
-      let gcView = GKGameCenterViewController()
-      gcView.gameCenterDelegate = self
-      gcView.viewState = GKGameCenterViewControllerState.leaderboards
-      gcView.modalPresentationStyle = .fullScreen
-      self.present(gcView, animated: true, completion: nil)
-      
       let Size: CGSize = UIScreen.main.bounds.size
       bannreView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0)
       bannreView.frame = CGRect(x: 0, y: Size.height - (tabBarController?.tabBar.frame.size.height)! - 50, width: Size.width, height: 50)
@@ -101,10 +94,26 @@ class ThirdSellectViewController: UIViewController, GKGameCenterControllerDelega
 
    }
    
-
+   override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(true)
+      
+      guard isLockShowGKView == false else {
+         isLockShowGKView = false
+         return
+      }
+      
+      let gcView = GKGameCenterViewController()
+      gcView.gameCenterDelegate = self
+      gcView.viewState = GKGameCenterViewControllerState.leaderboards
+      gcView.modalPresentationStyle = .fullScreen
+      self.present(gcView, animated: true, completion: nil)
+      
+      Analytics.logEvent("LoadRankingView", parameters: nil)
+   }
    
    //GKGameCenterControllerDelegate実装用
    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+      isLockShowGKView = true
       gameCenterViewController.dismiss(animated: true, completion: nil)
    }
    
