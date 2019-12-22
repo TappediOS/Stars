@@ -102,6 +102,8 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
    let bokeh = SCNParticleSystem(named: "Myparticle3.scnp", inDirectory: "")
    let Stars = SCNParticleSystem(named: "Stars.scnp", inDirectory: "")
    
+   let GrowStar = SCNParticleSystem(named: "Conffi.scnp", inDirectory: "")
+   
    let gameBGM = BGM()
    
    var MyTimer = Timer()
@@ -335,6 +337,7 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
       
       GorldNode.addParticleSystem(self.bokeh!)
       GorldNode.addParticleSystem(self.Stars!)
+      GorldNode.addParticleSystem(self.GrowStar!)
       
       let Transform = SCNTransformConstraint(inWorldSpace: true, with: { (sun, transform) -> SCNMatrix4 in
          let pos = sun.position

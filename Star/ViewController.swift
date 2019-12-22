@@ -103,6 +103,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
    let bokeh = SCNParticleSystem(named: "Myparticle.scnp", inDirectory: "")
    let Stars = SCNParticleSystem(named: "Stars.scnp", inDirectory: "")
    
+   let GrowStar = SCNParticleSystem(named: "Conffi.scnp", inDirectory: "")
    
    let gameBGM = BGM()
    
@@ -263,6 +264,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       GorldNode.addParticleSystem(self.bokeh!)
       
       GorldNode.addParticleSystem(self.Stars!)
+      GorldNode.addParticleSystem(self.GrowStar!)
 
       
       let Transform = SCNTransformConstraint(inWorldSpace: true, with: { (sun, transform) -> SCNMatrix4 in

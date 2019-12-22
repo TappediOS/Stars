@@ -86,6 +86,8 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    let key2 = SCNParticleSystem(named: "key2.scnp", inDirectory: "")
    let key3 = SCNParticleSystem(named: "key3.scnp", inDirectory: "")
    
+   let GrowStar = SCNParticleSystem(named: "Conffi.scnp", inDirectory: "")
+   
    let bokeh = SCNParticleSystem(named: "Myparticle2.scnp", inDirectory: "")
    let Stars = SCNParticleSystem(named: "Stars.scnp", inDirectory: "")
    //let FlowStars = SCNParticleSystem(named: "FlowStar.scnp", inDirectory: "")
@@ -270,7 +272,7 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       //パーティクルシステムのオブジェクト生成、およびノードへの追加
       GorldNode.addParticleSystem(self.bokeh!)
       GorldNode.addParticleSystem(self.Stars!)
-      //GorldNode.addParticleSystem(self.FlowStars!)
+      GorldNode.addParticleSystem(self.GrowStar!)
       
       
       

@@ -206,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				BF65631820ECA82D00294710 /* main.scn */,
+				BF65632520F0677A00294710 /* Conffi.scnp */,
 				BF65630220EC8BF000294710 /* AppDelegate.swift */,
 				BF2EBFC42121CBA000FE7449 /* IAPManager.swift */,
 				BF2CFCEA22CF409500D777A4 /* CanMoveBall.swift */,
@@ -230,7 +231,6 @@
 				BF2EBFCC212296A800FE7449 /* flear2.png */,
 				BFDAC0BD22ABDEE5002A8C37 /* flare3.png */,
 				BFF4AC1F20F60A4D0048853C /* key3.scnp */,
-				BF65632520F0677A00294710 /* Conffi.scnp */,
 				BF65632120F064E700294710 /* Myparticle.scnp */,
 				BFE8F6CA210C365100830A07 /* Myparticle3.scnp */,
 				BFE8F6CC210C365B00830A07 /* Myparticle2.scnp */,
