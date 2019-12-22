@@ -8,7 +8,7 @@
 
 
 "Restore" = "RESTORE";
-"Purchase" = "PURCHASE:$0.99";
+"Purchase" = "PURCHASE:";
 
 "ReTry" = "Continue(Watch an AD.)";
 "Return" = "Finish";

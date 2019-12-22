@@ -15,9 +15,12 @@ import StoreKit
 import AudioToolbox
 import FirebaseAnalytics
 import Firebase
+import SwiftyStoreKit
 
 
 class FifthSellectViewController: UIViewController, IAPManagerDelegate {
+   
+   
    
    
    var wall:[[[Int]]] = [
@@ -64,8 +67,18 @@ class FifthSellectViewController: UIViewController, IAPManagerDelegate {
    
    let userDefault = UserDefaults.standard
    
+   //この2つは課金で使う
+   let IAP_PRO_ID = "StageFifthBuy"
+   let SECRET_CODE = "7f886ebc5bad4888966c3d5ba58ee5d1"
+   
+   var BuyButton = UIButton()
+   
    override func viewDidLoad() {
       super.viewDidLoad()
+      
+      
+      CheckIAPInfomation()
+      
       
       AreYouBuy.register(defaults: ["AreYouBuy": false])
       YesOrNo = AreYouBuy.object(forKey: "AreYouBuy") as! Bool
@@ -290,7 +303,7 @@ class FifthSellectViewController: UIViewController, IAPManagerDelegate {
          SceneView.addSubview(View)
          View.bringSubviewToFront(SceneView)
          
-         let BuyButton = UIButton(frame: CGRect(x: Size.width / 8, y: Size.height * 10 / 16, width: Size.width / 3, height: Size.height / 8))
+         BuyButton = UIButton(frame: CGRect(x: Size.width / 8, y: Size.height * 10 / 16, width: Size.width / 3, height: Size.height / 8))
          BuyButton.backgroundColor = UIColor.black.withAlphaComponent(0.85)
          BuyButton.layer.cornerRadius = 10.0
          BuyButton.layer.borderColor = UIColor.black.cgColor
@@ -314,6 +327,28 @@ class FifthSellectViewController: UIViewController, IAPManagerDelegate {
       
       
       
+   }
+   
+   private func changePriceValue(priceString: String) {
+      let priceInfo = NSLocalizedString("Purchase", comment: "") + priceString
+      BuyButton.setTitle(priceInfo, for: .normal)
+   }
+   
+   //課金する商品情報を取得する
+   func  CheckIAPInfomation() {
+      SwiftyStoreKit.retrieveProductsInfo([IAP_PRO_ID]) { result in
+         if let product = result.retrievedProducts.first {
+            let priceString = product.localizedPrice!
+            print("Product: \(product.localizedDescription), price: \(priceString)")
+            self.changePriceValue(priceString: priceString)
+         }
+         else if let invalidProductId = result.invalidProductIDs.first {
+            print("Invalid product identifier: \(invalidProductId)")
+         }
+         else {
+            print("Error: \(String(describing: result.error))")
+         }
+      }
    }
    
    @objc func Buy() {

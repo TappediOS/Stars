@@ -115,6 +115,7 @@ PODS:
   - Protobuf (3.9.2)
   - SCLAlertView (0.8)
   - SpriteKitEasingSwift (0.14)
+  - SwiftyStoreKit (0.15.0)
   - TapticEngine (1.2.0)
 
 DEPENDENCIES:
@@ -129,6 +130,7 @@ DEPENDENCIES:
   - lottie-ios
   - SCLAlertView
   - SpriteKitEasingSwift
+  - SwiftyStoreKit
   - TapticEngine
 
 SPEC REPOS:
@@ -160,6 +162,7 @@ SPEC REPOS:
     - Protobuf
     - SCLAlertView
     - SpriteKitEasingSwift
+    - SwiftyStoreKit
     - TapticEngine
 
 SPEC CHECKSUMS:
@@ -190,8 +193,9 @@ SPEC CHECKSUMS:
   Protobuf: 67fb42ba613def994e61854de2b3164f13790cc4
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SpriteKitEasingSwift: d389a59f5531399b69cc9c31f52c2e279c813688
+  SwiftyStoreKit: 033d06b6f87955405d3f844a18a7687c2438592a
   TapticEngine: ed6f5b4a2e9aa46d4e8fa69a72a7a0b6719bf8ac
 
-PODFILE CHECKSUM: e16c62045018d0423c0f3b35e5c767470fee92e4
+PODFILE CHECKSUM: dd4f88d2d0d2fa43b976105a495d8e4537ed4a2e
 
-COCOAPODS: 1.8.0
+COCOAPODS: 1.8.4

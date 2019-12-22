@@ -27,4 +27,5 @@ target 'Star' do
 
   pod 'LicensePlist'
 
+  pod 'SwiftyStoreKit'
 end
