@@ -64,7 +64,7 @@ class FirstSellectViewController: UIViewController {
    
    let bokeh = SCNParticleSystem(named: "Myparticle.scnp", inDirectory: "")
    let Stars = SCNParticleSystem(named: "Stars.scnp", inDirectory: "")
-   
+   let GrowStar = SCNParticleSystem(named: "Conffi.scnp", inDirectory: "")
    let userDefault = UserDefaults.standard
    
    override func viewDidLoad() {
@@ -104,6 +104,7 @@ class FirstSellectViewController: UIViewController {
       GorldNode.addParticleSystem(self.bokeh!)
       
       GorldNode.addParticleSystem(self.Stars!)
+      GorldNode.addParticleSystem(self.GrowStar!)
       sun = GorldNode
       
       

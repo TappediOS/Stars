@@ -64,7 +64,7 @@ class FifthSellectViewController: UIViewController, IAPManagerDelegate {
    
    let bokeh = SCNParticleSystem(named: "Myparticle3.scnp", inDirectory: "")
    let Stars = SCNParticleSystem(named: "Stars.scnp", inDirectory: "")
-   
+   let GrowStar = SCNParticleSystem(named: "Conffi.scnp", inDirectory: "")
    let userDefault = UserDefaults.standard
    
    //この2つは課金で使う
@@ -116,6 +116,7 @@ class FifthSellectViewController: UIViewController, IAPManagerDelegate {
       SceneView.scene?.rootNode.addChildNode(GorldNode)
       GorldNode.addParticleSystem(self.bokeh!)
       GorldNode.addParticleSystem(self.Stars!)
+      GorldNode.addParticleSystem(self.GrowStar!)
       sun = GorldNode
      
       

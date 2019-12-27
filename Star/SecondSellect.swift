@@ -59,7 +59,7 @@ class SecondSellectViewController: UIViewController {
    
    let bokeh = SCNParticleSystem(named: "Myparticle2.scnp", inDirectory: "")
    let Stars = SCNParticleSystem(named: "Stars.scnp", inDirectory: "")
-
+   let GrowStar = SCNParticleSystem(named: "Conffi.scnp", inDirectory: "")
    let FlowStart = SCNParticleSystem(named: "FlowStar.scnp", inDirectory: "")
    
    let userDefault = UserDefaults.standard
@@ -104,7 +104,7 @@ class SecondSellectViewController: UIViewController {
       SceneView.scene?.rootNode.addChildNode(GorldNode)
       GorldNode.addParticleSystem(self.bokeh!)
       GorldNode.addParticleSystem(self.Stars!)
-      
+      GorldNode.addParticleSystem(self.GrowStar!)
       //GorldNode.addParticleSystem(self.FlowStart!)
       
       
