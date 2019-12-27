@@ -108,6 +108,7 @@ class SecondSellectViewController: UIViewController {
       //GorldNode.addParticleSystem(self.FlowStart!)
       
       
+      
       sun = GorldNode
       
       
