@@ -94,6 +94,10 @@
 		BF65631820ECA82D00294710 /* main.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = main.scn; sourceTree = "<group>"; };
 		BF65632120F064E700294710 /* Myparticle.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Myparticle.scnp; sourceTree = "<group>"; };
 		BF65632520F0677A00294710 /* Conffi.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Conffi.scnp; sourceTree = "<group>"; };
+		BF77128623DC6E1100EF0D3C /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Main.strings; sourceTree = "<group>"; };
+		BF77128723DC6E1200EF0D3C /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		BF77128823DC6E1200EF0D3C /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BF77128923DC6E1200EF0D3C /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BFC9C1D722B0C37100F0FFDE /* GameSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSound.swift; sourceTree = "<group>"; };
 		BFC9C1D922B0C45300F0FFDE /* gameBGM.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = gameBGM.caf; sourceTree = "<group>"; };
 		BFC9C1DB22B0D09B00F0FFDE /* dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dot.png; path = Assets.xcassets/dot.imageset/dot.png; sourceTree = "<group>"; };
@@ -325,6 +329,7 @@
 				"zh-Hant",
 				es,
 				ru,
+				vi,
 			);
 			mainGroup = BF6562F620EC8BF000294710;
 			productRefGroup = BF65630020EC8BF000294710 /* Products */;
@@ -456,6 +461,7 @@
 				BFEF99A9213123B700A64698 /* zh-Hant */,
 				BFEF99AD2131240600A64698 /* es */,
 				BFEF99B12131240E00A64698 /* ru */,
+				BF77128823DC6E1200EF0D3C /* vi */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -474,6 +480,7 @@
 				BFEF99AA213123B700A64698 /* zh-Hant */,
 				BFEF99AE2131240600A64698 /* es */,
 				BFEF99B22131240E00A64698 /* ru */,
+				BF77128923DC6E1200EF0D3C /* vi */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -491,6 +498,7 @@
 				BFEF99A7213123B700A64698 /* zh-Hant */,
 				BFEF99AB2131240600A64698 /* es */,
 				BFEF99AF2131240E00A64698 /* ru */,
+				BF77128623DC6E1100EF0D3C /* vi */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -508,6 +516,7 @@
 				BFEF99A8213123B700A64698 /* zh-Hant */,
 				BFEF99AC2131240600A64698 /* es */,
 				BFEF99B02131240E00A64698 /* ru */,
+				BF77128723DC6E1200EF0D3C /* vi */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -637,7 +646,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = 9R4W53MKG7;
 				INFOPLIST_FILE = Star/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
@@ -645,7 +654,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.6;
+				MARKETING_VERSION = 3.7;
 				PRODUCT_BUNDLE_IDENTIFIER = myfirst.Star;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -661,7 +670,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = 9R4W53MKG7;
 				INFOPLIST_FILE = Star/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
@@ -669,7 +678,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.6;
+				MARKETING_VERSION = 3.7;
 				PRODUCT_BUNDLE_IDENTIFIER = myfirst.Star;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;

@@ -406,7 +406,7 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
 
 
    
-   
+   //MARK:- 当たり判定
    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
       
       
@@ -463,6 +463,8 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
 
    }
    
+   
+   //MARK:- レンダリング処理
    func renderer(_ aRenderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
       
       self.Camera_Node.position.y = self.sun.position.y + 8
@@ -494,12 +496,12 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       self.sun.position.y -= FoundSpeed + dr + dr / 15
    }
    
-   
+   //MARK:- 指を動かしたときの処理
    @objc func panView(sender: UIPanGestureRecognizer) {
       //移動後の相対位置を取得
       let location: CGPoint = sender.translation(in: self.view)  //Swift3
-      let x = CGFloat(location.x / 60)
-      let z = CGFloat(location.y / 60)
+      let x = CGFloat(location.x / 80)
+      let z = CGFloat(location.y / 80)
       
       
       let queue = OperationQueue()

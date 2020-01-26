@@ -239,7 +239,8 @@ class SecondSellectViewController: UIViewController {
      
       
       bannreView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0)
-      bannreView.frame = CGRect(x: 0, y: Size.height - (tabBarController?.tabBar.frame.size.height)! - 82, width: Size.width, height: 50)
+      bannreView.translatesAutoresizingMaskIntoConstraints = false
+      bannreView.frame = CGRect(x: 0, y: Size.height - (tabBarController?.tabBar.frame.size.height)! - 50, width: Size.width, height: 50)
       
       view.addSubview(bannreView)
       view.bringSubviewToFront(bannreView)
@@ -274,6 +275,14 @@ class SecondSellectViewController: UIViewController {
       SceneView.addGestureRecognizer(tapGesture)
       
 
+   }
+   
+   override func viewDidLayoutSubviews() {
+      super.viewDidLayoutSubviews()
+      bannreView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -self.view.safeAreaInsets.bottom).isActive = true
+      bannreView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+      bannreView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
+      bannreView.heightAnchor.constraint(equalToConstant: 50).isActive = true
    }
    
    @objc func handleTap(_ gestureRecognize: UIGestureRecognizer) {

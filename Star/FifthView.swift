@@ -669,8 +669,8 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
    @objc func panView(sender: UIPanGestureRecognizer) {
       //移動後の相対位置を取得
       let location: CGPoint = sender.translation(in: self.view)  //Swift3
-      let x = CGFloat(location.x / 60)
-      let z = CGFloat(location.y / 60)
+      let x = CGFloat(location.x / 80)
+      let z = CGFloat(location.y / 80)
       
       
       let queue = OperationQueue()
