@@ -115,6 +115,8 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
    let INTERSTITIAL_ID = "ca-app-pub-1460017825820383/8064464410"
    
    let CanPosiBall = CanMoveBall()
+   
+   
 
    
    override func viewDidLoad() {
@@ -406,7 +408,8 @@ class FifthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCe
       //scaleMode = .resizeFill
       
       let ScoreLabel = SKLabelNode(text: String(score))
-      ScoreLabel.fontSize = 70
+      ScoreLabel.fontSize = 75
+      ScoreLabel.fontName = "HelveticaNeue-Medium"
       //y座標はマイナスで下側に。
       ScoreLabel.position = CGPoint(x: Size.width / 8, y: -Size.height / 8)
       ScoreLabel.xScale = 0.5

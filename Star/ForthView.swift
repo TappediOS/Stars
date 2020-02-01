@@ -22,7 +22,7 @@ import ChameleonFramework
 import SCLAlertView
 import Firebase
 
-class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterControllerDelegate, GADRewardBasedVideoAdDelegate, SCNSceneRendererDelegate, GADInterstitialDelegate {
+class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterControllerDelegate, GADRewardBasedVideoAdDelegate, SCNSceneRendererDelegate, GADInterstitialDelegate, GADBannerViewDelegate {
    
    var wall:[[[Int]]] = [[[]]]
    let FoundSpeed: Float = 0.1752
@@ -115,6 +115,16 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    let INTERSTITIAL_ID = "ca-app-pub-1460017825820383/8064464410"
 
    let CanPosiBall = CanMoveBall()
+   
+   let BannerAdView = GADBannerView()
+   let BannerViewReqest = GADRequest()
+   let BANNERVIEW_TEST_ID = "ca-app-pub-3940256099942544/2934735716"
+   let BANNERVIEW_ID = "ca-app-pub-1460017825820383/7264404784"
+   
+   @available(iOS 11.0, *)
+     override var prefersHomeIndicatorAutoHidden: Bool{
+        get { return true }
+   }
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -377,7 +387,8 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       //scaleMode = .resizeFill
       
       let ScoreLabel = SKLabelNode(text: String(score))
-      ScoreLabel.fontSize = 70
+      ScoreLabel.fontSize = 75
+      ScoreLabel.fontName = "HelveticaNeue-Medium"
       //y座標はマイナスで下側に。
       ScoreLabel.position = CGPoint(x: Size.width / 8, y: -Size.height / 8)
       ScoreLabel.xScale = 0.5
@@ -396,6 +407,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       
       InitReward()
       InitInstitial()
+      InitBanner()
       StartBGM()
    }
    
@@ -434,6 +446,31 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       #endif
       
       
+   }
+   
+   private func InitBanner() {
+      #if DEBUG
+         print("\n\n--------INFO ADMOB--------------\n")
+         print("Google Mobile ads SDK Versioin -> " + GADRequest.sdkVersion() + "\n")
+         self.BannerAdView.adUnitID = BANNERVIEW_TEST_ID
+         self.BannerViewReqest.testDevices = ["9d012329e337de42666c706e842b7819"];
+         print("バナー広告：テスト環境\n\n")
+      #else
+         print("\n\n--------INFO ADMOB--------------\n")
+         print("Google Mobile ads SDK Versioin -> " + GADRequest.sdkVersion() + "\n")
+         self.BannerAdView.adUnitID = BANNERVIEW_ID
+         print("バナー広告：本番環境")
+      #endif
+      
+      //GameClearBannerView.backgroundColor = .black
+      BannerAdView.frame = CGRect(x: 0, y: Size.height - 50, width: Size.width, height: 50)
+      view.addSubview(BannerAdView)
+      view.bringSubviewToFront(BannerAdView)
+      
+      BannerAdView.rootViewController = self
+      BannerAdView.delegate = self
+      
+      BannerAdView.load(BannerViewReqest)
    }
    
    private func StartBGM() {
