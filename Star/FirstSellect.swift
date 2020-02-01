@@ -183,7 +183,8 @@ class FirstSellectViewController: UIViewController {
       // Setup the game overlays using SpriteKit.
       //scaleMode = .resizeFill
       
-      let ScoreLabelChar = SKLabelNode(text: "Best Score")
+      let bestScore = NSLocalizedString("BestScore", comment: "")
+      let ScoreLabelChar = SKLabelNode(text: bestScore)
       ScoreLabelChar.fontSize = 80
       //y座標はマイナスで下側に。
       ScoreLabelChar.position = CGPoint(x: Size.width / 2, y: -Size.height * 2 / 8)
@@ -211,7 +212,8 @@ class FirstSellectViewController: UIViewController {
       Arrow.yScale = 0.5
       overlayNode.addChild(Arrow)
       
-      let StartLabel = SKLabelNode(text: "Tap To Start")
+      let tapToStart = NSLocalizedString("TapToStart", comment: "")
+      let StartLabel = SKLabelNode(text: tapToStart)
       StartLabel.fontSize = 80
       StartLabel.position = CGPoint(x: Size.width / 2, y: -Size.height * 10 / 16)
       StartLabel.xScale = 0.5
