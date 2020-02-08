@@ -32,6 +32,7 @@
 		BF65631920ECA82D00294710 /* main.scn in Resources */ = {isa = PBXBuildFile; fileRef = BF65631820ECA82D00294710 /* main.scn */; };
 		BF65632320F064E700294710 /* Myparticle.scnp in Resources */ = {isa = PBXBuildFile; fileRef = BF65632120F064E700294710 /* Myparticle.scnp */; };
 		BF65632720F0677A00294710 /* Conffi.scnp in Resources */ = {isa = PBXBuildFile; fileRef = BF65632520F0677A00294710 /* Conffi.scnp */; };
+		BF786DFE23EE59A100AAAAEC /* StarBGM.caf in Resources */ = {isa = PBXBuildFile; fileRef = BF786DFD23EE58C200AAAAEC /* StarBGM.caf */; };
 		BFC9C1D822B0C37100F0FFDE /* GameSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9C1D722B0C37100F0FFDE /* GameSound.swift */; };
 		BFC9C1DA22B0C45800F0FFDE /* gameBGM.caf in Resources */ = {isa = PBXBuildFile; fileRef = BFC9C1D922B0C45300F0FFDE /* gameBGM.caf */; };
 		BFC9C1DC22B0D09C00F0FFDE /* dot.png in Resources */ = {isa = PBXBuildFile; fileRef = BFC9C1DB22B0D09B00F0FFDE /* dot.png */; };
@@ -372,6 +373,7 @@
 				BFDE32DC20F09A1C00D0DE06 /* Stars.scnp in Resources */,
 				BFDAC0CC22AE4353002A8C37 /* FlowStar.scnp in Resources */,
 				BFF4AC1C20F605180048853C /* key1.scnp in Resources */,
+				BF786DFE23EE59A100AAAAEC /* StarBGM.caf in Resources */,
 				BF2EBFCD212296A800FE7449 /* flear2.png in Resources */,
 				BFF4AC2020F60A4D0048853C /* key3.scnp in Resources */,
 				BF65632720F0677A00294710 /* Conffi.scnp in Resources */,
