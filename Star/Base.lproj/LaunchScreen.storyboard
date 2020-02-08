@@ -19,7 +19,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="f6.png" translatesAutoresizingMaskIntoConstraints="NO" id="M0b-1B-wNl">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="QDh-iX-xgX">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon2" translatesAutoresizingMaskIntoConstraints="NO" id="QDh-iX-xgX">
                                 <rect key="frame" x="117" y="358" width="180" height="180"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="PBm-3e-scL"/>
@@ -46,7 +46,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Icon2" width="1024" height="1024"/>
         <image name="f6.png" width="1668" height="2224"/>
-        <image name="icon" width="1024" height="1024"/>
     </resources>
 </document>
