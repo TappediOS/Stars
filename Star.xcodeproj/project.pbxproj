@@ -110,6 +110,7 @@
 		BF786DFA23EE533E00AAAAEC /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		BF786DFB23EE533E00AAAAEC /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		BF786DFC23EE533E00AAAAEC /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		BF786DFD23EE58C200AAAAEC /* StarBGM.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = StarBGM.caf; sourceTree = "<group>"; };
 		BFC9C1D722B0C37100F0FFDE /* GameSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSound.swift; sourceTree = "<group>"; };
 		BFC9C1D922B0C45300F0FFDE /* gameBGM.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = gameBGM.caf; sourceTree = "<group>"; };
 		BFC9C1DB22B0D09B00F0FFDE /* dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dot.png; path = Assets.xcassets/dot.imageset/dot.png; sourceTree = "<group>"; };
@@ -275,6 +276,7 @@
 				BFDAC0B122ABA6FC002A8C37 /* Floor.swift */,
 				BFC9C1D722B0C37100F0FFDE /* GameSound.swift */,
 				BFC9C1D922B0C45300F0FFDE /* gameBGM.caf */,
+				BF786DFD23EE58C200AAAAEC /* StarBGM.caf */,
 				BFDAC0B322ABA855002A8C37 /* StageSpotLight.swift */,
 				BFDAC0B522ABA943002A8C37 /* Camera.swift */,
 				BFDAC0B722ABAABF002A8C37 /* Wall.swift */,

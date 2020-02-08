@@ -20,7 +20,7 @@ class BGM {
    init() {
       
       // サウンドファイルのパスを生成 魔王魂
-      let soundFilePath = Bundle.main.path(forResource: "gameBGM", ofType: "caf")!
+      let soundFilePath = Bundle.main.path(forResource: "StarBGM", ofType: "caf")!
       let sound:URL = URL(fileURLWithPath: soundFilePath)
       // AVAudioPlayerのインスタンスを作成
       do {
