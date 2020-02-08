@@ -16,15 +16,15 @@ class StageSpotLight: SCNNode {
       
       self.light = SCNLight()
       self.light?.type = SCNLight.LightType.spot
-      self.light?.intensity = 260 //260
+      self.light?.intensity = 266
       self.light?.castsShadow = true
       self.position = SCNVector3(x: 0, y: 10035, z: 0)
       self.eulerAngles.x = -90
-      self.light?.spotOuterAngle = 65
-      self.light?.spotInnerAngle = 48
+      self.light?.spotOuterAngle = 67
+      self.light?.spotInnerAngle = 50
       self.light?.shadowMapSize.width = 5100
       self.light?.shadowMapSize.height = 5100
-      self.light?.zNear = 50 //48
+      self.light?.zNear = 52
       
    }
    

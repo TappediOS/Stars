@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  Star
+
+  Created by jun on 2018/08/15.
+  Copyright © 2018年 jun. All rights reserved.
+*/
+
+
+"Restore" = "恢復";
+"Purchase" = "採購:";
+
+"ReTry" = "繼續（觀看廣告。）";
+"Return" = "完";
+"ReStart" = "開始";
+
+"BestScore" = "最好成績";
+"TapToStart" = "點擊開始";
+
+"Stage" = "階段";
