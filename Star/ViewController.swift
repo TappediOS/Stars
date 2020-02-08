@@ -339,12 +339,12 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       //scaleMode = .resizeFill
       
       let ScoreLabel = SKLabelNode(text: String(score))
-      ScoreLabel.fontSize = 75
+      ScoreLabel.fontSize = 80
       ScoreLabel.fontName = "HelveticaNeue-Medium"
       //y座標はマイナスで下側に。
       ScoreLabel.position = CGPoint(x: Size.width / 8, y: -Size.height / 8)
-      ScoreLabel.xScale = 0.5
-      ScoreLabel.yScale = 0.5
+      ScoreLabel.xScale = 0.6
+      ScoreLabel.yScale = 0.6
       overlayNode.addChild(ScoreLabel)
       
       Score = ScoreLabel
