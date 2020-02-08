@@ -11,7 +11,7 @@ import AVFoundation
 
 class BGM {
    
-   var audioPlayer1: AVAudioPlayer! = nil
+   var gameBGM: AVAudioPlayer! = nil
    
    let SoundVolume: Float = 0.17
    let SmallSoundVolume: Float = 0.17 / 3
@@ -19,42 +19,42 @@ class BGM {
    
    init() {
       
-      // サウンドファイルのパスを生成 魔王魂
+      // サウンドファイルのパスを生成
       let soundFilePath = Bundle.main.path(forResource: "StarBGM", ofType: "caf")!
       let sound:URL = URL(fileURLWithPath: soundFilePath)
       // AVAudioPlayerのインスタンスを作成
       do {
-         audioPlayer1 = try AVAudioPlayer(contentsOf: sound, fileTypeHint:nil)
+         gameBGM = try AVAudioPlayer(contentsOf: sound, fileTypeHint:nil)
          
       } catch {
          print("Katchインスタンス作成失敗")
       }
       
       
-      audioPlayer1.prepareToPlay()
-      audioPlayer1.numberOfLoops = -1
+      gameBGM.prepareToPlay()
+      gameBGM.numberOfLoops = -1
       
    }
    
    public func PlaySounds() {
-      self.audioPlayer1.volume = 0
-      self.audioPlayer1.stop()
-      self.audioPlayer1.currentTime = 0
-      self.audioPlayer1.volume = SoundVolume
-      self.audioPlayer1.play()
+      self.gameBGM.volume = 0
+      self.gameBGM.stop()
+      self.gameBGM.currentTime = 0
+      self.gameBGM.volume = SoundVolume
+      self.gameBGM.play()
    }
    
    public func BeSmallSound() {
-      self.audioPlayer1.volume = SmallSoundVolume
+      self.gameBGM.volume = SmallSoundVolume
    }
    
    public func StopSound() {
-      self.audioPlayer1.stop()
+      self.gameBGM.stop()
    }
    
    public func RestartSound() {
-      self.audioPlayer1.volume = SoundVolume
-      self.audioPlayer1.play()
+      self.gameBGM.volume = SoundVolume
+      self.gameBGM.play()
    }
    
 }
