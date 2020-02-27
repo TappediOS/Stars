@@ -33,7 +33,7 @@ class StageCamera : SCNNode {
       self.camera?.bloomThreshold = 0.2
       self.camera?.bloomBlurRadius = 2.5
      
-      self.camera?.motionBlurIntensity = 0.15
+      self.camera?.motionBlurIntensity = 0.155
       
    }
    
