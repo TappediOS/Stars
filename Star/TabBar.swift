@@ -32,9 +32,9 @@ class MyTabBarViewController: UITabBarController{
       tabBar.items![3].selectedImage = get3FillImage()
       tabBar.items![4].selectedImage = get4FillImage()
       
-      
      
-      tabBar.tintColor = UIColor.flatRed()
+     
+      tabBar.tintColor = .systemRed
       //self.tabBar.tintColor = UIColor.cyan
       
    }
