@@ -274,6 +274,14 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterC
       
       GorldNode.addParticleSystem(self.Stars!)
       GorldNode.addParticleSystem(self.GrowStar!)
+      
+      if Int.random(in: 1...10) == 9 {
+         self.GrowStar?.birthRate = 10
+      } else if Int.random(in: 1...10) == 5 {
+         self.GrowStar?.birthRate = 5
+      } else if Int.random(in: 1...15) == 14 {
+         self.GrowStar?.birthRate = 27
+      }
 
       
       let Transform = SCNTransformConstraint(inWorldSpace: true, with: { (sun, transform) -> SCNMatrix4 in

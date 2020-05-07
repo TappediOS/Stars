@@ -207,8 +207,8 @@
             filePath = "Star/SecondView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "453"
-            endingLineNumber = "453"
+            startingLineNumber = "457"
+            endingLineNumber = "457"
             landmarkName = "InitBanner()"
             landmarkType = "7">
          </BreakpointContent>
