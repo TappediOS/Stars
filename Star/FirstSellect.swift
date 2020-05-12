@@ -15,7 +15,7 @@ import FirebaseAnalytics
 import GoogleMobileAds
 
 
-class FirstSellectViewController: UIViewController {
+class FirstSellectViewController: UIViewController, GADBannerViewDelegate {
    
    
    var wall:[[[Int]]] = [
@@ -224,6 +224,7 @@ class FirstSellectViewController: UIViewController {
 
       bannreView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0)
       bannreView.frame = CGRect(x: 0, y: Size.height - (tabBarController?.tabBar.frame.size.height)! - 50, width: Size.width, height: 50)
+      bannreView.translatesAutoresizingMaskIntoConstraints = false
 
       view.addSubview(bannreView)
       view.bringSubviewToFront(bannreView)
@@ -248,8 +249,7 @@ class FirstSellectViewController: UIViewController {
       print("バナー広告：本番環境")
       #endif
       
-      bannreView.load(request)
-      
+      bannreView.delegate = self
 
       
       
@@ -262,6 +262,13 @@ class FirstSellectViewController: UIViewController {
       
       
       
+   }
+   
+   override func viewDidLayoutSubviews() {
+      super.viewDidLayoutSubviews()
+      bannreView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -self.view.safeAreaInsets.bottom).isActive = true
+      bannreView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+      bannreView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
    }
    
    @objc func handleTap(_ gestureRecognize: UIGestureRecognizer) {
@@ -309,13 +316,56 @@ class FirstSellectViewController: UIViewController {
       Analytics.logEvent("LoadStage1", parameters: nil)
 
       
-      
+      self.bannreView.alpha = 0
    }
+   
+   override func viewDidAppear(_ animated: Bool) {
+      super.viewDidAppear(true)
+      loadBannerAd()
+   }
+   
+   func loadBannerAd() {
+     let frame = { () -> CGRect in
+       if #available(iOS 11.0, *) {
+         return view.frame.inset(by: view.safeAreaInsets)
+       } else {
+         return view.frame
+       }
+     }()
+     let viewWidth = frame.size.width
+      
+     let adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth)
+      
+      bannreView.heightAnchor.constraint(equalToConstant: adSize.size.height).isActive = true
+      
+     bannreView.adSize = adSize
+     bannreView.load(GADRequest())
+   }
+   
+   override func viewWillTransition(to size: CGSize,
+                           with coordinator: UIViewControllerTransitionCoordinator) {
+     super.viewWillTransition(to:size, with:coordinator)
+     coordinator.animate(alongsideTransition: { _ in
+       self.loadBannerAd()
+     })
+   }
+   
+
    
    
    override func didReceiveMemoryWarning() {
       super.didReceiveMemoryWarning()
       // Dispose of any resources that can be recreated.
+   }
+   
+   //MARK:- ADMOB
+   /// Tells the delegate an ad request loaded an ad.
+   func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+      print("広告(banner)のロードが完了しました。")
+      self.bannreView.alpha = 0
+      UIView.animate(withDuration: 1, animations: {
+         self.bannreView.alpha = 1
+      })
    }
    
 }

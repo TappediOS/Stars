@@ -16,7 +16,7 @@ import GoogleMobileAds
 
 
 
-class SecondSellectViewController: UIViewController {
+class SecondSellectViewController: UIViewController, GADBannerViewDelegate {
    
    
    var wall:[[[Int]]] = [
@@ -266,8 +266,7 @@ class SecondSellectViewController: UIViewController {
       print("バナー広告：本番環境")
       #endif
       
-      bannreView.load(request)
-      
+      bannreView.delegate = self
      
       
       
@@ -284,7 +283,6 @@ class SecondSellectViewController: UIViewController {
       bannreView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -self.view.safeAreaInsets.bottom).isActive = true
       bannreView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
       bannreView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
-      bannreView.heightAnchor.constraint(equalToConstant: 50).isActive = true
    }
    
    @objc func handleTap(_ gestureRecognize: UIGestureRecognizer) {
@@ -334,15 +332,56 @@ class SecondSellectViewController: UIViewController {
          Analytics.logEvent("RequestReviewCount", parameters: nil)
       }
 
+      self.bannreView.alpha = 0
    }
    
+   override func viewDidAppear(_ animated: Bool) {
+      super.viewDidAppear(true)
+      loadBannerAd()
+   }
    
+   func loadBannerAd() {
+     let frame = { () -> CGRect in
+       if #available(iOS 11.0, *) {
+         return view.frame.inset(by: view.safeAreaInsets)
+       } else {
+         return view.frame
+       }
+     }()
+     let viewWidth = frame.size.width
+      
+     let adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth)
+      
+      bannreView.heightAnchor.constraint(equalToConstant: adSize.size.height).isActive = true
+      
+     bannreView.adSize = adSize
+     bannreView.load(GADRequest())
+   }
+   
+   override func viewWillTransition(to size: CGSize,
+                           with coordinator: UIViewControllerTransitionCoordinator) {
+     super.viewWillTransition(to:size, with:coordinator)
+     coordinator.animate(alongsideTransition: { _ in
+       self.loadBannerAd()
+     })
+   }
+
   
    
    
    override func didReceiveMemoryWarning() {
       super.didReceiveMemoryWarning()
       // Dispose of any resources that can be recreated.
+   }
+   
+   //MARK:- ADMOB
+   /// Tells the delegate an ad request loaded an ad.
+   func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+      print("広告(banner)のロードが完了しました。")
+      self.bannreView.alpha = 0
+      UIView.animate(withDuration: 1, animations: {
+         self.bannreView.alpha = 1
+      })
    }
    
 }

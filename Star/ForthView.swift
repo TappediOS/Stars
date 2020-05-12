@@ -966,4 +966,14 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       
    }
    
+   //MARK:- ADMOB
+   /// Tells the delegate an ad request loaded an ad.
+   func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+      print("広告(banner)のロードが完了しました。")
+      self.BannerAdView.alpha = 0
+      UIView.animate(withDuration: 1, animations: {
+         self.BannerAdView.alpha = 1
+      })
+   }
+   
 }

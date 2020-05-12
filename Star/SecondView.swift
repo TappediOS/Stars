@@ -286,14 +286,13 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       GorldNode.addParticleSystem(self.Stars!)
       GorldNode.addParticleSystem(self.GrowStar!)
       
-      if Int.random(in: 1...10) == 9 {
+      if Int.random(in: 1...15) == 14 {
+         self.GrowStar?.birthRate = 30
+      } else if Int.random(in: 1...12) == 5 {
+         self.GrowStar?.birthRate = 15
+      } else if Int.random(in: 1...13) == 4 {
          self.GrowStar?.birthRate = 10
-      } else if Int.random(in: 1...10) == 5 {
-         self.GrowStar?.birthRate = 5
-      } else if Int.random(in: 1...15) == 14 {
-         self.GrowStar?.birthRate = 27
       }
-   
 
       let Transform = SCNTransformConstraint(inWorldSpace: true, with: { (sun, transform) -> SCNMatrix4 in
          let pos = sun.position
@@ -927,6 +926,16 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
          TapticEngine.impact.feedback(.heavy)
       }
       
+   }
+   
+   //MARK:- ADMOB
+   /// Tells the delegate an ad request loaded an ad.
+   func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+      print("広告(banner)のロードが完了しました。")
+      self.BannerAdView.alpha = 0
+      UIView.animate(withDuration: 1, animations: {
+         self.BannerAdView.alpha = 1
+      })
    }
    
 }
