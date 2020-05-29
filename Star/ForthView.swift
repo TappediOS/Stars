@@ -27,7 +27,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    var wall:[[[Int]]] = [[[]]]
    let FoundSpeed: Float = 0.1752
    var dr: Float = 0.000505
-   var PlusSpeed: Float = 0.00498
+   var PlusSpeed: Float = 0.005
    
    var score:Int = 0
    var y_speed:CGFloat = -22
@@ -121,6 +121,8 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    let BANNERVIEW_TEST_ID = "ca-app-pub-3940256099942544/2934735716"
    let BANNERVIEW_ID = "ca-app-pub-1460017825820383/7264404784"
    
+   let DistanceOfWallAndWall = 24
+   
    @available(iOS 11.0, *)
      override var prefersHomeIndicatorAutoHidden: Bool{
         get { return true }
@@ -160,6 +162,26 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       floorNode.physicsBody?.collisionBitMask = Int(BoxCategory) + Int(SunCategory)
       floorNode.physicsBody?.categoryBitMask = Int(FloorCategoyr)
       scene.rootNode.addChildNode(floorNode)
+      
+      let Dosei = SCNScene(named: "ttthf.scn")!
+      let DoseiNode = Dosei.rootNode.childNode(withName: "dosei", recursively: true)!
+      //DoseiNode.eulerAngles.x = -90
+      DoseiNode.scale = SCNVector3(0.35, 0.35, 0.35)
+      DoseiNode.position = SCNVector3(-5, 9480, 0)
+      DoseiNode.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: .pi, y: .pi, z: 0, duration: 4)))
+      DoseiNode.castsShadow = false
+      
+          
+      let TexScene = SCNScene(named: "sst.scn")!
+      let FiveNode = TexScene.rootNode.childNode(withName: "StarStar", recursively: true)!
+      FiveNode.scale = SCNVector3(1.85, 1.85, 1.85)
+      FiveNode.position = SCNVector3(0, 9900, 0)
+      FiveNode.castsShadow = false
+      let scalaUpAction = SCNAction.scale(by: 1.3, duration: 1.3)
+      let scalaDownAction = SCNAction.scale(by: 1 / 1.3, duration: 1.3)
+      let sequenceAction = SCNAction.sequence([scalaUpAction, scalaDownAction])
+      let rotateAction = SCNAction.rotateBy(x: 0, y: .pi, z: 0, duration: 5)
+      FiveNode.runAction(SCNAction.repeatForever(SCNAction.group([rotateAction, sequenceAction])))
       
 
       
@@ -217,6 +239,37 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       }
       
       for tmp in 0 ... 175 {
+         var colors:[UIColor] = Array()
+         colors.removeAll()
+         if #available(iOS 13, *) {
+            colors = [.systemTeal, .systemRed, .systemPurple, .systemGreen, .systemPink, .systemOrange, .systemIndigo, .systemYellow, .systemFill, .secondarySystemGroupedBackground]
+            
+         }
+         if (tmp % 10 == 0 && tmp <= 100) || tmp == 1 {
+            
+            let clone = FiveNode.clone()
+            clone.position = SCNVector3(0, deruta, -0.2)
+            if !colors.isEmpty {
+               colors.shuffle()
+               clone.geometry?.firstMaterial?.diffuse.contents = colors.first!
+               
+            }
+            
+            scene.rootNode.addChildNode(clone)
+         }
+         
+         if ((tmp - 5) % 10 == 0 && tmp <= 100) {
+            let Dclone = DoseiNode.clone()
+            Dclone.position = SCNVector3([-5.0, 5.0].randomElement()!, deruta, [1.2, -1.2].randomElement()!)
+            if !colors.isEmpty {
+               colors.shuffle()
+               Dclone.geometry?.firstMaterial?.diffuse.contents = colors.first!
+            }
+            
+            scene.rootNode.addChildNode(Dclone)
+         }
+         
+         
          for x in 0 ... 2 {
             for y in 0 ... 2 {
                if wall[tmp][x][y] == 0 {
@@ -228,7 +281,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
                   WallNode0.physicsBody = SCNPhysicsBody(type: .dynamic, shape: WallShape0)
                   WallNode0.physicsBody?.mass = 0
                   WallNode0.eulerAngles.x = -90
-                  deruta = Double(9980 - tmp * 20) + Double(y) * 0.4
+                  deruta = Double(9980 - tmp * DistanceOfWallAndWall) + Double(y) * 0.4
                   WallNode0.position = SCNVector3(1.2 * Double(x) - 1.2, deruta, 1.2 * Double(y) - 1.2 - 0.2)
                   WallNode0.physicsBody?.categoryBitMask = Int(Wall0Category)
                   WallNode0.physicsBody?.collisionBitMask = 0
@@ -246,7 +299,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
                   WallNode1.physicsBody = SCNPhysicsBody(type: .dynamic, shape: WallShape1)
                   WallNode1.physicsBody?.mass = 0
                   WallNode1.eulerAngles.x = -90
-                  deruta = Double(9980 - tmp * 20) + Double(y) * 0.4
+                  deruta = Double(9980 - tmp * DistanceOfWallAndWall) + Double(y) * 0.4
                   WallNode1.position = SCNVector3(1.2 * Double(x) - 1.2, deruta, 1.2 * Double(y) - 1.2 - 0.2)
                   WallNode1.physicsBody?.categoryBitMask = Int(Wall1Category)
                   WallNode1.physicsBody?.collisionBitMask = 0
@@ -264,7 +317,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
                   WallNode1.physicsBody = SCNPhysicsBody(type: .dynamic, shape: WallShape1)
                   WallNode1.physicsBody?.mass = 0
                   WallNode1.eulerAngles.x = -90
-                  deruta = Double(9980 - tmp * 20) + Double(y) * 0.4
+                  deruta = Double(9980 - tmp * DistanceOfWallAndWall) + Double(y) * 0.4
                   WallNode1.position = SCNVector3(1.2 * Double(x) - 1.2, deruta, 1.2 * Double(y) - 1.2 - 0.2)
                   WallNode1.physicsBody?.categoryBitMask = Int(Wall1Category)
                   WallNode1.physicsBody?.collisionBitMask = 0
@@ -282,7 +335,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
                   WallNode1.physicsBody = SCNPhysicsBody(type: .dynamic, shape: WallShape1)
                   WallNode1.physicsBody?.mass = 0
                   WallNode1.eulerAngles.x = -90
-                  deruta = Double(9980 - tmp * 20) + Double(y) * 0.4
+                  deruta = Double(9980 - tmp * DistanceOfWallAndWall) + Double(y) * 0.4
                   WallNode1.position = SCNVector3(1.2 * Double(x) - 1.2, deruta, 1.2 * Double(y) - 1.2 - 0.2)
                   WallNode1.physicsBody?.categoryBitMask = Int(Wall1Category)
                   WallNode1.physicsBody?.collisionBitMask = 0
@@ -492,7 +545,7 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       let secondNode = contact.nodeB
       
       let WallPosiX = Int(firstNode.position.x + 1.2)
-      let WallPosiY = 499 - Int((firstNode.position.y + 2) / 20)
+      let WallPosiY = 415 - Int((firstNode.position.y + 2) / Float(DistanceOfWallAndWall))
       let WallPosiZ = Int(firstNode.position.z + 1.2)
       let num = Int(arc4random_uniform(4))
       
@@ -612,13 +665,13 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
          
          self.sun.removeAllActions()
          dr += PlusSpeed
-         PlusSpeed += PlusSpeed / 110
+         PlusSpeed += PlusSpeed / 100
       }
    }
    
    func renderer(_ aRenderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
       
-      self.Camera_Node.position.y = self.sun.position.y + 8
+      self.Camera_Node.position.y = self.sun.position.y + 9.5
       self.SpotLightNode.position.y  =  self.sun.position.y + 58
       
       // per-frame code here

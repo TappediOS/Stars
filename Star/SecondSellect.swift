@@ -275,6 +275,8 @@ class SecondSellectViewController: UIViewController, GADBannerViewDelegate {
       let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
       SceneView.addGestureRecognizer(tapGesture)
       
+      
+
 
    }
    
