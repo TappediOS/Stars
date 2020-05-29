@@ -31,6 +31,8 @@
 		BF65631920ECA82D00294710 /* main.scn in Resources */ = {isa = PBXBuildFile; fileRef = BF65631820ECA82D00294710 /* main.scn */; };
 		BF65632320F064E700294710 /* Myparticle.scnp in Resources */ = {isa = PBXBuildFile; fileRef = BF65632120F064E700294710 /* Myparticle.scnp */; };
 		BF65632720F0677A00294710 /* Conffi.scnp in Resources */ = {isa = PBXBuildFile; fileRef = BF65632520F0677A00294710 /* Conffi.scnp */; };
+		BF6E30432481512D008AFEEF /* StarUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6E30422481512D008AFEEF /* StarUnitTests.swift */; };
+		BF6E305124815145008AFEEF /* StarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6E305024815145008AFEEF /* StarUITests.swift */; };
 		BF786DFE23EE59A100AAAAEC /* StarBGM.caf in Resources */ = {isa = PBXBuildFile; fileRef = BF786DFD23EE58C200AAAAEC /* StarBGM.caf */; };
 		BF787266247BC004002594CC /* hdg.stl in Resources */ = {isa = PBXBuildFile; fileRef = BF787264247BC004002594CC /* hdg.stl */; };
 		BF787267247BC004002594CC /* ttthf.stl in Resources */ = {isa = PBXBuildFile; fileRef = BF787265247BC004002594CC /* ttthf.stl */; };
@@ -68,6 +70,23 @@
 		F71DFCAB1AA215D795ECE1AA /* Pods_Star.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAB277BF978B8240C12A89C5 /* Pods_Star.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		BF6E30452481512D008AFEEF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF6562F720EC8BF000294710 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF6562FE20EC8BF000294710;
+			remoteInfo = Star;
+		};
+		BF6E305324815145008AFEEF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF6562F720EC8BF000294710 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF6562FE20EC8BF000294710;
+			remoteInfo = Star;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		40FA7893066C30D182181F05 /* Pods-Star.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Star.release.xcconfig"; path = "Pods/Target Support Files/Pods-Star/Pods-Star.release.xcconfig"; sourceTree = "<group>"; };
 		BAB277BF978B8240C12A89C5 /* Pods_Star.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Star.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +121,12 @@
 		BF65631820ECA82D00294710 /* main.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = main.scn; sourceTree = "<group>"; };
 		BF65632120F064E700294710 /* Myparticle.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Myparticle.scnp; sourceTree = "<group>"; };
 		BF65632520F0677A00294710 /* Conffi.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Conffi.scnp; sourceTree = "<group>"; };
+		BF6E30402481512D008AFEEF /* StarUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF6E30422481512D008AFEEF /* StarUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarUnitTests.swift; sourceTree = "<group>"; };
+		BF6E30442481512D008AFEEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF6E304E24815145008AFEEF /* StarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF6E305024815145008AFEEF /* StarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarUITests.swift; sourceTree = "<group>"; };
+		BF6E305224815145008AFEEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF77128623DC6E1100EF0D3C /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Main.strings; sourceTree = "<group>"; };
 		BF77128723DC6E1200EF0D3C /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		BF77128823DC6E1200EF0D3C /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -198,6 +223,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BF6E303D2481512D008AFEEF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF6E304B24815145008AFEEF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -223,6 +262,8 @@
 			isa = PBXGroup;
 			children = (
 				BF65630120EC8BF000294710 /* Star */,
+				BF6E30412481512D008AFEEF /* StarUnitTests */,
+				BF6E304F24815145008AFEEF /* StarUITests */,
 				BF65630020EC8BF000294710 /* Products */,
 				12B1BA22A016C87C75EA2691 /* Pods */,
 				BE06171413F632E5E8DB3449 /* Frameworks */,
@@ -233,6 +274,8 @@
 			isa = PBXGroup;
 			children = (
 				BF6562FF20EC8BF000294710 /* Star.app */,
+				BF6E30402481512D008AFEEF /* StarUnitTests.xctest */,
+				BF6E304E24815145008AFEEF /* StarUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -297,6 +340,24 @@
 			path = Star;
 			sourceTree = "<group>";
 		};
+		BF6E30412481512D008AFEEF /* StarUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				BF6E30422481512D008AFEEF /* StarUnitTests.swift */,
+				BF6E30442481512D008AFEEF /* Info.plist */,
+			);
+			path = StarUnitTests;
+			sourceTree = "<group>";
+		};
+		BF6E304F24815145008AFEEF /* StarUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BF6E305024815145008AFEEF /* StarUITests.swift */,
+				BF6E305224815145008AFEEF /* Info.plist */,
+			);
+			path = StarUITests;
+			sourceTree = "<group>";
+		};
 		BFDDC6C322ABA69400A09A4B /* Stage Objects */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,13 +394,49 @@
 			productReference = BF6562FF20EC8BF000294710 /* Star.app */;
 			productType = "com.apple.product-type.application";
 		};
+		BF6E303F2481512D008AFEEF /* StarUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF6E30472481512D008AFEEF /* Build configuration list for PBXNativeTarget "StarUnitTests" */;
+			buildPhases = (
+				BF6E303C2481512D008AFEEF /* Sources */,
+				BF6E303D2481512D008AFEEF /* Frameworks */,
+				BF6E303E2481512D008AFEEF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF6E30462481512D008AFEEF /* PBXTargetDependency */,
+			);
+			name = StarUnitTests;
+			productName = StarUnitTests;
+			productReference = BF6E30402481512D008AFEEF /* StarUnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BF6E304D24815145008AFEEF /* StarUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF6E305524815145008AFEEF /* Build configuration list for PBXNativeTarget "StarUITests" */;
+			buildPhases = (
+				BF6E304A24815145008AFEEF /* Sources */,
+				BF6E304B24815145008AFEEF /* Frameworks */,
+				BF6E304C24815145008AFEEF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF6E305424815145008AFEEF /* PBXTargetDependency */,
+			);
+			name = StarUITests;
+			productName = StarUITests;
+			productReference = BF6E304E24815145008AFEEF /* StarUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		BF6562F720EC8BF000294710 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0940;
+				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = jun;
 				TargetAttributes = {
@@ -351,6 +448,14 @@
 								enabled = 1;
 							};
 						};
+					};
+					BF6E303F2481512D008AFEEF = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = BF6562FE20EC8BF000294710;
+					};
+					BF6E304D24815145008AFEEF = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = BF6562FE20EC8BF000294710;
 					};
 				};
 			};
@@ -381,6 +486,8 @@
 			projectRoot = "";
 			targets = (
 				BF6562FE20EC8BF000294710 /* Star */,
+				BF6E303F2481512D008AFEEF /* StarUnitTests */,
+				BF6E304D24815145008AFEEF /* StarUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -429,6 +536,20 @@
 				BFDAC0BE22ABDEE6002A8C37 /* flare3.png in Resources */,
 				BFEF99B4213415A900A64698 /* GoogleService-Info.plist in Resources */,
 				BF65632320F064E700294710 /* Myparticle.scnp in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF6E303E2481512D008AFEEF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF6E304C24815145008AFEEF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,7 +619,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BF6E303C2481512D008AFEEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF6E30432481512D008AFEEF /* StarUnitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF6E304A24815145008AFEEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF6E305124815145008AFEEF /* StarUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BF6E30462481512D008AFEEF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF6562FE20EC8BF000294710 /* Star */;
+			targetProxy = BF6E30452481512D008AFEEF /* PBXContainerItemProxy */;
+		};
+		BF6E305424815145008AFEEF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF6562FE20EC8BF000294710 /* Star */;
+			targetProxy = BF6E305324815145008AFEEF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BF2EBFDA2123DBB600FE7449 /* Localizable.strings */ = {
@@ -753,6 +903,94 @@
 			};
 			name = Release;
 		};
+		BF6E30482481512D008AFEEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9R4W53MKG7;
+				INFOPLIST_FILE = StarUnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Taped.StarUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Star.app/Star";
+			};
+			name = Debug;
+		};
+		BF6E30492481512D008AFEEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9R4W53MKG7;
+				INFOPLIST_FILE = StarUnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Taped.StarUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Star.app/Star";
+			};
+			name = Release;
+		};
+		BF6E305624815145008AFEEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9R4W53MKG7;
+				INFOPLIST_FILE = StarUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Taped.StarUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Star;
+			};
+			name = Debug;
+		};
+		BF6E305724815145008AFEEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9R4W53MKG7;
+				INFOPLIST_FILE = StarUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Taped.StarUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Star;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -770,6 +1008,24 @@
 			buildConfigurations = (
 				BF65631220EC8BF100294710 /* Debug */,
 				BF65631320EC8BF100294710 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF6E30472481512D008AFEEF /* Build configuration list for PBXNativeTarget "StarUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF6E30482481512D008AFEEF /* Debug */,
+				BF6E30492481512D008AFEEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF6E305524815145008AFEEF /* Build configuration list for PBXNativeTarget "StarUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF6E305624815145008AFEEF /* Debug */,
+				BF6E305724815145008AFEEF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
