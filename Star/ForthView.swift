@@ -900,7 +900,8 @@ class FourthViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
       }
       
       self.MyTimer.invalidate()
-      if userDefault.integer(forKey: "PlayStage") % 3 == 0{
+      let PlayNum = userDefault.integer(forKey: "PlayStage")
+      if PlayNum >= 3 && (PlayNum == 3 || PlayNum % 5 == 0 || (PlayNum + 2) % 5 == 0) {
          if Interstitial.isReady {
             print("インタースティシャル広告の準備できてるからpresentする!")
             Interstitial.present(fromRootViewController: self)
