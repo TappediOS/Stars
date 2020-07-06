@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		BF03548720FD8232004BF8A2 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF03548620FD8232004BF8A2 /* SecondView.swift */; };
+		BF20388524B31B0100AF581C /* darkSpace.caf in Resources */ = {isa = PBXBuildFile; fileRef = BF20388424B31B0100AF581C /* darkSpace.caf */; };
+		BF20388724B31D8400AF581C /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF20388624B31D8400AF581C /* RemoteConfigDefaults.plist */; };
 		BF24DFED22A794CC00862C21 /* SStar.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = BF24DFEC22A794CC00862C21 /* SStar.jpeg */; };
 		BF2CFCEB22CF409500D777A4 /* CanMoveBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2CFCEA22CF409500D777A4 /* CanMoveBall.swift */; };
 		BF2EBFB7211EB17800FE7449 /* FirstSellect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2EBFB6211EB17800FE7449 /* FirstSellect.swift */; };
@@ -91,6 +93,8 @@
 		40FA7893066C30D182181F05 /* Pods-Star.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Star.release.xcconfig"; path = "Pods/Target Support Files/Pods-Star/Pods-Star.release.xcconfig"; sourceTree = "<group>"; };
 		BAB277BF978B8240C12A89C5 /* Pods_Star.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Star.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF03548620FD8232004BF8A2 /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
+		BF20388424B31B0100AF581C /* darkSpace.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = darkSpace.caf; sourceTree = "<group>"; };
+		BF20388624B31D8400AF581C /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		BF24DFEC22A794CC00862C21 /* SStar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SStar.jpeg; sourceTree = "<group>"; };
 		BF2CFCEA22CF409500D777A4 /* CanMoveBall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanMoveBall.swift; sourceTree = "<group>"; };
 		BF2EBFB6211EB17800FE7449 /* FirstSellect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstSellect.swift; sourceTree = "<group>"; };
@@ -336,6 +340,7 @@
 				BFEF99B3213415A900A64698 /* GoogleService-Info.plist */,
 				BFF330DE2151F5EF00C8C2E5 /* GoogleService-Info-Dev.plist */,
 				BF65630E20EC8BF100294710 /* Info.plist */,
+				BF20388624B31D8400AF581C /* RemoteConfigDefaults.plist */,
 			);
 			path = Star;
 			sourceTree = "<group>";
@@ -363,6 +368,7 @@
 			children = (
 				BFDAC0B122ABA6FC002A8C37 /* Floor.swift */,
 				BFC9C1D722B0C37100F0FFDE /* GameSound.swift */,
+				BF20388424B31B0100AF581C /* darkSpace.caf */,
 				BFC9C1D922B0C45300F0FFDE /* gameBGM.caf */,
 				BF786DFD23EE58C200AAAAEC /* StarBGM.caf */,
 				BFDAC0B322ABA855002A8C37 /* StageSpotLight.swift */,
@@ -532,9 +538,11 @@
 				BF787266247BC004002594CC /* hdg.stl in Resources */,
 				BFDAC0BC22ABD9AF002A8C37 /* back.png in Resources */,
 				BF2EBFD82123DBB600FE7449 /* Localizable.strings in Resources */,
+				BF20388724B31D8400AF581C /* RemoteConfigDefaults.plist in Resources */,
 				BF787267247BC004002594CC /* ttthf.stl in Resources */,
 				BFDAC0BE22ABDEE6002A8C37 /* flare3.png in Resources */,
 				BFEF99B4213415A900A64698 /* GoogleService-Info.plist in Resources */,
+				BF20388524B31B0100AF581C /* darkSpace.caf in Resources */,
 				BF65632320F064E700294710 /* Myparticle.scnp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

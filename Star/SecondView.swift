@@ -21,7 +21,7 @@ import ChameleonFramework
 import SCLAlertView
 import Firebase
 
-class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterControllerDelegate, GADRewardBasedVideoAdDelegate, SCNSceneRendererDelegate, GADInterstitialDelegate, GADBannerViewDelegate {
+class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameCenterControllerDelegate, SCNSceneRendererDelegate, GADInterstitialDelegate, GADBannerViewDelegate, GADRewardedAdDelegate {
    
    var wall:[[[Int]]] = [[[]]]
    var score:Int = 0
@@ -80,7 +80,10 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    var adRedy = false
    let request:GADRequest = GADRequest()
    /// The reward-based video ad.
-   var rewardBasedVideo: GADRewardBasedVideoAd?
+   var rewardBasedVideo: GADRewardedAd?
+   
+   
+   
    var RewardAD: Bool = true
    let key1 = SCNParticleSystem(named: "key1.scnp", inDirectory: "")
    let key2 = SCNParticleSystem(named: "key2.scnp", inDirectory: "")
@@ -445,19 +448,25 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    }
    
    private func InitReward() {
-      rewardBasedVideo = GADRewardBasedVideoAd.sharedInstance()
-      rewardBasedVideo?.delegate = self
       #if DEBUG
       print("リワード:テスト環境")
-      rewardBasedVideo?.load(GADRequest(), withAdUnitID: TEST_ID)
+      rewardBasedVideo = GADRewardedAd(adUnitID: self.TEST_ID)
       print("ID = \(TEST_ID)")
       #else
       print("リワード:本番環境")
-      rewardBasedVideo?.load(GADRequest(), withAdUnitID: AdMobID)
+      rewardBasedVideo = GADRewardedAd(adUnitID: self.AdMobID)
       print("ID = \(AdMobID)")
       #endif
       
-      
+      rewardBasedVideo?.load(GADRequest()) { error in
+         self.adRequestInProgress = false
+         if let error = error {
+            print("リワード広告のロード失敗: \(error)")
+            return
+         }
+         print("リワード広告のロード完了したよ")
+         self.adRequestInProgress = true
+      }
    }
    
    
@@ -666,10 +675,8 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
             ComleateView.addButton(NSLocalizedString("ReTry", comment: "")){
                print("tap ReTry")
                self.gameBGM.StopSound()
-               if GADRewardBasedVideoAd.sharedInstance().isReady && self.adRedy {
-                  GADRewardBasedVideoAd.sharedInstance().present(fromRootViewController: self)
-                  self.adRedy = false
-                  self.NOT_TryAgain()
+               if self.rewardBasedVideo?.isReady ?? false {
+                  self.rewardBasedVideo?.present(fromRootViewController: self, delegate: self)
                }else{
                   self.NOT_TryAgain()
                }
@@ -692,30 +699,7 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    }
    
    func NOT_TryAgain() {
-      
-      self.View2.removeFromSuperview()
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.54) {
-         
-         self.View2.frame = CGRect(x: self.Size.width / 4, y: self.Size.height / 2, width: self.Size.width / 2, height: self.Size.height / 4)
-         self.View2.backgroundColor = UIColor.flatWhiteColorDark()
-         
-         let RestartButton = FUIButton(frame: CGRect(x: 0, y: 0, width: self.View2.frame.width, height: self.View2.frame.height))
-         RestartButton.titleLabel?.adjustsFontSizeToFitWidth = true
-         RestartButton.titleLabel?.adjustsFontForContentSizeCategory = true
-         RestartButton.buttonColor = UIColor.turquoise()
-         RestartButton.shadowColor = UIColor.greenSea()
-         RestartButton.shadowHeight = 3.0
-         RestartButton.cornerRadius = 6.0
-         RestartButton.titleLabel?.font = UIFont.boldFlatFont (ofSize: 16)
-         RestartButton.setTitleColor(UIColor.clouds(), for: UIControl.State.normal)
-         RestartButton.setTitleColor(UIColor.clouds(), for: UIControl.State.highlighted)
-         RestartButton.setTitle(NSLocalizedString(NSLocalizedString("Return", comment: ""), comment: ""), for: .normal)
-         RestartButton.addTarget(self, action: #selector(self.Return), for: .touchUpInside)
-         
-         self.View2.addSubview(RestartButton)
-         
-         self.view.addSubview(self.View2)
-      }
+      self.Return()
    }
    
 
@@ -846,47 +830,25 @@ class SecondViewController: UIViewController, SCNPhysicsContactDelegate, GKGameC
    }
    
    // MARK: GADRewardBasedVideoAdDelegate implementation
-   func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd, didFailToLoadWithError error: Error) {
-      adRequestInProgress = false
-      print("reword:失敗したよ（準備できてない？）: \(error.localizedDescription)")
-   }
-   
-   func rewardBasedVideoAdDidReceive(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
-      adRequestInProgress = false
-      adRedy = true
-      print("動画の準備整ったよ")
-   }
-   
-   func rewardBasedVideoAdDidOpen(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
-      print("動画プレイヤーが開かれたよ。")
-   }
-   
-   func rewardBasedVideoAdDidStartPlaying(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
-      print("動画の再生を開始っ！")
-   }
-   
-   func rewardBasedVideoAdDidClose(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
-      #if DEBUG
-      print("リワード:テスト環境")
-      rewardBasedVideo?.load(GADRequest(), withAdUnitID: TEST_ID)
-      print("ID = \(TEST_ID)")
-      #else
-      print("リワード:本番環境")
-      rewardBasedVideo?.load(GADRequest(), withAdUnitID: AdMobID)
-      print("ID = \(AdMobID)")
-      #endif
-      
-   }
-   
-   func rewardBasedVideoAdWillLeaveApplication(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
-      print("Reward based video ad will leave application.\n呼ばれないらしい。")
-   }
-   
+   /// Tells the delegate that the user earned a reward.
    //ココの関数に特典を与える処理を入れる
-   func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd, didRewardUserWith reward: GADAdReward) {
+   func rewardedAd(_ rewardedAd: GADRewardedAd, userDidEarn reward: GADAdReward) {
       self.TryAgain()
-      
    }
+   /// Tells the delegate that the rewarded ad was presented.
+   func rewardedAdDidPresent(_ rewardedAd: GADRewardedAd) {
+      print("Rewarded ad presented.")
+   }
+   /// Tells the delegate that the rewarded ad was dismissed.
+   func rewardedAdDidDismiss(_ rewardedAd: GADRewardedAd) {
+      print("Rewarded ad dismissed.")
+   }
+   /// Tells the delegate that the rewarded ad failed to present.
+   func rewardedAd(_ rewardedAd: GADRewardedAd, didFailToPresentWithError error: Error) {
+      print("Rewarded ad failed to present.")
+   }
+   
+   
    
    //GKGameCenterControllerDelegate実装用
    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
