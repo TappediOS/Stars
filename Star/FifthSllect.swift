@@ -19,10 +19,6 @@ import SwiftyStoreKit
 
 
 class FifthSellectViewController: UIViewController, IAPManagerDelegate {
-
-
-
-
     var wall:[[[Int]]] = [
         [
             [0, 0, 0],
@@ -472,7 +468,7 @@ class FifthSellectViewController: UIViewController, IAPManagerDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
+
         UserScore4.register(defaults: ["Stage4": 0])
         let HightScore4: Int = UserScore4.object(forKey: "Stage4") as! Int
         Score.text = String(HightScore4)
