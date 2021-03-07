@@ -16,7 +16,7 @@ target 'Star' do
   pod 'SCLAlertView'
 
   pod 'Firebase/Core'
-  pod 'Crashlytics'
+  pod 'Firebase/Crashlytics'
   pod 'Firebase/AdMob'
   pod 'Firebase/RemoteConfig'
   pod 'Firebase/Performance'
