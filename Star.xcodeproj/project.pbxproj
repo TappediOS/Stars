@@ -388,6 +388,7 @@
 			buildConfigurationList = BF65631120EC8BF100294710 /* Build configuration list for PBXNativeTarget "Star" */;
 			buildPhases = (
 				B176AA9F057AFC3073C1201F /* [CP] Check Pods Manifest.lock */,
+				9496582723EAEA2FBF7DCF8A /* [CP] Prepare Artifacts */,
 				BF6562FB20EC8BF000294710 /* Sources */,
 				BF6562FC20EC8BF000294710 /* Frameworks */,
 				BF6562FD20EC8BF000294710 /* Resources */,
@@ -566,6 +567,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		9496582723EAEA2FBF7DCF8A /* [CP] Prepare Artifacts */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Star/Pods-Star-artifacts-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Prepare Artifacts";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Star/Pods-Star-artifacts-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Star/Pods-Star-artifacts.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		94F3D5BB395BC3C59572552D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

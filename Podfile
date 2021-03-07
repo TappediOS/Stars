@@ -20,6 +20,7 @@ target 'Star' do
   pod 'Firebase/AdMob'
   pod 'Firebase/RemoteConfig'
   pod 'Firebase/Performance'
+  pod 'Firebase/Analytics'
 
   pod 'ChameleonFramework/Swift'
   pod 'FlatUIKit'
