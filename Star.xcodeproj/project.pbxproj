@@ -393,6 +393,7 @@
 				BF6562FC20EC8BF000294710 /* Frameworks */,
 				BF6562FD20EC8BF000294710 /* Resources */,
 				94F3D5BB395BC3C59572552D /* [CP] Embed Pods Frameworks */,
+				BF534E7125F4CF2C00B1AEAA /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -618,6 +619,24 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		BF534E7125F4CF2C00B1AEAA /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Crashlytics;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/FirebaseCrashlytics/run\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -891,6 +910,7 @@
 				CODE_SIGN_ENTITLEMENTS = Star/Star.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 36;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 9R4W53MKG7;
 				INFOPLIST_FILE = Star/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
