@@ -8,3 +8,4 @@
 
 
 CFBundleDisplayName = "On Stars";
+NSUserTrackingUsageDescription = "許可するとカスタマイズされた広告が表示されるよ";

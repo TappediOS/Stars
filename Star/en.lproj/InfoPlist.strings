@@ -7,3 +7,4 @@
 */
 
 CFBundleDisplayName = "On Star";
+NSUserTrackingUsageDescription = "If you allow it, you will see a customized ad";

@@ -13,7 +13,8 @@ import SpriteKit
 import Foundation
 import FirebaseAnalytics
 import GoogleMobileAds
-
+import AppTrackingTransparency
+import AdSupport
 
 
 class SecondSellectViewController: UIViewController, GADBannerViewDelegate {
@@ -337,10 +338,29 @@ class SecondSellectViewController: UIViewController, GADBannerViewDelegate {
       self.bannreView.alpha = 0
    }
    
-   override func viewDidAppear(_ animated: Bool) {
-      super.viewDidAppear(true)
-      loadBannerAd()
-   }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        loadBannerAd()
+
+        requestAdsTrackingIfNeeded()
+    }
+
+    func requestAdsTrackingIfNeeded() {
+        if #available(iOS 14, *) {
+            if ATTrackingManager.trackingAuthorizationStatus == .notDetermined {
+                ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                    switch status {
+                    case .authorized: Analytics.logEvent("AdsTrackingAuthorized", parameters: nil)
+                    case .denied: Analytics.logEvent("AdsTrackingDenied", parameters: nil)
+                    case .restricted, .notDetermined: return
+                    @unknown default: return
+                    }
+                })
+            }
+        } else {
+            return
+        }
+    }
    
    func loadBannerAd() {
      let frame = { () -> CGRect in
