@@ -115,6 +115,7 @@
 		BF2EBFE12123DEA500FE7449 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BF2EBFE32123DEAA00FE7449 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BF2EBFE42123DEAB00FE7449 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BF5237CA24BAFAD2003CC516 /* Star.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Star.entitlements; sourceTree = "<group>"; };
 		BF6562FF20EC8BF000294710 /* Star.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Star.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF65630220EC8BF000294710 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF65630420EC8BF000294710 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -287,6 +288,7 @@
 		BF65630120EC8BF000294710 /* Star */ = {
 			isa = PBXGroup;
 			children = (
+				BF5237CA24BAFAD2003CC516 /* Star.entitlements */,
 				BF65631820ECA82D00294710 /* main.scn */,
 				BFFC7E2C247BA42C0047D7EF /* TRX.stl */,
 				BFFC7E2D247BA4870047D7EF /* TRXs.scn */,
@@ -868,6 +870,7 @@
 			baseConfigurationReference = FE3C0020C150BFDA18E22ED7 /* Pods-Star.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Star/Star.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_TEAM = 9R4W53MKG7;
@@ -880,6 +883,7 @@
 				MARKETING_VERSION = 3.9.6;
 				PRODUCT_BUNDLE_IDENTIFIER = myfirst.Star;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -892,6 +896,7 @@
 			baseConfigurationReference = 40FA7893066C30D182181F05 /* Pods-Star.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Star/Star.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_TEAM = 9R4W53MKG7;
@@ -904,6 +909,7 @@
 				MARKETING_VERSION = 3.9.6;
 				PRODUCT_BUNDLE_IDENTIFIER = myfirst.Star;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
