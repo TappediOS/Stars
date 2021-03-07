@@ -9,8 +9,8 @@
 import Foundation
 
 struct CanMoveBall {
-   let MaxX: Float = 1.625
-   let MinX: Float = -1.625
-   let MaxZ: Float = 1.425
-   let MinZ: Float = -1.725
+    let MaxX: Float = 1.625
+    let MinX: Float = -1.625
+    let MaxZ: Float = 1.425
+    let MinZ: Float = -1.725
 }
